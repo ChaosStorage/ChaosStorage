@@ -7,7 +7,7 @@
   ],
   "key": {
     "G": {
-      "tag": "minecraft:glass"
+      "item": "minecraft:glass"
     },
     "R": {
       "item": "minecraft:redstone"

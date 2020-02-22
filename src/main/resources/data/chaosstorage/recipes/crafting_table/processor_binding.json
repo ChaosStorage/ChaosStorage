@@ -7,10 +7,10 @@
   ],
   "key": {
     "S": {
-      "tag": "minecraft:string"
+      "item": "minecraft:string"
     },
     "L": {
-      "tag": "minecraft:slime_ball"
+      "item": "minecraft:slime_ball"
     }
   },
   "result": {

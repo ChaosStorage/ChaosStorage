@@ -13,7 +13,7 @@
       "item": "chaosstorage:pattern"
     },
     "G": {
-      "tag": "minecraft:glass"
+      "item": "minecraft:glass"
     },
     "E": {
       "item": "chaosstorage:quartz_enriched_iron"

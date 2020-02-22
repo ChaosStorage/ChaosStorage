@@ -20,11 +20,13 @@ public class CSContent {
 
   public static Item UPGRADE;
   public static Item CRAFTING_UPGRADE;
-  public static Item FORTUNE_UPGRADE;
   public static Item RANGE_UPGRADE;
-  public static Item SILK_TOUCH_UPGRADE;
   public static Item SPEED_UPGRADE;
   public static Item STACK_UPGRADE;
+  public static Item SILK_TOUCH_UPGRADE;
+  public static Item FORTUNE_1_UPGRADE;
+  public static Item FORTUNE_2_UPGRADE;
+  public static Item FORTUNE_3_UPGRADE;
 
   public static Item WRENCH;
   public static Item FILTER;

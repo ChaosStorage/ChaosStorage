@@ -10,7 +10,7 @@
       "item": "chaosstorage:quartz_enriched_iron"
     },
     "C": {
-      "tag": "minecraft:chest"
+      "item": "minecraft:chest"
     },
     "S": {
       "item": "chaosstorage:security_card"
