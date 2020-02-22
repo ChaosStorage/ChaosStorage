@@ -32,4 +32,27 @@ import java.util.List;
 
 public class ChaosStorageConfig {
 
+  @Config(config = "upgrade", category = "upgrade", key = "rangeUpgradeUsage", comment = "The additional energy used by the Range Upgrade")
+  public static int RangeUpgradeUsage = 8;
+
+  @Config(config = "upgrade", category = "upgrade", key = "speedUpgradeUsage", comment = "The additional energy use by the Speed Upgrade")
+  public static int SpeedUpgradeUsage  = 2;
+
+  @Config(config = "upgrade", category = "upgrade", key = "craftingUpgradeUsage", comment = "The additional energy used by the Crafting Upgrade")
+  public static int CraftingUpgradeUsage = 5;
+
+  @Config(config = "upgrade", category = "upgrade", key = "stackUpgradeUsage", comment = "The additional energy used by the Stack Upgrade")
+  public static int StackUpgradeUsage = 12;
+
+  @Config(config = "upgrade", category = "upgrade", key = "silkTouchUpgradeUsage", comment = "The additional energy used by the Silk Touch Upgrade")
+  public static int SilkTouchUpgradeUsage  = 12;
+
+  @Config(config = "upgrade", category = "upgrade", key = "fortune1UpgradeUsage", comment = "The additional energy used by the Fortune 1 Upgrade")
+  public static int Fortune1UpgradeUsage = 10;
+
+  @Config(config = "upgrade", category = "upgrade", key = "fortune2UpgradeUsage", comment = "The additional energy used by the Fortune 2 Upgrade")
+  public static int Fortune2UpgradeUsage = 10;
+
+  @Config(config = "upgrade", category = "upgrade", key = "fortune3UpgradeUsage", comment = "The additional energy used by the Fortune 3 Upgrade")
+  public static int Fortune3UpgradeUsage = 10;
 }

@@ -6,6 +6,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.item.Item;
 import reborncore.api.IListInfoProvider;
+import chaosstorage.config.ChaosStorageConfig;
 
 import java.util.List;
 
@@ -22,30 +23,30 @@ public class UpgradeItem extends Item implements IListInfoProvider {
         FORTUNE_2(),
         FORTUNE_3();
 
-        /*public int getEnergyUsage() {
+        public int getEnergyUsage() {
             switch (this) {
                 case NORMAL:
                     return 0;
                 case RANGE:
-                    return RS.SERVER_CONFIG.getUpgrades().getRangeUpgradeUsage();
+		    return ChaosStorageConfig.RangeUpgradeUsage;
                 case SPEED:
-                    return RS.SERVER_CONFIG.getUpgrades().getSpeedUpgradeUsage();
+		    return ChaosStorageConfig.SpeedUpgradeUsage;
                 case CRAFTING:
-                    return RS.SERVER_CONFIG.getUpgrades().getCraftingUpgradeUsage();
+		    return ChaosStorageConfig.CraftingUpgradeUsage;
                 case STACK:
-                    return RS.SERVER_CONFIG.getUpgrades().getStackUpgradeUsage();
+		    return ChaosStorageConfig.StackUpgradeUsage;
                 case SILK_TOUCH:
-                    return RS.SERVER_CONFIG.getUpgrades().getSilkTouchUpgradeUsage();
+		    return ChaosStorageConfig.SilkTouchUpgradeUsage;
                 case FORTUNE_1:
-                    return RS.SERVER_CONFIG.getUpgrades().getFortune1UpgradeUsage();
+		    return ChaosStorageConfig.Fortune1UpgradeUsage;
                 case FORTUNE_2:
-                    return RS.SERVER_CONFIG.getUpgrades().getFortune2UpgradeUsage();
+		    return ChaosStorageConfig.Fortune2UpgradeUsage;
                 case FORTUNE_3:
-                    return RS.SERVER_CONFIG.getUpgrades().getFortune3UpgradeUsage();
+		    return ChaosStorageConfig.Fortune3UpgradeUsage;
                 default:
                     throw new IllegalStateException("What even am I?");
             }
-        }*/
+        }
 
         public int getFortuneLevel() {
             switch (this) {
