@@ -5,12 +5,17 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
+
+import reborncore.common.config.Configuration;
+
+import chaosstorage.config.ChaosStorageConfig;
 import chaosstorage.events.ModRegistry;
 import chaosstorage.init.CSContent;
 
+
 public class ChaosStorage implements ModInitializer {
   public static final String MOD_ID = "chaosstorage";
-
+  public static ChaosStorage INSTANCE;
 
   public static final ItemGroup ITEMGROUP = FabricItemGroupBuilder.build(
       new Identifier("chaosstorage", "item_group"),
@@ -19,7 +24,11 @@ public class ChaosStorage implements ModInitializer {
   @Override
   public void onInitialize() {
     System.out.println("Hello Fabric world!");
+    INSTANCE = this;
+    new Configuration(ChaosStorageConfig.class, "chaosstorage");
 
     ModRegistry.setupShit();
+
+    System.out.println("ChaosStorage setup done!");
   }
 }
