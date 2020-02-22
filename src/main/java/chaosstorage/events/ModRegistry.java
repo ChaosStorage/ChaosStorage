@@ -1,25 +1,75 @@
 package chaosstorage.events;
 
+import reborncore.RebornRegistry;
 import chaosstorage.item.UpgradeItem;
 import chaosstorage.ChaosStorage;
 import chaosstorage.init.CSContent;
+import net.minecraft.block.Block;
+import net.minecraft.block.Material;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.Settings;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
 
 public class ModRegistry {
+  private static final Item.Settings itemGroup = new Item.Settings().group(ChaosStorage.ITEMGROUP);
+
   public static void setupShit() {
     registerBlocks();
     registerItems();
   }
 
   public static void registerBlocks() {
+    Block.Settings settings = FabricBlockSettings.of(Material.STONE).strength(1.9f, 1.9f).sounds(BlockSoundGroup.STONE).build();
+
+    RebornRegistry.registerBlock(CSContent.IMPORTER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "importer"));
+    RebornRegistry.registerBlock(CSContent.EXPORTER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "exporter"));
+    RebornRegistry.registerBlock(CSContent.DETECTOR = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "detector"));
+    RebornRegistry.registerBlock(CSContent.RELAY = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "relay"));
+    RebornRegistry.registerBlock(CSContent.NETWORK_TRANSMITTER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "network_transmitter"));
+    RebornRegistry.registerBlock(CSContent.NETWORK_RECEIVER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "network_receiver"));
+
+    RebornRegistry.registerBlock(CSContent.QUARTZ_ENRICHED_IRON_BLOCK = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "quartz_enriched_iron_block"));
+    RebornRegistry.registerBlock(CSContent.MACHINE_CASING = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "machine_casing"));
+    RebornRegistry.registerBlock(CSContent.CONTROLLER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "controller"));
+    RebornRegistry.registerBlock(CSContent.CREATIVE_CONTROLLER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "creative_controller"));
+    RebornRegistry.registerBlock(CSContent.CABLE = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "cable"));
+    RebornRegistry.registerBlock(CSContent.DISK_DRIVE = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "disk_drive"));
+    RebornRegistry.registerBlock(CSContent.EXTERNAL_STORAGE = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "external_storage"));
+    RebornRegistry.registerBlock(CSContent.GRID = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "grid"));
+    RebornRegistry.registerBlock(CSContent.CRAFTING_GRID = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "crafting_grid"));
+    RebornRegistry.registerBlock(CSContent.PATTERN_GRID = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "pattern_grid"));
+    RebornRegistry.registerBlock(CSContent.FLUID_GRID = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "fluid_grid"));
+
+    RebornRegistry.registerBlock(CSContent.SECURITY_MANAGER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "security_manager"));
+    RebornRegistry.registerBlock(CSContent.INTERFACE = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "interface"));
+    RebornRegistry.registerBlock(CSContent.FLUID_INTERFACE = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "fluid_interface"));
+    RebornRegistry.registerBlock(CSContent.WIRELESS_TRANSMITTER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "wireless_transmitter"));
+    RebornRegistry.registerBlock(CSContent.STORAGE_MONITOR = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "storage_monitor"));
+    RebornRegistry.registerBlock(CSContent.CONSTRUCTOR = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "constructor"));
+    RebornRegistry.registerBlock(CSContent.DESTRUCTOR = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "destructor"));
+    RebornRegistry.registerBlock(CSContent.DISK_MANIPULATOR = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "disk_manipulator"));
+    RebornRegistry.registerBlock(CSContent.PORTABLE_GRID = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "portable_grid"));
+    RebornRegistry.registerBlock(CSContent.CREATIVE_PORTABLE_GRID = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "creative_portable_grid"));
+    RebornRegistry.registerBlock(CSContent.CRAFTER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "crafter"));
+    RebornRegistry.registerBlock(CSContent.CRAFTER_MANAGER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "crafter_manager"));
+    RebornRegistry.registerBlock(CSContent.CRAFTING_MONITOR = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "crafting_monitor"));
+
+    RebornRegistry.registerBlock(CSContent._1K_STORAGE_BLOCK = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "1k_storage_block"));
+    RebornRegistry.registerBlock(CSContent._4K_STORAGE_BLOCK = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "4k_storage_block"));
+    RebornRegistry.registerBlock(CSContent._16K_STORAGE_BLOCK = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "16k_storage_block"));
+    RebornRegistry.registerBlock(CSContent._64K_STORAGE_BLOCK = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "64k_storage_block"));
+    RebornRegistry.registerBlock(CSContent.CREATIVE_STORAGE_BLOCK = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "creative_storage_block"));
+
+    RebornRegistry.registerBlock(CSContent._64K_FLUID_STORAGE_BLOCK = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "64k_fluid_storage_block"));
+    RebornRegistry.registerBlock(CSContent._256K_FLUID_STORAGE_BLOCK = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "256k_fluid_storage_block"));
+    RebornRegistry.registerBlock(CSContent._1024K_FLUID_STORAGE_BLOCK = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "1024k_fluid_storage_block"));
+    RebornRegistry.registerBlock(CSContent._4096K_FLUID_STORAGE_BLOCK = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "4096k_fluid_storage_block"));
+    RebornRegistry.registerBlock(CSContent.CREATIVE_FLUID_STORAGE_BLOCK = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "creative_fluid_storage_block"));
   }
 
   public static void registerItems() {
-    Settings itemGroup = new Item.Settings().group(ChaosStorage.ITEMGROUP);
-
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "quartz_enriched_iron"), CSContent.QUARTZ_ENRICHED_IRON = new Item(itemGroup));
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "silicon"), CSContent.SILICON = new Item(itemGroup));
 
