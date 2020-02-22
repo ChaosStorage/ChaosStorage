@@ -2,6 +2,20 @@ package chaosstorage.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemStack;
+
+import chaosstorage.blocks.ControllerBlock;
+import chaosstorage.blockentity.ControllerEntity;
+import chaosstorage.utils.InitUtils;
+
+import chaosstorage.events.ModRegistry;
+
+
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.function.Function;
 
 public class CSContent {
 
@@ -16,7 +30,7 @@ public class CSContent {
 
   public static Block QUARTZ_ENRICHED_IRON_BLOCK;
   public static Block MACHINE_CASING;
-  public static Block CONTROLLER;
+  //public static Block CONTROLLER;
   public static Block CREATIVE_CONTROLLER;
   public static Block CABLE;
   public static Block DISK_DRIVE;
@@ -112,4 +126,29 @@ public class CSContent {
   public static Item _16K_STORAGE_DISK;
   public static Item _64K_STORAGE_DISK;
   public static Item CREATIVE_STORAGE_DISK;
+
+  // Entities
+  public enum Machine implements ItemConvertible {
+	  CONTROLLER(new ControllerBlock()),
+          CREATIVE_CONTROLLER(new ControllerBlock());
+	  
+
+	  public final String name;
+	  public final Block block;
+
+	  <B extends Block> Machine(B block) {
+		  this.name = this.toString().toLowerCase(Locale.ROOT);
+		  this.block = block;
+		  InitUtils.setup(block, ModRegistry.itemGroup, name);
+	  }
+
+	  public ItemStack getStack() {
+		  return new ItemStack(block);
+	  }
+
+	  @Override
+	  public Item asItem() {
+		  return block.asItem();
+	  }
+  }
 }

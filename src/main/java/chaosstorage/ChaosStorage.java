@@ -11,6 +11,8 @@ import reborncore.common.config.Configuration;
 import chaosstorage.config.ChaosStorageConfig;
 import chaosstorage.events.ModRegistry;
 import chaosstorage.init.CSContent;
+import chaosstorage.init.CSBlockEntities;
+import chaosstorage.client.GuiHandler;
 
 
 public class ChaosStorage implements ModInitializer {
@@ -28,6 +30,10 @@ public class ChaosStorage implements ModInitializer {
     new Configuration(ChaosStorageConfig.class, "chaosstorage");
 
     ModRegistry.setupShit();
+    GuiHandler.register();
+    
+    // Force loads the block entities at the right time
+    CSBlockEntities.CONTROLLER.toString();
 
     System.out.println("ChaosStorage setup done!");
   }

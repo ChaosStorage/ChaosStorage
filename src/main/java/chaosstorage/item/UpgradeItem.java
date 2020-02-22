@@ -6,6 +6,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.item.Item;
 import reborncore.api.IListInfoProvider;
+
 import chaosstorage.config.ChaosStorageConfig;
 
 import java.util.List;

@@ -55,4 +55,16 @@ public class ChaosStorageConfig {
 
   @Config(config = "upgrade", category = "upgrade", key = "fortune3UpgradeUsage", comment = "The additional energy used by the Fortune 3 Upgrade")
   public static int Fortune3UpgradeUsage = 10;
+
+  @Config(config = "machines", category = "controller", key = "ControllerInput", comment = "Controller Max Input (Value in EU)")
+  public static int ControllerMaxInput = Integer.MAX_VALUE;
+
+  @Config(config = "machines", category = "controller", key = "ControllerEnegryPerTick", comment = "Controller Energy useage per tick (Value in EU)")
+  public static int ControllerEngergyPerTick = 1;
+
+  @Config(config = "machines", category = "controller", key = "ControllerMaxEnergy", comment = "Energy storage in Controller")
+  public static int ControllerMaxPower = 40_000;
+
+  @Config(config = "machines", category = "grid", key = "WirelessGridStoredEnergy", comment = "Energy storage in Wirless Grid")
+  public static int WirelessGridStoredPower = 4_000;
 }

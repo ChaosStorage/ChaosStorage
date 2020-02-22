@@ -2,6 +2,7 @@ package chaosstorage.events;
 
 import reborncore.RebornRegistry;
 import chaosstorage.item.UpgradeItem;
+import chaosstorage.item.WirelessGrid;
 import chaosstorage.ChaosStorage;
 import chaosstorage.init.CSContent;
 import net.minecraft.block.Block;
@@ -13,7 +14,7 @@ import net.minecraft.util.Identifier;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 
 public class ModRegistry {
-  private static final Item.Settings itemGroup = new Item.Settings().group(ChaosStorage.ITEMGROUP);
+  public /*private*/ static final Item.Settings itemGroup = new Item.Settings().group(ChaosStorage.ITEMGROUP);
 
   public static void setupShit() {
     registerBlocks();
@@ -32,8 +33,8 @@ public class ModRegistry {
 
     RebornRegistry.registerBlock(CSContent.QUARTZ_ENRICHED_IRON_BLOCK = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "quartz_enriched_iron_block"));
     RebornRegistry.registerBlock(CSContent.MACHINE_CASING = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "machine_casing"));
-    RebornRegistry.registerBlock(CSContent.CONTROLLER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "controller"));
-    RebornRegistry.registerBlock(CSContent.CREATIVE_CONTROLLER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "creative_controller"));
+    //RebornRegistry.registerBlock(CSContent.CONTROLLER = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "controller"));
+    //RebornRegistry.registerBlock(CSContent.Machine.CREATIVE_CONTROLLER.block, itemGroup, new Identifier(ChaosStorage.MOD_ID, "creative_controller"));
     RebornRegistry.registerBlock(CSContent.CABLE = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "cable"));
     RebornRegistry.registerBlock(CSContent.DISK_DRIVE = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "disk_drive"));
     RebornRegistry.registerBlock(CSContent.EXTERNAL_STORAGE = new Block(settings), itemGroup, new Identifier(ChaosStorage.MOD_ID, "external_storage"));
@@ -101,9 +102,9 @@ public class ModRegistry {
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "network_card"), CSContent.NETWORK_CARD = new Item(itemGroup));
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "security_card"), CSContent.SECURITY_CARD = new Item(itemGroup));
 
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "wireless_crafting_monitor"), CSContent.WIRELESS_CRAFTING_MONITOR = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "wireless_fluid_grid"), CSContent.WIRELESS_FLUID_GRID = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "wireless_grid"), CSContent.WIRELESS_GRID = new Item(itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "wireless_crafting_monitor"), CSContent.WIRELESS_CRAFTING_MONITOR = new WirelessGrid(WirelessGrid.Type.CRAFTING, itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "wireless_fluid_grid"), CSContent.WIRELESS_FLUID_GRID = new WirelessGrid(WirelessGrid.Type.FLUID, itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "wireless_grid"), CSContent.WIRELESS_GRID = new WirelessGrid(WirelessGrid.Type.NORMAL, itemGroup));
 
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "storage_housing"), CSContent.STORAGE_HOUSING = new Item(itemGroup));
 
