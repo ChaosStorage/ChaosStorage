@@ -1,5 +1,6 @@
 package chaosstorage.events;
 
+import chaosstorage.item.UpgradeItem;
 import chaosstorage.ChaosStorage;
 import chaosstorage.init.CSContent;
 import net.minecraft.item.Item;
@@ -34,15 +35,15 @@ public class ModRegistry {
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "construction_core"), CSContent.CONSTRUCTION_CORE = new Item(itemGroup));
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "destruction_core"), CSContent.DESTRUCTION_CORE = new Item(itemGroup));
 
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "upgrade"), CSContent.UPGRADE = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "crafting_upgrade"), CSContent.CRAFTING_UPGRADE = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "range_upgrade"), CSContent.RANGE_UPGRADE = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "speed_upgrade"), CSContent.SPEED_UPGRADE = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "stack_upgrade"), CSContent.STACK_UPGRADE = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "silk_touch_upgrade"), CSContent.SILK_TOUCH_UPGRADE = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "fortune_1_upgrade"), CSContent.FORTUNE_1_UPGRADE = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "fortune_2_upgrade"), CSContent.FORTUNE_2_UPGRADE = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "fortune_3_upgrade"), CSContent.FORTUNE_3_UPGRADE = new Item(itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "upgrade"), CSContent.UPGRADE = new UpgradeItem(UpgradeItem.Type.NORMAL, itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "crafting_upgrade"), CSContent.CRAFTING_UPGRADE = new UpgradeItem(UpgradeItem.Type.CRAFTING, itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "range_upgrade"), CSContent.RANGE_UPGRADE = new UpgradeItem(UpgradeItem.Type.RANGE, itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "speed_upgrade"), CSContent.SPEED_UPGRADE = new UpgradeItem(UpgradeItem.Type.SPEED, itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "stack_upgrade"), CSContent.STACK_UPGRADE = new UpgradeItem(UpgradeItem.Type.STACK, itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "silk_touch_upgrade"), CSContent.SILK_TOUCH_UPGRADE = new UpgradeItem(UpgradeItem.Type.SILK_TOUCH, itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "fortune_1_upgrade"), CSContent.FORTUNE_1_UPGRADE = new UpgradeItem(UpgradeItem.Type.FORTUNE_1, itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "fortune_2_upgrade"), CSContent.FORTUNE_2_UPGRADE = new UpgradeItem(UpgradeItem.Type.FORTUNE_2, itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "fortune_3_upgrade"), CSContent.FORTUNE_3_UPGRADE = new UpgradeItem(UpgradeItem.Type.FORTUNE_3, itemGroup));
 
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "wrench"), CSContent.WRENCH = new Item(itemGroup));
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "filter"), CSContent.FILTER = new Item(itemGroup));
