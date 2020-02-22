@@ -81,6 +81,12 @@ dependencies {
 	}
 	include rcVersion
 
+	def trVersion = 'TechReborn:TechReborn-1.15:+'
+	modApi (trVersion) {
+		exclude group: "net.fabricmc"
+	}
+	include trVersion
+
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 
 	modRuntime ("com.jamieswhiteshirt:developer-mode:1.0.15") {
