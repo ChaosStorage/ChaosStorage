@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "chaosstorage",
+  "version": "${version}",
+  "name": "Chaos Storage",
+  "description": "A storage mod for modern modded minecraft.",
+  "icon": "assets/chaosstorage/icon.png",
+  "license": "MIT",
+  "contact": {
+    "homepage": "https://github.com/ChaosStorage/ChaosStorage",
+    "sources": "https://github.com/ChaosStorage/ChaosStorage",
+    "issues": "https://github.com/ChaosStorage/ChaosStorage/issues"
+  },
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "chaosstorage.ChaosStorage"
+    ],
+    "client": [
+      "chaosstorage.ChaosStorageClient"
+    ],
+    "rei_plugins_v0": [
+      "chaosstorage.compat.rei.ReiPlugin"
+    ],
+    "libcd": [
+      "chaosstorage.compat.libcd.LibCDPlugin"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.6.3",
+    "fabric": "*",
+    "reborncore": "*"
+  },
+  "authors": [
+    "PetaByteBoy",
+    "Kloenk"
+  ],
+  "contributors": [
+    "Gigabit101",
+    "TheMattaBase",
+    "Mj11jM",
+    "Mazdallier",
+    "tntrololol",
+    "joflashstudios",
+    "lclc98",
+    "Lordmau5",
+    "mezz",
+    "Prospector",
+    "Rushmead",
+    "Yulife",
+    "Dragon2488",
+    "MrBretze",
+    "Ourten",
+    "Dimmerworld",
+    "coderbot",
+    "estebes"
+  ]
+}

@@ -1,0 +1,124 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven {
+			name = "Modmuss50"
+			url = "https://maven.modmuss50.me/"
+		}
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+	dependencies {
+		classpath "net.fabricmc:fabric-loom:0.2.7-SNAPSHOT"
+		classpath "gradle.plugin.net.minecrell:licenser:0.2.1"
+		classpath 'de.undercouch:gradle-download-task:3.4.3'
+		classpath "com.wynprice.cursemaven:CurseMaven:2.1.1"
+	}
+}
+
+apply plugin: net.fabricmc.loom.LoomGradlePlugin
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: net.minecrell.gradle.licenser.Licenser
+apply plugin: 'de.undercouch.download'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: "com.wynprice.cursemaven"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+repositories {
+	maven {
+		name = "Modmuss50"
+		url = "https://maven.modmuss50.me/"
+	}
+	maven {
+		// LibCD
+		url 'http://server.bbkr.space:8081/artifactory/libs-release'
+	}
+	maven {
+		//Dev Mode
+		url "https://maven.jamieswhiteshirt.com/libs-release/"
+	}
+}
+
+version = "3.3.4"
+
+configurations {
+	shade
+	compile.extendsFrom shade
+}
+
+def ENV = System.getenv()
+def build_number = ENV.BUILD_NUMBER ?: "local"
+version = "${version}+build.$build_number"
+
+license {
+	header file('HEADER')
+	include '**/*.java'
+	ignoreFailures = true //Stops the build from failing if a file does not have a license header
+}
+
+group = 'ChaosStorage'
+
+dependencies {
+	minecraft "com.mojang:minecraft:1.15.2"
+	mappings "net.fabricmc:yarn:1.15.2+build.2:v2"
+	modImplementation "net.fabricmc:fabric-loader:0.7.5+build.178"
+
+	//Fabric api
+	modImplementation "net.fabricmc.fabric-api:fabric-api:0.4.29+build.290-1.15"
+
+	optionalDependency ("me.shedaniel:RoughlyEnoughItems:3.2.31")
+	optionalDependency ('io.github.cottonmc:LibCD:2.0.1+1.15')
+
+	def rcVersion = 'RebornCore:RebornCore-1.15:+'
+	modApi (rcVersion) {
+		exclude group: "net.fabricmc"
+	}
+	include rcVersion
+
+	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
+
+	modRuntime ("com.jamieswhiteshirt:developer-mode:1.0.15") {
+		transitive = false
+	}
+}
+
+def optionalDependency(String dep) {
+	dependencies.modRuntime (dep) {
+		exclude group: "net.fabricmc"
+		exclude module: "nbt-crafting"
+	}
+	dependencies.modCompileOnly (dep) {
+		exclude group: "net.fabricmc"
+		exclude module: "nbt-crafting"
+	}
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	from(sourceSets.main.resources.srcDirs) {
+		include "fabric.mod.json"
+		expand "version": project.version
+	}
+
+	from(sourceSets.main.resources.srcDirs) {
+		exclude "fabric.mod.json"
+	}
+}
+
+jar {
+	exclude "**/*.psd"
+	classifier = 'universal'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier = "sources"
+	from sourceSets.main.allSource
+}
+
