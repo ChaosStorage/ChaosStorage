@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:disk_drive"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.drives"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.drives.description"
+    }
+  },
+  "parent": "chaosstorage:root",
+  "criteria": {
+    "disk_drive_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:disk_drive"
+          }
+        ]
+      }
+    }
+  }
+}

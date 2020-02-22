@@ -1,0 +1,9 @@
+{
+  "parent": "chaosstorage:block/controller/controller_nearly",
+  "textures": {
+    "particle": "chaosstorage:block/controller/controller_off",
+    "all": "chaosstorage:block/controller/controller",
+    "cutout": "chaosstorage:block/controller/cutouts/nearly_on",
+    "cutout_gray": "chaosstorage:block/controller/cutouts/nearly_on_gray"
+  }
+}

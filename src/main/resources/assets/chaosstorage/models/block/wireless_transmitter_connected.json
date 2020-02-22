@@ -1,0 +1,6 @@
+{
+  "parent": "chaosstorage:block/wireless_transmitter",
+  "textures": {
+    "cutout": "chaosstorage:block/wireless_transmitter/cutouts/connected"
+  }
+}

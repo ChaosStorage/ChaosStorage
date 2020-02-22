@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCG",
+    "EMG",
+    "PDG"
+  ],
+  "key": {
+    "P": {
+      "item": "chaosstorage:improved_processor"
+    },
+    "C": {
+      "item": "chaosstorage:construction_core"
+    },
+    "G": {
+      "tag": "forge:glass"
+    },
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "M": {
+      "item": "chaosstorage:machine_casing"
+    },
+    "D": {
+      "item": "chaosstorage:destruction_core"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:grid"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EPE",
+    "EME",
+    "EAE"
+  ],
+  "key": {
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "A": {
+      "item": "chaosstorage:advanced_processor"
+    },
+    "M": {
+      "item": "chaosstorage:machine_casing"
+    },
+    "P": {
+      "tag": "forge:ender_pearls"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:wireless_transmitter"
+  }
+}

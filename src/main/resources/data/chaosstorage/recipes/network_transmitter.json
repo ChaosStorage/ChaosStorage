@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "CMD",
+    "AAA"
+  ],
+  "key": {
+    "E": {
+      "tag": "forge:ender_pearls"
+    },
+    "C": {
+      "item": "chaosstorage:construction_core"
+    },
+    "M": {
+      "item": "chaosstorage:machine_casing"
+    },
+    "D": {
+      "item": "chaosstorage:destruction_core"
+    },
+    "A": {
+      "item": "chaosstorage:advanced_processor"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:network_transmitter"
+  }
+}

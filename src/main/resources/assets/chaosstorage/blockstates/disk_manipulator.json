@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chaosstorage:block/disk_manipulator_disconnected"
+    }
+  }
+}

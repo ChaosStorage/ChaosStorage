@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CED",
+    "HMH",
+    "EPE"
+  ],
+  "key": {
+    "C": {
+      "item": "chaosstorage:construction_core"
+    },
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "D": {
+      "item": "chaosstorage:destruction_core"
+    },
+    "H": {
+      "tag": "forge:chests"
+    },
+    "M": {
+      "item": "chaosstorage:cable"
+    },
+    "P": {
+      "item": "chaosstorage:improved_processor"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:external_storage"
+  }
+}

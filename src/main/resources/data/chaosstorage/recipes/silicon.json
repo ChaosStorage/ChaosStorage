@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "minecraft:quartz"
+  },
+  "result": "chaosstorage:silicon",
+  "experience": 0.5
+}

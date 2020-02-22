@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:crafter_manager"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.managing_patterns"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.managing_patterns.description"
+    }
+  },
+  "parent": "chaosstorage:autocrafting",
+  "criteria": {
+    "crafter_manager_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:crafter_manager"
+          }
+        ]
+      }
+    }
+  }
+}

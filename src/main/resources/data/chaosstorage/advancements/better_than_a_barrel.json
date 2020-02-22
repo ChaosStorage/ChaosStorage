@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:storage_monitor"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.better_than_a_barrel"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.better_than_a_barrel.description"
+    }
+  },
+  "parent": "chaosstorage:root",
+  "criteria": {
+    "storage_monitor_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:storage_monitor"
+          }
+        ]
+      }
+    }
+  }
+}

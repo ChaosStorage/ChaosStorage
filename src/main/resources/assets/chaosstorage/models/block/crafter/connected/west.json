@@ -1,0 +1,18 @@
+{
+  "parent": "chaosstorage:block/cube_cutout",
+  "textures": {
+    "particle": "chaosstorage:block/crafter/side",
+    "down": "chaosstorage:block/crafter/side_270",
+    "up": "chaosstorage:block/crafter/side_270",
+    "north": "chaosstorage:block/crafter/side_90",
+    "east": "chaosstorage:block/crafter/bottom",
+    "south": "chaosstorage:block/crafter/side_270",
+    "west": "chaosstorage:block/crafter/front",
+    "cutout_down": "chaosstorage:block/crafter/cutouts/side_connected_270",
+    "cutout_up": "chaosstorage:block/crafter/cutouts/side_connected_270",
+    "cutout_north": "chaosstorage:block/crafter/cutouts/side_connected_90",
+    "cutout_east": "chaosstorage:block/crafter/bottom",
+    "cutout_south": "chaosstorage:block/crafter/cutouts/side_connected_270",
+    "cutout_west": "chaosstorage:block/crafter/cutouts/front_connected"
+  }
+}

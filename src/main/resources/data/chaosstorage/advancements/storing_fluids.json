@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:64k_fluid_storage_disk"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.storing_fluids"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.storing_fluids.description"
+    }
+  },
+  "parent": "chaosstorage:drives",
+  "criteria": {
+    "fluid_storage_disk_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:64k_fluid_storage_disk"
+          }
+        ]
+      }
+    }
+  }
+}

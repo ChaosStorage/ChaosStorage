@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:crafting_upgrade"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.crafting_on_demand"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.crafting_on_demand.description"
+    }
+  },
+  "parent": "chaosstorage:pattern_creation",
+  "criteria": {
+    "upgrade_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:crafting_upgrade"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "UIU",
+    "RMR",
+    "UEU"
+  ],
+  "key": {
+    "I": {
+      "item": "chaosstorage:importer"
+    },
+    "E": {
+      "item": "chaosstorage:exporter"
+    },
+    "M": {
+      "item": "chaosstorage:machine_casing"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "U": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:interface"
+  }
+}

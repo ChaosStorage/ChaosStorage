@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:portable_grid"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.portable_storage"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.portable_storage.description"
+    }
+  },
+  "parent": "chaosstorage:viewing_items",
+  "criteria": {
+    "portable_grid_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:portable_grid"
+          }
+        ]
+      }
+    }
+  }
+}

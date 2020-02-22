@@ -1,0 +1,12 @@
+{
+  "parent": "chaosstorage:block/cube_north_cutout",
+  "textures": {
+    "particle": "chaosstorage:block/side",
+    "north": "chaosstorage:block/crafter_manager/front",
+    "east": "chaosstorage:block/crafter_manager/left",
+    "south": "chaosstorage:block/crafter_manager/back",
+    "west": "chaosstorage:block/crafter_manager/right",
+    "up": "chaosstorage:block/crafter_manager/top",
+    "down": "chaosstorage:block/bottom"
+  }
+}

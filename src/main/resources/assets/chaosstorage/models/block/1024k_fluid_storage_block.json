@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "chaosstorage:block/1024k_fluid_storage_block"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chaosstorage:block/creative_storage_block"
+    }
+  }
+}

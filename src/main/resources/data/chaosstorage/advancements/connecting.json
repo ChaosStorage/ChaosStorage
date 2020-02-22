@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:cable"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.connecting"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.connecting.description"
+    }
+  },
+  "parent": "chaosstorage:root",
+  "criteria": {
+    "cable_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:cable"
+          }
+        ]
+      }
+    }
+  }
+}

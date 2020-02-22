@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCG",
+    "EMG",
+    "PCG"
+  ],
+  "key": {
+    "P": {
+      "item": "chaosstorage:advanced_processor"
+    },
+    "C": {
+      "item": "chaosstorage:crafter"
+    },
+    "G": {
+      "tag": "forge:glass"
+    },
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "M": {
+      "item": "chaosstorage:machine_casing"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:crafter_manager"
+  }
+}

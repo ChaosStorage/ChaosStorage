@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EPE",
+    "EEE",
+    " E "
+  ],
+  "key": {
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "P": {
+      "item": "chaosstorage:basic_processor"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:wrench"
+  }
+}

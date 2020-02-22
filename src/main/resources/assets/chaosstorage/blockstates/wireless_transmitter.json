@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "connected=true": {
+      "model": "chaosstorage:block/wireless_transmitter_connected"
+    },
+    "connected=false": {
+      "model": "chaosstorage:block/wireless_transmitter_disconnected"
+    }
+  }
+}

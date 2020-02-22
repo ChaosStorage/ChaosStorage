@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "connected=true": {
+      "model": "chaosstorage:block/network_transmitter_connected"
+    },
+    "connected=false": {
+      "model": "chaosstorage:block/network_transmitter_disconnected"
+    }
+  }
+}

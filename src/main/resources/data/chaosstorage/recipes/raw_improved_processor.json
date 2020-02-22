@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosstorage:processor_binding"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "tag": "chaosstorage:silicon"
+    },
+    {
+      "item": "minecraft:redstone"
+    }
+  ],
+  "result": {
+    "item": "chaosstorage:raw_improved_processor"
+  }
+}

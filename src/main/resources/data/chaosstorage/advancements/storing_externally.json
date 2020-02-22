@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:external_storage"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.storing_externally"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.storing_externally.description"
+    }
+  },
+  "parent": "chaosstorage:root",
+  "criteria": {
+    "external_storage_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:external_storage"
+          }
+        ]
+      }
+    }
+  }
+}

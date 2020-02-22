@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ESE",
+    "CMD",
+    "ESE"
+  ],
+  "key": {
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "S": {
+      "item": "chaosstorage:storage_housing"
+    },
+    "C": {
+      "item": "chaosstorage:construction_core"
+    },
+    "M": {
+      "item": "chaosstorage:machine_casing"
+    },
+    "D": {
+      "item": "chaosstorage:destruction_core"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:disk_manipulator"
+  }
+}

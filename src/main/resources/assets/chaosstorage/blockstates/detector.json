@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=true": {
+      "model": "chaosstorage:block/detector_on"
+    },
+    "powered=false": {
+      "model": "chaosstorage:block/detector_off"
+    }
+  }
+}

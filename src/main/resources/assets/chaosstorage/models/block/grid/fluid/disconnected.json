@@ -1,0 +1,13 @@
+{
+  "parent": "chaosstorage:block/cube_north_cutout",
+  "textures": {
+    "particle": "chaosstorage:block/side",
+    "east": "chaosstorage:block/grid/fluid_left",
+    "south": "chaosstorage:block/grid/back",
+    "west": "chaosstorage:block/grid/fluid_right",
+    "up": "chaosstorage:block/grid/fluid_top",
+    "down": "chaosstorage:block/bottom",
+    "north": "chaosstorage:block/grid/fluid_front",
+    "cutout": "chaosstorage:block/grid/cutouts/fluid_front_disconnected"
+  }
+}

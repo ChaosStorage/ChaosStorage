@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ECE",
+    "SMS",
+    "ESE"
+  ],
+  "key": {
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "C": {
+      "tag": "forge:chests"
+    },
+    "S": {
+      "item": "chaosstorage:security_card"
+    },
+    "M": {
+      "item": "chaosstorage:machine_casing"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:security_manager"
+  }
+}

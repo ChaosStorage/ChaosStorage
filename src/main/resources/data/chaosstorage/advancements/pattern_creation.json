@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:pattern"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.pattern_creation"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.pattern_creation.description"
+    }
+  },
+  "parent": "chaosstorage:autocrafting",
+  "criteria": {
+    "pattern_and_pattern_grid_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:pattern"
+          },
+          {
+            "item": "chaosstorage:pattern_grid"
+          }
+        ]
+      }
+    }
+  }
+}

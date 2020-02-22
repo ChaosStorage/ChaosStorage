@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "connected=true": {
+      "model": "chaosstorage:block/relay_connected"
+    },
+    "connected=false": {
+      "model": "chaosstorage:block/relay_disconnected"
+    }
+  }
+}

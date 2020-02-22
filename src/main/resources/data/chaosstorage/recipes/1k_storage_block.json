@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EPE",
+    "EME",
+    "ERE"
+  ],
+  "key": {
+    "M": {
+      "item": "chaosstorage:machine_casing"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "P": {
+      "item": "chaosstorage:1k_storage_part"
+    },
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:1k_storage_block"
+  }
+}

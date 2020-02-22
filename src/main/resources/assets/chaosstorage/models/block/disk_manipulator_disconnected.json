@@ -1,0 +1,13 @@
+{
+  "parent": "chaosstorage:block/cube_north_cutout",
+  "textures": {
+    "particle": "chaosstorage:block/disk_manipulator/disk_manipulator",
+    "north": "chaosstorage:block/disk_manipulator/disk_manipulator",
+    "east": "chaosstorage:block/side",
+    "south": "chaosstorage:block/side",
+    "west": "chaosstorage:block/side",
+    "up": "chaosstorage:block/side",
+    "down": "chaosstorage:block/side",
+    "cutout": "chaosstorage:block/disk_manipulator/cutouts/disconnected"
+  }
+}

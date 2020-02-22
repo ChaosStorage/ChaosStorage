@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EGE",
+    "ECE",
+    "EFE"
+  ],
+  "key": {
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "G": {
+      "item": "chaosstorage:grid"
+    },
+    "F": {
+      "item": "chaosstorage:fluid_grid"
+    },
+    "C": {
+      "item": "chaosstorage:controller"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:portable_grid"
+  }
+}

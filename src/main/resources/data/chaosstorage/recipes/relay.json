@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosstorage:machine_casing"
+    },
+    {
+      "item": "chaosstorage:cable"
+    },
+    {
+      "item": "minecraft:redstone_torch"
+    }
+  ],
+  "result": {
+    "item": "chaosstorage:relay"
+  }
+}

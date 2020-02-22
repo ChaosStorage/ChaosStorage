@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:wireless_grid"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.wireless_items"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.wireless_items.description"
+    }
+  },
+  "parent": "chaosstorage:wireless",
+  "criteria": {
+    "wireless_grid_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:wireless_grid"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "type": "chaosstorage:upgrade_with_enchanted_book",
+  "enchantment": {
+    "id": "minecraft:silk_touch"
+  },
+  "result": "chaosstorage:silk_touch_upgrade"
+}

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:constructor"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.construction"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.construction.description"
+    }
+  },
+  "parent": "chaosstorage:exporting",
+  "criteria": {
+    "constructor_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:constructor"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SES",
+    "GRG",
+    "SGS"
+  ],
+  "key": {
+    "S": {
+      "tag": "chaosstorage:silicon"
+    },
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "G": {
+      "tag": "forge:glass"
+    },
+    "R": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:64k_fluid_storage_part"
+  }
+}

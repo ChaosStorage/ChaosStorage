@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "chaosstorage:4k_storage_block",
+          "functions": [
+            {
+              "function": "chaosstorage:storage_block"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

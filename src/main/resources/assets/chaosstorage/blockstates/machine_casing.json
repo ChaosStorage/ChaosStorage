@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chaosstorage:block/machine_casing"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosstorage:cable"
+    },
+    {
+      "item": "chaosstorage:destruction_core"
+    },
+    {
+      "item": "chaosstorage:improved_processor"
+    }
+  ],
+  "result": {
+    "item": "chaosstorage:importer"
+  }
+}

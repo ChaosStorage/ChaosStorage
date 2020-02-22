@@ -1,0 +1,10 @@
+{
+  "parent": "chaosstorage:block/security_manager",
+  "textures": {
+    "cutout_up": "chaosstorage:block/security_manager/cutouts/top_disconnected",
+    "cutout_north": "chaosstorage:block/security_manager/cutouts/front_disconnected",
+    "cutout_east": "chaosstorage:block/security_manager/cutouts/left_disconnected",
+    "cutout_south": "chaosstorage:block/security_manager/cutouts/back_disconnected",
+    "cutout_west": "chaosstorage:block/security_manager/cutouts/right_disconnected"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:wireless_transmitter"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.wireless"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.wireless.description"
+    }
+  },
+  "parent": "chaosstorage:root",
+  "criteria": {
+    "wireless_transmitter_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:wireless_transmitter"
+          }
+        ]
+      }
+    }
+  }
+}

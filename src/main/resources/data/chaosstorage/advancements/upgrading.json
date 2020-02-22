@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:upgrade"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.upgrading"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.upgrading.description"
+    }
+  },
+  "parent": "chaosstorage:root",
+  "criteria": {
+    "upgrade_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:upgrade"
+          }
+        ]
+      }
+    }
+  }
+}

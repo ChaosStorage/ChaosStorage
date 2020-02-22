@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:wireless_crafting_monitor"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.wireless_monitoring"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.wireless_monitoring.description"
+    }
+  },
+  "parent": "chaosstorage:wireless",
+  "criteria": {
+    "wireless_crafting_monitor_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:wireless_crafting_monitor"
+          }
+        ]
+      }
+    }
+  }
+}

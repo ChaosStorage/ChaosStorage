@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:security_manager"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.security"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.security.description"
+    }
+  },
+  "parent": "chaosstorage:root",
+  "criteria": {
+    "security_manager_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:security_manager"
+          },
+          {
+            "item": "chaosstorage:security_card"
+          }
+        ]
+      }
+    }
+  }
+}

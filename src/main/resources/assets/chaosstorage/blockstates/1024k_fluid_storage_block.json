@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chaosstorage:block/1024k_fluid_storage_block"
+    }
+  }
+}

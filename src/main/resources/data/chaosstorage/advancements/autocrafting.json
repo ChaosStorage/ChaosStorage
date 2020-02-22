@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:crafter"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.autocrafting"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.autocrafting.description"
+    }
+  },
+  "parent": "chaosstorage:root",
+  "criteria": {
+    "crafter_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:crafter"
+          }
+        ]
+      }
+    }
+  }
+}

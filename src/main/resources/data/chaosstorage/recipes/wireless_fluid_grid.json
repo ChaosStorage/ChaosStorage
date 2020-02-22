@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EPE",
+    "EGE",
+    "EAE"
+  ],
+  "key": {
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "P": {
+      "tag": "forge:ender_pearls"
+    },
+    "G": {
+      "item": "chaosstorage:fluid_grid"
+    },
+    "A": {
+      "item": "chaosstorage:advanced_processor"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:wireless_fluid_grid"
+  }
+}

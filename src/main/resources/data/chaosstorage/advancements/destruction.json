@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:destructor"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.destruction"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.destruction.description"
+    }
+  },
+  "parent": "chaosstorage:importing",
+  "criteria": {
+    "destructor_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:destructor"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:detector"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.detecting"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.detecting.description"
+    }
+  },
+  "parent": "chaosstorage:root",
+  "criteria": {
+    "detector_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:detector"
+          }
+        ]
+      }
+    }
+  }
+}

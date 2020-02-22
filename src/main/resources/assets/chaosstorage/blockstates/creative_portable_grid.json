@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chaosstorage:block/portable_grid_disconnected"
+    }
+  }
+}

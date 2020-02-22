@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "direction=north": {
+      "model": "chaosstorage:block/storage_monitor",
+      "y": 0
+    },
+    "direction=east": {
+      "model": "chaosstorage:block/storage_monitor",
+      "y": 90
+    },
+    "direction=south": {
+      "model": "chaosstorage:block/storage_monitor",
+      "y": 180
+    },
+    "direction=west": {
+      "model": "chaosstorage:block/storage_monitor",
+      "y": 270
+    }
+  }
+}

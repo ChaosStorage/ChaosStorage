@@ -1,0 +1,6 @@
+{
+  "parent": "chaosstorage:block/portable_grid",
+  "textures": {
+    "texture1": "chaosstorage:block/portable_grid_2"
+  }
+}

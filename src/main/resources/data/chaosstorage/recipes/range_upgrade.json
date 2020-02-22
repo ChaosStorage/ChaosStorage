@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EPE",
+    "PUP",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "P": {
+      "tag": "forge:ender_pearls"
+    },
+    "U": {
+      "item": "chaosstorage:upgrade"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:range_upgrade"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PEP",
+    "SRS",
+    "PSP"
+  ],
+  "key": {
+    "P": {
+      "item": "chaosstorage:improved_processor"
+    },
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "S": {
+      "item": "chaosstorage:256k_fluid_storage_part"
+    },
+    "R": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:1024k_fluid_storage_part"
+  }
+}

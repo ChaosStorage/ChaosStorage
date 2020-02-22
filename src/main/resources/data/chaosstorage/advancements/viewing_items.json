@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:grid"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.viewing_items"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.viewing_items.description"
+    }
+  },
+  "parent": "chaosstorage:storing_items",
+  "criteria": {
+    "grid_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:grid"
+          }
+        ]
+      }
+    }
+  }
+}

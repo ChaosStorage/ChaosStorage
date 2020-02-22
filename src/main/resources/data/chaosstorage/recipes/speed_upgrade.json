@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ESE",
+    "SUS",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    },
+    "U": {
+      "item": "chaosstorage:upgrade"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:speed_upgrade"
+  }
+}

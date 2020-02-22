@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:crafting_monitor"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.monitoring"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.monitoring.description"
+    }
+  },
+  "parent": "chaosstorage:autocrafting",
+  "criteria": {
+    "crafting_monitor_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:crafting_monitor"
+          }
+        ]
+      }
+    }
+  }
+}

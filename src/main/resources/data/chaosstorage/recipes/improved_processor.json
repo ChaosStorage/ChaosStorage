@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "chaosstorage:raw_improved_processor"
+  },
+  "result": "chaosstorage:improved_processor",
+  "experience": 0.5
+}

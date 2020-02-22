@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosstorage:storage_housing"
+    },
+    {
+      "item": "chaosstorage:256k_fluid_storage_part"
+    }
+  ],
+  "result": {
+    "item": "chaosstorage:256k_fluid_storage_disk"
+  }
+}

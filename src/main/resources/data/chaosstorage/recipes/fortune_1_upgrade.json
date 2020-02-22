@@ -1,0 +1,8 @@
+{
+  "type": "chaosstorage:upgrade_with_enchanted_book",
+  "enchantment": {
+    "level": 1,
+    "id": "minecraft:fortune"
+  },
+  "result": "chaosstorage:fortune_1_upgrade"
+}

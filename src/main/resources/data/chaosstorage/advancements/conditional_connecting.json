@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:relay"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.conditional_connecting"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.conditional_connecting.description"
+    }
+  },
+  "parent": "chaosstorage:connecting",
+  "criteria": {
+    "relay_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:relay"
+          }
+        ]
+      }
+    }
+  }
+}

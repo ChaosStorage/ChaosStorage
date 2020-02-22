@@ -1,0 +1,6 @@
+{
+  "parent": "chaosstorage:block/detector",
+  "textures": {
+    "torch": "chaosstorage:block/detector/cutouts/off"
+  }
+}

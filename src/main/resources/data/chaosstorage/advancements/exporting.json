@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:exporter"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.exporting"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.exporting.description"
+    }
+  },
+  "parent": "chaosstorage:root",
+  "criteria": {
+    "exporter_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:exporter"
+          }
+        ]
+      }
+    }
+  }
+}

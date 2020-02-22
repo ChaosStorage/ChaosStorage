@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:interface"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.interface_to_the_world"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.interface_to_the_world.description"
+    }
+  },
+  "parent": "chaosstorage:root",
+  "criteria": {
+    "interface_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:interface"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EPE",
+    "SMS",
+    "ESE"
+  ],
+  "key": {
+    "E": {
+      "item": "chaosstorage:quartz_enriched_iron"
+    },
+    "P": {
+      "item": "chaosstorage:advanced_processor"
+    },
+    "S": {
+      "tag": "chaosstorage:silicon"
+    },
+    "M": {
+      "item": "chaosstorage:machine_casing"
+    }
+  },
+  "result": {
+    "item": "chaosstorage:controller"
+  }
+}

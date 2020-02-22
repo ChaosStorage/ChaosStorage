@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "connected=true": {
+      "model": "chaosstorage:block/fluid_interface_connected"
+    },
+    "connected=false": {
+      "model": "chaosstorage:block/fluid_interface_disconnected"
+    }
+  }
+}

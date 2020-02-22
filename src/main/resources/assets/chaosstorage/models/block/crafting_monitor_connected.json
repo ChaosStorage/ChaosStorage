@@ -1,0 +1,6 @@
+{
+  "parent": "chaosstorage:block/crafting_monitor",
+  "textures": {
+    "cutout": "chaosstorage:block/crafting_monitor/cutouts/front_connected"
+  }
+}

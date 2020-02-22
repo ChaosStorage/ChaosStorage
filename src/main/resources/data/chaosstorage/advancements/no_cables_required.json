@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "chaosstorage:network_transmitter"
+    },
+    "title": {
+      "translate": "advancements.chaosstorage.no_cables_required"
+    },
+    "description": {
+      "translate": "advancements.chaosstorage.no_cables_required.description"
+    }
+  },
+  "parent": "chaosstorage:wireless",
+  "criteria": {
+    "network_transmitter_receiver_card_in_inventory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosstorage:network_transmitter"
+          },
+          {
+            "item": "chaosstorage:network_receiver"
+          },
+          {
+            "item": "chaosstorage:network_card"
+          }
+        ]
+      }
+    }
+  }
+}

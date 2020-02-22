@@ -1,0 +1,8 @@
+{
+  "parent": "chaosstorage:block/cube_all_cutout",
+  "textures": {
+    "particle": "chaosstorage:block/network_transmitter/network_transmitter",
+    "all": "chaosstorage:block/network_transmitter/network_transmitter",
+    "cutout": "chaosstorage:block/network_transmitter/cutouts/connected"
+  }
+}

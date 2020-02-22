@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosstorage:grid"
+    },
+    {
+      "item": "chaosstorage:advanced_processor"
+    },
+    {
+      "tag": "chaosstorage:crafting_tables"
+    }
+  ],
+  "result": {
+    "item": "chaosstorage:crafting_grid"
+  }
+}

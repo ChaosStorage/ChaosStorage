@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "energy_type=off": {
+      "model": "chaosstorage:block/controller/controller_off"
+    },
+    "energy_type=nearly_off": {
+      "model": "chaosstorage:block/controller/controller_nearly_off"
+    },
+    "energy_type=nearly_on": {
+      "model": "chaosstorage:block/controller/controller_nearly_on"
+    },
+    "energy_type=on": {
+      "model": "chaosstorage:block/controller/controller_on"
+    }
+  }
+}

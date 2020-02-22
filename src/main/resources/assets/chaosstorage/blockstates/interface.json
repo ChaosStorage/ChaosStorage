@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "connected=true": {
+      "model": "chaosstorage:block/interface_connected"
+    },
+    "connected=false": {
+      "model": "chaosstorage:block/interface_disconnected"
+    }
+  }
+}

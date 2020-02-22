@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chaosstorage:interface"
+    },
+    {
+      "item": "chaosstorage:advanced_processor"
+    },
+    {
+      "item": "minecraft:bucket"
+    }
+  ],
+  "result": {
+    "item": "chaosstorage:fluid_interface"
+  }
+}

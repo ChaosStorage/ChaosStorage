@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "chaosstorage:block/creative_storage_block"
+  }
+}

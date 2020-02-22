@@ -1,0 +1,7 @@
+{
+  "parent": "chaosstorage:block/constructor_destructor",
+  "textures": {
+    "front": "chaosstorage:block/constructor/constructor",
+    "cutout": "chaosstorage:block/constructor/cutouts/connected"
+  }
+}
