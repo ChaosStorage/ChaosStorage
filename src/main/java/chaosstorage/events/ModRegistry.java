@@ -59,16 +59,16 @@ public class ModRegistry {
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "16k_storage_part"), CSContent._16K_STORAGE_PART = new Item(itemGroup));
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "64k_storage_part"), CSContent._64K_STORAGE_PART = new Item(itemGroup));
 
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "64k_fluid_storage_part"), CSContent._64K_FLUID_STORAGE_PART = new Item(itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "256k_fluid_storage_part"), CSContent._256K_FLUID_STORAGE_PART = new Item(itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "1024k_fluid_storage_part"), CSContent._1024K_FLUID_STORAGE_PART = new Item(itemGroup));
+    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "4096k_fluid_storage_part"), CSContent._4096K_FLUID_STORAGE_PART = new Item(itemGroup));
+
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "1k_storage_disk"), CSContent._1K_STORAGE_DISK = new Item(itemGroup));
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "4k_storage_disk"), CSContent._4K_STORAGE_DISK = new Item(itemGroup));
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "16k_storage_disk"), CSContent._16K_STORAGE_DISK = new Item(itemGroup));
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "64k_storage_disk"), CSContent._64K_STORAGE_DISK = new Item(itemGroup));
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "creative_storage_disk"), CSContent.CREATIVE_STORAGE_DISK = new Item(itemGroup));
-
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "64k_fluid_storage_part"), CSContent._64K_FLUID_STORAGE_PART = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "256k_fluid_storage_part"), CSContent._256K_FLUID_STORAGE_PART = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "1024k_fluid_storage_part"), CSContent._1024K_FLUID_STORAGE_PART = new Item(itemGroup));
-    Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "4096k_fluid_storage_part"), CSContent._4096K_FLUID_STORAGE_PART = new Item(itemGroup));
 
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "64k_fluid_storage_disk"), CSContent._64K_FLUID_STORAGE_DISK = new Item(itemGroup));
     Registry.register(Registry.ITEM, new Identifier(ChaosStorage.MOD_ID, "256k_fluid_storage_disk"), CSContent._256K_FLUID_STORAGE_DISK = new Item(itemGroup));

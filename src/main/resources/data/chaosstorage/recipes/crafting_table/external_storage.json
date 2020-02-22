@@ -16,7 +16,7 @@
       "item": "chaosstorage:destruction_core"
     },
     "H": {
-      "tag": "forge:chests"
+      "tag": "minecraft:chest"
     },
     "M": {
       "item": "chaosstorage:cable"

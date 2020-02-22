@@ -10,7 +10,7 @@
       "item": "chaosstorage:quartz_enriched_iron"
     },
     "C": {
-      "tag": "forge:chests"
+      "tag": "minecraft:chest"
     },
     "M": {
       "item": "chaosstorage:machine_casing"
