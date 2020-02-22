@@ -1,9 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "II",
-    "IQ"
-  ],
+  "type": "minecraft:crafting_shapeless",
   "key": {
     "I": {
       "item": "minecraft:iron_ingot"
