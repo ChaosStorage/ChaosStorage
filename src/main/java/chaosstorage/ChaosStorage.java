@@ -16,25 +16,25 @@ import chaosstorage.client.GuiHandler;
 
 
 public class ChaosStorage implements ModInitializer {
-  public static final String MOD_ID = "chaosstorage";
-  public static ChaosStorage INSTANCE;
+	public static final String MOD_ID = "chaosstorage";
+	public static ChaosStorage INSTANCE;
 
-  public static final ItemGroup ITEMGROUP = FabricItemGroupBuilder.build(
-      new Identifier("chaosstorage", "item_group"),
-      () -> new ItemStack(CSContent.QUARTZ_ENRICHED_IRON));
+	public static final ItemGroup ITEMGROUP = FabricItemGroupBuilder.build(
+			new Identifier("chaosstorage", "item_group"),
+			() -> new ItemStack(CSContent.Items.QUARTZ_ENRICHED_IRON));
 
-  @Override
-  public void onInitialize() {
-    System.out.println("Hello Fabric world!");
-    INSTANCE = this;
-    new Configuration(ChaosStorageConfig.class, "chaosstorage");
+	@Override
+	public void onInitialize() {
+		System.out.println("Hello Fabric world!");
+		INSTANCE = this;
+		new Configuration(ChaosStorageConfig.class, "chaosstorage");
 
-    ModRegistry.setupShit();
-    GuiHandler.register();
-    
-    // Force loads the block entities at the right time
-    CSBlockEntities.CONTROLLER.toString();
+		ModRegistry.setupShit();
+		GuiHandler.register();
+		
+		// Force loads the block entities at the right time
+		//CSBlockEntities.CONTROLLER.toString();
 
-    System.out.println("ChaosStorage setup done!");
-  }
+		System.out.println("ChaosStorage setup done!");
+	}
 }

@@ -43,20 +43,20 @@ import chaosstorage.client.gui.*;
 public class GuiHandler {
 	public static void register() {
 		EGui.stream().forEach(gui -> ContainerProviderRegistry.INSTANCE.registerFactory(gui.getID(), (syncID, identifier, playerEntity, packetByteBuf) -> {
-                        final BlockEntity blockEntity = playerEntity.world.getBlockEntity(packetByteBuf.readBlockPos());
-                        return ((IContainerProvider) blockEntity).createContainer(syncID, playerEntity);
-                }));
+			final BlockEntity blockEntity = playerEntity.world.getBlockEntity(packetByteBuf.readBlockPos());
+			return ((IContainerProvider) blockEntity).createContainer(syncID, playerEntity);
+		}));
 
-                RebornCore.clientOnly(() -> () -> EGui.stream().forEach(gui -> ScreenProviderRegistry.INSTANCE.registerFactory(gui.getID(), (syncID, identifier, playerEntity, packetByteBuf) -> getClientGuiElement(EGui.byID(identifier), playerEntity, packetByteBuf.readBlockPos(), syncID))));
+		RebornCore.clientOnly(() -> () -> EGui.stream().forEach(gui -> ScreenProviderRegistry.INSTANCE.registerFactory(gui.getID(), (syncID, identifier, playerEntity, packetByteBuf) -> getClientGuiElement(EGui.byID(identifier), playerEntity, packetByteBuf.readBlockPos(), syncID))));
 	}
 
 	@Environment(EnvType.CLIENT)
-        private static ContainerScreen<?> getClientGuiElement(final EGui gui, final PlayerEntity player, BlockPos pos, int syncID) {
-                final BlockEntity blockEntity = player.world.getBlockEntity(pos);
+	private static ContainerScreen<?> getClientGuiElement(final EGui gui, final PlayerEntity player, BlockPos pos, int syncID) {
+		final BlockEntity blockEntity = player.world.getBlockEntity(pos);
 
 		/*if (blockEntity instanceof DataDrivenBEProvider.DataDrivenBlockEntity) {
-                        return new DataDrivenGui(syncID, player, (DataDrivenBEProvider.DataDrivenBlockEntity) blockEntity);
-                }*/
+			return new DataDrivenGui(syncID, player, (DataDrivenBEProvider.DataDrivenBlockEntity) blockEntity);
+			}*/
 
 		switch (gui) {
 			case CONTROLLER:

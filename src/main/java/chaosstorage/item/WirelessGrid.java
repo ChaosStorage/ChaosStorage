@@ -17,7 +17,7 @@ import chaosstorage.config.ChaosStorageConfig;
 
 import java.util.List;
 
-public class WirelessGrid extends Item implements EnergyHolder, ItemDurabilityExtensions/*, IListInfoProvider*/ {
+public class WirelessGrid extends ChaosItem implements EnergyHolder, ItemDurabilityExtensions/*, IListInfoProvider*/ {
 	public enum Type {
 		CRAFTING(),
 		FLUID(),
@@ -33,8 +33,8 @@ public class WirelessGrid extends Item implements EnergyHolder, ItemDurabilityEx
 	private final Type type;
 	private boolean linked;
 
-	public WirelessGrid(Type type, Settings itemGroup) {
-		super(itemGroup);
+	public WirelessGrid(Type type) {
+		super();
 		this.type = type;
 		this.linked = false;
 	}
@@ -50,7 +50,7 @@ public class WirelessGrid extends Item implements EnergyHolder, ItemDurabilityEx
 		if (!this.linked) {
 			info.add(
 				new TranslatableText("item.chaosstorage.wireless_unlinked")
-				    .setStyle(new Style().setColor(Formatting.GRAY))
+						.setStyle(new Style().setColor(Formatting.GRAY))
 			);
 		}
 	}*/

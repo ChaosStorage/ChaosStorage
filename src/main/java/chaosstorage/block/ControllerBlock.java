@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-package chaosstorage.blocks;
+package chaosstorage.block;
 
 
 import net.minecraft.block.entity.BlockEntity;
@@ -63,7 +63,7 @@ public class ControllerBlock extends BaseBlockEntityProvider {
 	public static BooleanProperty ACTIVE; // = BooleanProperty.of("active");
 	public IMachineGuiHandler gui;
 
-	public ControllerBlock() {
+	public ControllerBlock(boolean _creative) {
 		super(FabricBlockSettings.of(Material.METAL).strength(2f, 2f).build());
 		this.setDefaultState(this.getStateManager().getDefaultState().with(ACTIVE, false).with(FACING, Direction.NORTH));
 		this.name = "controller";
@@ -77,22 +77,22 @@ public class ControllerBlock extends BaseBlockEntityProvider {
 	}
 
 	public static void setActive(Boolean active, World world, BlockPos pos) {
-                Direction facing = (Direction)world.getBlockState(pos).get(FACING);
-                BlockState state = world.getBlockState(pos).with(ACTIVE, active).with(FACING, facing);
-                world.setBlockState(pos, state, 1);
-        }
+		Direction facing = (Direction)world.getBlockState(pos).get(FACING);
+		BlockState state = world.getBlockState(pos).with(ACTIVE, active).with(FACING, facing);
+		world.setBlockState(pos, state, 1);
+	}
 
 	// BaseBlockEntityProvider
 	@Override
 	public void onPlaced(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		super.onPlaced(worldIn, pos, state, placer, stack);
 		Direction facing = placer.getHorizontalFacing().getOpposite();
-                if (placer.pitch < -50) {
-                        facing = Direction.DOWN;
-                } else if (placer.pitch > 50) {
-                        facing = Direction.UP;
-                }
-                //setFacing(facing, worldIn, pos);
+		if (placer.pitch < -50) {
+			facing = Direction.DOWN;
+		} else if (placer.pitch > 50) {
+			facing = Direction.UP;
+		}
+		//setFacing(facing, worldIn, pos);
 	}
 
 	// Block
@@ -103,56 +103,56 @@ public class ControllerBlock extends BaseBlockEntityProvider {
 	}
 
 	@SuppressWarnings("deprecation")
-        @Override
-        public ActionResult onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand hand, BlockHitResult hitResult) {
-                ItemStack stack = playerIn.getStackInHand(Hand.MAIN_HAND);
-                BlockEntity blockEntity = worldIn.getBlockEntity(pos);
+	@Override
+	public ActionResult onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand hand, BlockHitResult hitResult) {
+		ItemStack stack = playerIn.getStackInHand(Hand.MAIN_HAND);
+		BlockEntity blockEntity = worldIn.getBlockEntity(pos);
 
-                // We extended BlockTileBase. Thus we should always have blockEntity entity. I hope.
-                if (blockEntity == null) {
-                        return ActionResult.FAIL;
-                }
+		// We extended BlockTileBase. Thus we should always have blockEntity entity. I hope.
+		if (blockEntity == null) {
+			return ActionResult.FAIL;
+		}
 
-                if (!stack.isEmpty() && ToolManager.INSTANCE.canHandleTool(stack)) {
-                        if (WrenchUtils.handleWrench(stack, worldIn, pos, playerIn, hitResult.getSide())) {
-                                return ActionResult.SUCCESS;
-                        }
-                }
+		if (!stack.isEmpty() && ToolManager.INSTANCE.canHandleTool(stack)) {
+			if (WrenchUtils.handleWrench(stack, worldIn, pos, playerIn, hitResult.getSide())) {
+				return ActionResult.SUCCESS;
+			}
+		}
 
-                if (!playerIn.isSneaking() && gui != null) {
-                        gui.open(playerIn, pos, worldIn);
-                        return ActionResult.SUCCESS;
-                }
+		if (!playerIn.isSneaking() && gui != null) {
+			gui.open(playerIn, pos, worldIn);
+			return ActionResult.SUCCESS;
+		}
 
-                return super.onUse(state, worldIn, pos, playerIn, hand, hitResult);
-        }
+		return super.onUse(state, worldIn, pos, playerIn, hand, hitResult);
+	}
 
-        @SuppressWarnings("deprecation")
-        @Override
-        public void onBlockRemoved(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-                if (state.getBlock() != newState.getBlock()) {
-                        ItemHandlerUtils.dropContainedItems(worldIn, pos);
-                        super.onBlockRemoved(state, worldIn, pos, newState, isMoving);
-                }
-        }
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onBlockRemoved(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+		if (state.getBlock() != newState.getBlock()) {
+			ItemHandlerUtils.dropContainedItems(worldIn, pos);
+			super.onBlockRemoved(state, worldIn, pos, newState, isMoving);
+		}
+	}
 
-        @SuppressWarnings("deprecation")
-        @Override
-        public boolean hasComparatorOutput(BlockState state) {
-                return true;
-        }
+	@SuppressWarnings("deprecation")
+	@Override
+	public boolean hasComparatorOutput(BlockState state) {
+		return true;
+	}
 
-        @SuppressWarnings("deprecation")
-        @Override
-        public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-                return PowerAcceptorBlockEntity.calculateComparatorOutputFromEnergy(world.getBlockEntity(pos));
-        }
+	@SuppressWarnings("deprecation")
+	@Override
+	public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+		return PowerAcceptorBlockEntity.calculateComparatorOutputFromEnergy(world.getBlockEntity(pos));
+	}
 
-        @SuppressWarnings("deprecation")
-        @Override
-        public BlockState rotate(BlockState state, BlockRotation rotation) {
-                return state.with(FACING, rotation.rotate(state.get(FACING)));
-        }
+	@SuppressWarnings("deprecation")
+	@Override
+	public BlockState rotate(BlockState state, BlockRotation rotation) {
+		return state.with(FACING, rotation.rotate(state.get(FACING)));
+	}
 
 	@Override
 	public BlockEntity createBlockEntity(BlockView worldIn) {

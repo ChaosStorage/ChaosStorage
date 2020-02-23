@@ -38,7 +38,7 @@ import team.reborn.energy.EnergyTier;
 
 import chaosstorage.init.CSBlockEntities;
 import chaosstorage.init.CSContent;
-import chaosstorage.blocks.ControllerBlock;
+import chaosstorage.block.ControllerBlock;
 import chaosstorage.config.ChaosStorageConfig;
 
 public class ControllerEntity extends PowerAcceptorBlockEntity implements IContainerProvider, InventoryProvider {

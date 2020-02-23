@@ -43,34 +43,30 @@ import java.util.List;
 public class CSBlockEntities {
 	private static List<BlockEntityType<?>> TYPES = new ArrayList<>();
 
-	public static final BlockEntityType<ControllerEntity> CONTROLLER = register(ControllerEntity.class, "controller", CSContent.Machine.CONTROLLER);
-	public static final BlockEntityType<ControllerEntity> CREATIV_CONTROLLER = register(ControllerEntity.class, "creative_controller", CSContent.Machine.CREATIVE_CONTROLLER);
-
-
-
+	public static final BlockEntityType<ControllerEntity> CONTROLLER = register(ControllerEntity.class, "controller", CSContent.Blocks.CONTROLLER);
+	public static final BlockEntityType<ControllerEntity> CREATIVE_CONTROLLER = register(ControllerEntity.class, "creative_controller", CSContent.Blocks.CREATIVE_CONTROLLER);
 
 	public static <T extends BlockEntity> BlockEntityType<T> register(Class<T> tClass, String name, ItemConvertible... items) {
-                return register(tClass, name, Arrays.stream(items).map(itemConvertible -> Block.getBlockFromItem(itemConvertible.asItem())).toArray(Block[]::new));
-        }
+		return register(tClass, name, Arrays.stream(items).map(itemConvertible -> Block.getBlockFromItem(itemConvertible.asItem())).toArray(Block[]::new));
+	}
 
-        public static <T extends BlockEntity> BlockEntityType<T> register(Class<T> tClass, String name, Block... blocks) {
-                Validate.isTrue(blocks.length > 0, "no blocks for blockEntity entity type!");
-                return register(new Identifier(ChaosStorage.MOD_ID, name).toString(), BlockEntityType.Builder.create(() -> createBlockEntity(tClass), blocks));
-        }
+	public static <T extends BlockEntity> BlockEntityType<T> register(Class<T> tClass, String name, Block... blocks) {
+		Validate.isTrue(blocks.length > 0, "no blocks for blockEntity entity type!");
+		return register(new Identifier(ChaosStorage.MOD_ID, name).toString(), BlockEntityType.Builder.create(() -> createBlockEntity(tClass), blocks));
+	}
 
-        private static <T extends BlockEntity> T createBlockEntity(Class<T> tClass){
-                try {
-                        return tClass.newInstance();
-                } catch (InstantiationException | IllegalAccessException e) {
-                        throw new RuntimeException("Failed to createBlockEntity blockEntity", e);
-                }
-        }
+	private static <T extends BlockEntity> T createBlockEntity(Class<T> tClass){
+		try {
+			return tClass.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			throw new RuntimeException("Failed to createBlockEntity blockEntity", e);
+		}
+	}
 
-        public static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType.Builder<T> builder) {
-                BlockEntityType<T> blockEntityType = builder.build(null);
-                Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(id), blockEntityType);
-                CSBlockEntities.TYPES.add(blockEntityType);
-                return blockEntityType;
-        }
-
+	public static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType.Builder<T> builder) {
+		BlockEntityType<T> blockEntityType = builder.build(null);
+		Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(id), blockEntityType);
+		CSBlockEntities.TYPES.add(blockEntityType);
+		return blockEntityType;
+	}
 }

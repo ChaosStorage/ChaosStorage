@@ -5,12 +5,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 
-import chaosstorage.blocks.ControllerBlock;
+import chaosstorage.block.ChaosBlock;
+import chaosstorage.item.ChaosItem;
+import chaosstorage.item.UpgradeItem;
+import chaosstorage.item.WirelessGrid;
+import chaosstorage.block.ControllerBlock;
 import chaosstorage.blockentity.ControllerEntity;
 import chaosstorage.utils.InitUtils;
-
 import chaosstorage.events.ModRegistry;
-
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -19,136 +21,140 @@ import java.util.function.Function;
 
 public class CSContent {
 
-  /* Blocks */
+	/* Blocks */
+	public enum Blocks implements ItemConvertible {
+		IMPORTER(new ChaosBlock()),
+		EXPORTER(new ChaosBlock()),
+		DETECTOR(new ChaosBlock()),
+		RELAY(new ChaosBlock()),
+		NETWORK_TRANSMITTER(new ChaosBlock()),
+		NETWORK_RECEIVER(new ChaosBlock()),
 
-  public static Block IMPORTER;
-  public static Block EXPORTER;
-  public static Block DETECTOR;
-  public static Block RELAY;
-  public static Block NETWORK_TRANSMITTER;
-  public static Block NETWORK_RECEIVER;
+		QUARTZ_ENRICHED_IRON_BLOCK(new ChaosBlock()),
+		MACHINE_CASING(new ChaosBlock()),
+		CONTROLLER(new ControllerBlock(false)),
+		CREATIVE_CONTROLLER(new ControllerBlock(true)),
+		CABLE(new ChaosBlock()),
+		DISK_DRIVE(new ChaosBlock()),
+		EXTERNAL_STORAGE(new ChaosBlock()),
+		GRID(new ChaosBlock()),
+		CRAFTING_GRID(new ChaosBlock()),
+		PATTERN_GRID(new ChaosBlock()),
+		FLUID_GRID(new ChaosBlock()),
 
-  public static Block QUARTZ_ENRICHED_IRON_BLOCK;
-  public static Block MACHINE_CASING;
-  //public static Block CONTROLLER;
-  public static Block CREATIVE_CONTROLLER;
-  public static Block CABLE;
-  public static Block DISK_DRIVE;
-  public static Block EXTERNAL_STORAGE;
-  public static Block GRID;
-  public static Block CRAFTING_GRID;
-  public static Block PATTERN_GRID;
-  public static Block FLUID_GRID;
+		SECURITY_MANAGER(new ChaosBlock()),
+		INTERFACE(new ChaosBlock()),
+		FLUID_INTERFACE(new ChaosBlock()),
+		WIRELESS_TRANSMITTER(new ChaosBlock()),
+		STORAGE_MONITOR(new ChaosBlock()),
+		CONSTRUCTOR(new ChaosBlock()),
+		DESTRUCTOR(new ChaosBlock()),
+		DISK_MANIPULATOR(new ChaosBlock()),
+		PORTABLE_GRID(new ChaosBlock()),
+		CREATIVE_PORTABLE_GRID(new ChaosBlock()),
+		CRAFTER(new ChaosBlock()),
+		CRAFTER_MANAGER(new ChaosBlock()),
+		CRAFTING_MONITOR(new ChaosBlock()),
 
-  public static Block SECURITY_MANAGER;
-  public static Block INTERFACE;
-  public static Block FLUID_INTERFACE;
-  public static Block WIRELESS_TRANSMITTER;
-  public static Block STORAGE_MONITOR;
-  public static Block CONSTRUCTOR;
-  public static Block DESTRUCTOR;
-  public static Block DISK_MANIPULATOR;
-  public static Block PORTABLE_GRID;
-  public static Block CREATIVE_PORTABLE_GRID;
-  public static Block CRAFTER;
-  public static Block CRAFTER_MANAGER;
-  public static Block CRAFTING_MONITOR;
+		_1K_STORAGE_BLOCK(new ChaosBlock()),
+		_4K_STORAGE_BLOCK(new ChaosBlock()),
+		_16K_STORAGE_BLOCK(new ChaosBlock()),
+		_64K_STORAGE_BLOCK(new ChaosBlock()),
+		CREATIVE_STORAGE_BLOCK(new ChaosBlock()),
 
-  public static Block _1K_STORAGE_BLOCK;
-  public static Block _4K_STORAGE_BLOCK;
-  public static Block _16K_STORAGE_BLOCK;
-  public static Block _64K_STORAGE_BLOCK;
-  public static Block CREATIVE_STORAGE_BLOCK;
+		_64K_FLUID_STORAGE_BLOCK(new ChaosBlock()),
+		_256K_FLUID_STORAGE_BLOCK(new ChaosBlock()),
+		_1024K_FLUID_STORAGE_BLOCK(new ChaosBlock()),
+		_4096K_FLUID_STORAGE_BLOCK(new ChaosBlock()),
+		CREATIVE_FLUID_STORAGE_BLOCK(new ChaosBlock());
 
-  public static Block _64K_FLUID_STORAGE_BLOCK;
-  public static Block _256K_FLUID_STORAGE_BLOCK;
-  public static Block _1024K_FLUID_STORAGE_BLOCK;
-  public static Block _4096K_FLUID_STORAGE_BLOCK;
-  public static Block CREATIVE_FLUID_STORAGE_BLOCK;
+		public final Block block;
+		
+		Blocks(Block b) {
+			String name = this.toString().toLowerCase(Locale.ROOT);
+			block = b;
+			InitUtils.setup(block, name);
+		}
 
-  /* Items */
+		@Override
+		public Item asItem() {
+			return block.asItem();
+		}
+	}
 
-  public static Item QUARTZ_ENRICHED_IRON;
-  public static Item SILICON;
+	/* Items */
+	public enum Items implements ItemConvertible {
+		QUARTZ_ENRICHED_IRON(new ChaosItem()),
+		SILICON(new ChaosItem()),
 
-  public static Item PROCESSOR_BINDING;
-  public static Item RAW_BASIC_PROCESSOR;
-  public static Item RAW_IMPROVED_PROCESSOR;
-  public static Item RAW_ADVANCED_PROCESSOR;
+		PROCESSOR_BINDING(new ChaosItem()),
+		RAW_BASIC_PROCESSOR(new ChaosItem()),
+		RAW_IMPROVED_PROCESSOR(new ChaosItem()),
+		RAW_ADVANCED_PROCESSOR(new ChaosItem()),
 
-  public static Item BASIC_PROCESSOR;
-  public static Item IMPROVED_PROCESSOR;
-  public static Item ADVANCED_PROCESSOR;
+		BASIC_PROCESSOR(new ChaosItem()),
+		IMPROVED_PROCESSOR(new ChaosItem()),
+		ADVANCED_PROCESSOR(new ChaosItem()),
 
-  public static Item CONSTRUCTION_CORE;
-  public static Item DESTRUCTION_CORE;
+		CONSTRUCTION_CORE(new ChaosItem()),
+		DESTRUCTION_CORE(new ChaosItem()),
 
-  public static Item UPGRADE;
-  public static Item CRAFTING_UPGRADE;
-  public static Item RANGE_UPGRADE;
-  public static Item SPEED_UPGRADE;
-  public static Item STACK_UPGRADE;
-  public static Item SILK_TOUCH_UPGRADE;
-  public static Item FORTUNE_1_UPGRADE;
-  public static Item FORTUNE_2_UPGRADE;
-  public static Item FORTUNE_3_UPGRADE;
+		UPGRADE(new UpgradeItem(UpgradeItem.Type.NORMAL)),
+		CRAFTING_UPGRADE(new UpgradeItem(UpgradeItem.Type.SPEED)),
+		RANGE_UPGRADE(new UpgradeItem(UpgradeItem.Type.RANGE)),
+		SPEED_UPGRADE(new UpgradeItem(UpgradeItem.Type.CRAFTING)),
+		STACK_UPGRADE(new UpgradeItem(UpgradeItem.Type.STACK)),
+		SILK_TOUCH_UPGRADE(new UpgradeItem(UpgradeItem.Type.SILK_TOUCH)),
+		FORTUNE_1_UPGRADE(new UpgradeItem(UpgradeItem.Type.FORTUNE_1)),
+		FORTUNE_2_UPGRADE(new UpgradeItem(UpgradeItem.Type.FORTUNE_2)),
+		FORTUNE_3_UPGRADE(new UpgradeItem(UpgradeItem.Type.FORTUNE_3)),
 
-  public static Item WRENCH;
-  public static Item FILTER;
-  public static Item PATTERN;
-  public static Item NETWORK_CARD;
-  public static Item SECURITY_CARD;
+		WRENCH(new ChaosItem()),
+		FILTER(new ChaosItem()),
+		PATTERN(new ChaosItem()),
+		NETWORK_CARD(new ChaosItem()),
+		SECURITY_CARD(new ChaosItem()),
 
-  public static Item WIRELESS_CRAFTING_MONITOR;
-  public static Item WIRELESS_FLUID_GRID;
-  public static Item WIRELESS_GRID;
+		WIRELESS_CRAFTING_MONITOR(new ChaosItem()),
+		WIRELESS_CRAFTING_GRID(new WirelessGrid(WirelessGrid.Type.CRAFTING)),
+		WIRELESS_FLUID_GRID(new WirelessGrid(WirelessGrid.Type.FLUID)),
+		WIRELESS_GRID(new WirelessGrid(WirelessGrid.Type.NORMAL)),
 
-  public static Item STORAGE_HOUSING;
+		STORAGE_HOUSING(new ChaosItem()),
 
-  public static Item _1K_STORAGE_PART;
-  public static Item _4K_STORAGE_PART;
-  public static Item _16K_STORAGE_PART;
-  public static Item _64K_STORAGE_PART;
+		_1K_STORAGE_PART(new ChaosItem()),
+		_4K_STORAGE_PART(new ChaosItem()),
+		_16K_STORAGE_PART(new ChaosItem()),
+		_64K_STORAGE_PART(new ChaosItem()),
 
-  public static Item _64K_FLUID_STORAGE_PART;
-  public static Item _256K_FLUID_STORAGE_PART;
-  public static Item _1024K_FLUID_STORAGE_PART;
-  public static Item _4096K_FLUID_STORAGE_PART;
+		_64K_FLUID_STORAGE_PART(new ChaosItem()),
+		_256K_FLUID_STORAGE_PART(new ChaosItem()),
+		_1024K_FLUID_STORAGE_PART(new ChaosItem()),
+		_4096K_FLUID_STORAGE_PART(new ChaosItem()),
 
-  public static Item _64K_FLUID_STORAGE_DISK;
-  public static Item _256K_FLUID_STORAGE_DISK;
-  public static Item _1024K_FLUID_STORAGE_DISK;
-  public static Item _4096K_FLUID_STORAGE_DISK;
-  public static Item CREATIVE_FLUID_STORAGE_DISK;
+		_64K_FLUID_STORAGE_DISK(new ChaosItem()),
+		_256K_FLUID_STORAGE_DISK(new ChaosItem()),
+		_1024K_FLUID_STORAGE_DISK(new ChaosItem()),
+		_4096K_FLUID_STORAGE_DISK(new ChaosItem()),
+		CREATIVE_FLUID_STORAGE_DISK(new ChaosItem()),
 
-  public static Item _1K_STORAGE_DISK;
-  public static Item _4K_STORAGE_DISK;
-  public static Item _16K_STORAGE_DISK;
-  public static Item _64K_STORAGE_DISK;
-  public static Item CREATIVE_STORAGE_DISK;
+		_1K_STORAGE_DISK(new ChaosItem()),
+		_4K_STORAGE_DISK(new ChaosItem()),
+		_16K_STORAGE_DISK(new ChaosItem()),
+		_64K_STORAGE_DISK(new ChaosItem()),
+		CREATIVE_STORAGE_DISK(new ChaosItem());
 
-  // Entities
-  public enum Machine implements ItemConvertible {
-	  CONTROLLER(new ControllerBlock()),
-          CREATIVE_CONTROLLER(new ControllerBlock());
-	  
+		public final Item item;
+		
+		Items(Item i) {
+			String name = this.toString().toLowerCase(Locale.ROOT);
+			item = i;
+			InitUtils.setup(item, name);
+		}
 
-	  public final String name;
-	  public final Block block;
-
-	  <B extends Block> Machine(B block) {
-		  this.name = this.toString().toLowerCase(Locale.ROOT);
-		  this.block = block;
-		  InitUtils.setup(block, ModRegistry.itemGroup, name);
-	  }
-
-	  public ItemStack getStack() {
-		  return new ItemStack(block);
-	  }
-
-	  @Override
-	  public Item asItem() {
-		  return block.asItem();
-	  }
-  }
+		@Override
+		public Item asItem() {
+			return item;
+		}
+	}
 }

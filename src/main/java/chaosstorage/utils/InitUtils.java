@@ -42,49 +42,44 @@ import team.reborn.energy.Energy;
 import chaosstorage.ChaosStorage;
 
 public class InitUtils {
-        public static <I extends Item> I setup(I item, String name) {
-                RebornRegistry.registerIdent(item, new Identifier(ChaosStorage.MOD_ID, name));
-                return item;
-        }
+	public static <I extends Item> I setup(I item, String name) {
+		RebornRegistry.registerIdent(item, new Identifier(ChaosStorage.MOD_ID, name));
+		return item;
+	}
 
-        public static <B extends Block> B setup(B block, String name) {
-                //RebornRegistry.registerIdent(chaosstorage.init.CSContent.INTERFACE/*block*/, new Identifier(ChaosStorage.MOD_ID, name));
-                return block;
-        }
-
-	public static <B extends Block> B setup(B block, Item.Settings itemGroup, String name) {
-		RebornRegistry.registerBlock(block, itemGroup, new Identifier(ChaosStorage.MOD_ID, name));
+	public static <B extends Block> B setup(B block, String name) {
+		RebornRegistry.registerIdent(block, new Identifier(ChaosStorage.MOD_ID, name));
 		return block;
 	}
 
-        public static SoundEvent setup(String name) {
-                Identifier identifier = new Identifier(ChaosStorage.MOD_ID, name);
-                return Registry.register(Registry.SOUND_EVENT, identifier, new SoundEvent(identifier));
-        }
+	public static SoundEvent setup(String name) {
+		Identifier identifier = new Identifier(ChaosStorage.MOD_ID, name);
+		return Registry.register(Registry.SOUND_EVENT, identifier, new SoundEvent(identifier));
+	}
 
-        public static void initPoweredItems(Item item, DefaultedList<ItemStack> itemList) {
-                ItemStack uncharged = new ItemStack(item);
-                ItemStack charged = new ItemStack(item);
+	public static void initPoweredItems(Item item, DefaultedList<ItemStack> itemList) {
+		ItemStack uncharged = new ItemStack(item);
+		ItemStack charged = new ItemStack(item);
 
-                Energy.of(charged).set(Energy.of(charged).getMaxStored());
+		Energy.of(charged).set(Energy.of(charged).getMaxStored());
 
-                itemList.add(uncharged);
-                itemList.add(charged);
-        }
+		itemList.add(uncharged);
+		itemList.add(charged);
+	}
 
-        public static Settings setupRubberBlockSettings(boolean noCollision, float hardness, float resistance) {
+	public static Settings setupRubberBlockSettings(boolean noCollision, float hardness, float resistance) {
 
-                FabricBlockSettings settings = FabricBlockSettings.of(Material.WOOD, MaterialColor.SPRUCE);
-                settings.strength(hardness, resistance);
-                settings.sounds(BlockSoundGroup.WOOD);
-                if (noCollision) {
-                        settings.noCollision();
-                }
+		FabricBlockSettings settings = FabricBlockSettings.of(Material.WOOD, MaterialColor.SPRUCE);
+		settings.strength(hardness, resistance);
+		settings.sounds(BlockSoundGroup.WOOD);
+		if (noCollision) {
+			settings.noCollision();
+		}
 
-                return settings.build();
-        }
+		return settings.build();
+	}
 
-        public static Settings setupRubberBlockSettings(float hardness, float resistance) {
-                return setupRubberBlockSettings(false, hardness, resistance);
+	public static Settings setupRubberBlockSettings(float hardness, float resistance) {
+		return setupRubberBlockSettings(false, hardness, resistance);
 	}
 }

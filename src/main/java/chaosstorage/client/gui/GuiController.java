@@ -57,7 +57,7 @@ public class GuiController extends GuiBase<BuiltContainer> {
 		drawSlot(8, 72, layer);
 
 	}
-	
+
 
 	@Override
 	protected void drawForeground(final int mouseX, final int mouseY) {
