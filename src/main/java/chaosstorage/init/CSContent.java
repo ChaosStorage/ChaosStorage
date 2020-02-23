@@ -6,6 +6,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 
 import chaosstorage.block.ChaosBlock;
+import chaosstorage.block.CableBlock;
 import chaosstorage.item.ChaosItem;
 import chaosstorage.item.UpgradeItem;
 import chaosstorage.item.WirelessGrid;
@@ -42,7 +43,7 @@ public class CSContent {
 		MACHINE_CASING(new ChaosBlock()),
 		CONTROLLER(new ControllerBlock(false)),
 		CREATIVE_CONTROLLER(new ControllerBlock(true)),
-		CABLE(new ChaosBlock()),
+		CABLE(new CableBlock()),
 		DISK_DRIVE(new ChaosBlock()),
 		EXTERNAL_STORAGE(new ChaosBlock()),
 		GRID(new ChaosBlock()),

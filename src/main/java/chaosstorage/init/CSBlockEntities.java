@@ -34,6 +34,7 @@ import net.minecraft.util.registry.Registry;
 import org.apache.commons.lang3.Validate;
 
 import chaosstorage.blockentity.ControllerEntity;
+import chaosstorage.blockentity.CableEntity;
 import chaosstorage.ChaosStorage;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class CSBlockEntities {
 
 	public static final BlockEntityType<ControllerEntity> CONTROLLER = register(ControllerEntity.class, "controller", CSContent.Blocks.CONTROLLER);
 	public static final BlockEntityType<ControllerEntity> CREATIVE_CONTROLLER = register(ControllerEntity.class, "creative_controller", CSContent.Blocks.CREATIVE_CONTROLLER);
+	public static final BlockEntityType<CableEntity> CABLE = register(CableEntity.class, "cable", CSContent.Blocks.CABLE);
 
 	public static <T extends BlockEntity> BlockEntityType<T> register(Class<T> tClass, String name, ItemConvertible... items) {
 		return register(tClass, name, Arrays.stream(items).map(itemConvertible -> Block.getBlockFromItem(itemConvertible.asItem())).toArray(Block[]::new));

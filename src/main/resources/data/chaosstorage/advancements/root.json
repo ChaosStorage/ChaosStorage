@@ -4,7 +4,7 @@
       "item": "chaosstorage:creative_controller"
     },
     "title": {
-      "translate": "itemGroup.chaosstorage"
+      "translate": "itemGroup.chaosstorage.item_group"
     },
     "description": {
       "translate": "advancements.chaosstorage.controlling.description"
