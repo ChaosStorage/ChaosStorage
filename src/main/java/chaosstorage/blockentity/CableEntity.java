@@ -23,48 +23,28 @@
  * SOFTWARE.
  */
 
-package chaosstorage.client.gui;
+package chaosstorage.blockentity;
 
-import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.block.Block;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.Direction;
+import reborncore.api.blockentity.InventoryProvider;
+import reborncore.client.containerBuilder.IContainerProvider;
 import reborncore.client.containerBuilder.builder.BuiltContainer;
-import reborncore.client.gui.builder.GuiBase;
-import reborncore.common.powerSystem.PowerSystem;
+import reborncore.client.containerBuilder.builder.ContainerBuilder;
+import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
+import reborncore.common.util.RebornInventory;
+import team.reborn.energy.EnergyTier;
 
-//import chaosstorage.blockentity.StorageBlockEntity;
-import chaosstorage.blockentity.StorageBlockEntity;
+import chaosstorage.init.CSBlockEntities;
+import chaosstorage.init.CSContent;
+import chaosstorage.block.CableBlock;
+import chaosstorage.config.ChaosStorageConfig;
 
-//import techreborn.blockentity.storage.energy.LowVoltageSUBlockEntity;
+public class CableEntity extends BlockEntity {
 
-public class GuiStorageBlock extends GuiBase<BuiltContainer> {
-
-	StorageBlockEntity blockEntity;
-
-	public GuiStorageBlock(int syncID, final PlayerEntity player, final StorageBlockEntity storageBlock) {
-		super(player, storageBlock, storageBlock.createContainer(syncID, player));
-		this.blockEntity = storageBlock;
-	}
-
-	public void init() {
-		super.init();
-	}
-
-	@Override
-	protected void drawBackground(float partialTicks, int mouseX, int mouseY) {
-		super.drawBackground(partialTicks, mouseX, mouseY);
-		final Layer layer = Layer.BACKGROUND;
-
-		//drawSlot(8, 72, layer);
-
-	}
-
-
-	@Override
-	protected void drawForeground(final int mouseX, final int mouseY) {
-		super.drawForeground(mouseX, mouseY);
-		final Layer layer = Layer.FOREGROUND;
-
-		builder.drawMultiEnergyBar(this, 9, 19, (int) blockEntity.getSpace(), (int) blockEntity.getMaxSpace(), mouseX, mouseY, 0, layer);
+	public CableEntity() {
+		super(CSBlockEntities.CONTROLLER);
 	}
 }
-

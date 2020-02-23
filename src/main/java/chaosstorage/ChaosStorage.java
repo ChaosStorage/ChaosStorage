@@ -21,7 +21,7 @@ public class ChaosStorage implements ModInitializer {
 
 	public static final ItemGroup ITEMGROUP = FabricItemGroupBuilder.build(
 			new Identifier("chaosstorage", "item_group"),
-			() -> new ItemStack(CSContent.Items.QUARTZ_ENRICHED_IRON));
+			() -> new ItemStack(CSContent.Blocks.CREATIVE_CONTROLLER));
 
 	@Override
 	public void onInitialize() {
