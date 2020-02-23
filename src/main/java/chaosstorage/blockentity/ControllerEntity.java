@@ -49,7 +49,7 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 
 	public ControllerEntity() {
 		super(CSBlockEntities.CONTROLLER);
-		inventory = new RebornInventory<>(2, "controllerBlockEntity", 64, this);
+		inventory = new RebornInventory<>(1, "ControllerEntity", 64, this);
 		EnergyPerTick = ChaosStorageConfig.ControllerEngergyPerTick;
 		checkTier(); //?
 
@@ -78,7 +78,7 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 	@Override
 	public void tick() {
 		super.tick();
-		//charge(2);
+		charge(0);
 		if (world.isClient) {
 			return;
 		}
@@ -164,6 +164,6 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 	@Override
 	public BuiltContainer createContainer(int syncID, final PlayerEntity player) {
 		return new ContainerBuilder("controller").player(player.inventory).inventory().hotbar().addInventory()
-			.blockEntity(this).energySlot(0, 62, 45).energySlot(1, 98, 45).syncEnergyValue().addInventory().create(this, syncID);
+			.blockEntity(this).energySlot(0, 8, 72).syncEnergyValue().addInventory().create(this, syncID);
 	}
 }
