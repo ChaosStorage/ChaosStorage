@@ -37,6 +37,7 @@ import reborncore.RebornCore;
 import reborncore.client.containerBuilder.IContainerProvider;
 
 import chaosstorage.blockentity.ControllerEntity;
+import chaosstorage.blockentity.StorageBlockEntity;
 import chaosstorage.client.gui.*;
 
 
@@ -61,6 +62,8 @@ public class GuiHandler {
 		switch (gui) {
 			case CONTROLLER:
 				return new GuiController(syncID, player, (ControllerEntity) blockEntity);
+			case STORAGE_BLOCK:
+				return new GuiStorageBlock(syncID, player, (StorageBlockEntity) blockEntity);
 			default:
 				break;
 		}

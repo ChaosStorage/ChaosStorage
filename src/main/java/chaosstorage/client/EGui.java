@@ -38,7 +38,8 @@ import java.util.Locale;
 import java.util.stream.Stream;
 
 public enum EGui implements IMachineGuiHandler {
-	CONTROLLER;
+	CONTROLLER,
+	STORAGE_BLOCK;
 
 	private final boolean containerBuilder;
 

@@ -11,6 +11,7 @@ import chaosstorage.item.UpgradeItem;
 import chaosstorage.item.WirelessGrid;
 import chaosstorage.block.ControllerBlock;
 import chaosstorage.blockentity.ControllerEntity;
+import chaosstorage.block.StorageBlock;
 import chaosstorage.utils.InitUtils;
 import chaosstorage.events.ModRegistry;
 
@@ -64,11 +65,11 @@ public class CSContent {
 		CRAFTER_MANAGER(new ChaosBlock()),
 		CRAFTING_MONITOR(new ChaosBlock()),
 
-		_1K_STORAGE_BLOCK(new ChaosBlock()),
-		_4K_STORAGE_BLOCK(new ChaosBlock()),
-		_16K_STORAGE_BLOCK(new ChaosBlock()),
-		_64K_STORAGE_BLOCK(new ChaosBlock()),
-		CREATIVE_STORAGE_BLOCK(new ChaosBlock()),
+		_1K_STORAGE_BLOCK(new StorageBlock(StorageBlock.Item._1K_STORAGE_BLOCK)),
+		_4K_STORAGE_BLOCK(new StorageBlock(StorageBlock.Item._4K_STORAGE_BLOCK)),
+		_16K_STORAGE_BLOCK(new StorageBlock(StorageBlock.Item._16K_STORAGE_BLOCK)),
+		_64K_STORAGE_BLOCK(new StorageBlock(StorageBlock.Item._64K_STORAGE_BLOCK)),
+		CREATIVE_STORAGE_BLOCK(new StorageBlock(StorageBlock.Item.CREATIVE_STORAGE_BLOCK)),
 
 		_64K_FLUID_STORAGE_BLOCK(new ChaosBlock()),
 		_256K_FLUID_STORAGE_BLOCK(new ChaosBlock()),
