@@ -21,6 +21,14 @@ import java.util.function.Function;
 
 public class CSContent {
 
+	private static String makeName(String enumName) {
+		String ret = enumName.toLowerCase(Locale.ROOT);
+		while (ret.startsWith("_")) {
+			ret = ret.substring(1, ret.length());
+		}
+		return ret;
+	}
+
 	/* Blocks */
 	public enum Blocks implements ItemConvertible {
 		IMPORTER(new ChaosBlock()),
@@ -71,7 +79,7 @@ public class CSContent {
 		public final Block block;
 		
 		Blocks(Block b) {
-			String name = this.toString().toLowerCase(Locale.ROOT);
+			String name = makeName(this.toString());
 			block = b;
 			InitUtils.setup(block, name);
 		}
@@ -147,7 +155,7 @@ public class CSContent {
 		public final Item item;
 		
 		Items(Item i) {
-			String name = this.toString().toLowerCase(Locale.ROOT);
+			String name = makeName(this.toString());
 			item = i;
 			InitUtils.setup(item, name);
 		}
