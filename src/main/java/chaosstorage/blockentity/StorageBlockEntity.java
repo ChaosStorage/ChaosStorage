@@ -37,6 +37,12 @@ public class StorageBlockEntity extends MachineBaseBlockEntity implements IStora
 		return this.usedSpace;
 	}
 
+	// MachineBaseBlockEntity
+	@Override
+        public boolean canBeUpgraded() {
+                return false;
+        }
+
 	public BuiltContainer createContainer(int syncID, final PlayerEntity player) {
 		//return new ContainerBuilder(this.name).player(player.inventory).inventory().hotbar().addInventory()
 		//	.blockEntity(this);

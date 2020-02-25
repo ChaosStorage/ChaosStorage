@@ -33,10 +33,13 @@ import reborncore.common.powerSystem.PowerSystem;
 
 //import chaosstorage.blockentity.StorageBlockEntity;
 import chaosstorage.blockentity.StorageBlockEntity;
+import chaosstorage.client.gui.guibuilder.GuiBuilder;
 
 //import techreborn.blockentity.storage.energy.LowVoltageSUBlockEntity;
 
 public class GuiStorageBlock extends GuiBase<BuiltContainer> {
+	
+	public GuiBuilder builder = new GuiBuilder();
 
 	StorageBlockEntity blockEntity;
 
@@ -64,7 +67,7 @@ public class GuiStorageBlock extends GuiBase<BuiltContainer> {
 		super.drawForeground(mouseX, mouseY);
 		final Layer layer = Layer.FOREGROUND;
 
-		builder.drawMultiEnergyBar(this, 9, 19, (int) blockEntity.getSpace(), (int) blockEntity.getMaxSpace(), mouseX, mouseY, 0, layer);
+		builder.drawStorageBar(this, 9, 19, (int) blockEntity.getSpace(), (int) blockEntity.getMaxSpace(), mouseX, mouseY, 0, layer);
 	}
 }
 
