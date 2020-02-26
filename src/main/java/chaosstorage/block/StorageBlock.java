@@ -74,9 +74,9 @@ public class StorageBlock extends BaseBlockEntityProvider {
 
 		/*if (!stack.isEmpty() && ToolManager.INSTANCE.canHandleTool(stack)) {
 			if (WrenchUtils.handleWrench(stack, worldIn, pos, playerIn, hitResult.getSide())) {
-				return ActionResult.SUCCESS;
+			return ActionResult.SUCCESS;
 			}
-		}*/
+			}*/
 
 		if (!playerIn.isSneaking() && gui != null) {
 			gui.open(playerIn, pos, worldIn);
@@ -88,11 +88,11 @@ public class StorageBlock extends BaseBlockEntityProvider {
 
 	// TODO: Comperator output
 
-	
+
 	//BaseBlockEntityProvider
 	@Override
-        public BlockEntity createBlockEntity(BlockView worldIn) {
+	public BlockEntity createBlockEntity(BlockView worldIn) {
 		System.out.println("add entity for " + this.name);
 		return new StorageBlockEntity(this.size, this.name);
-        }
+	}
 }

@@ -124,7 +124,7 @@ public class CSContent {
 		CRAFTING_MONITOR(new ChaosBlock(true, true));
 
 		public final Block block;
-		
+
 		Blocks(Block b) {
 			String name = makeName(this.toString());
 			block = b;
@@ -199,7 +199,7 @@ public class CSContent {
 		CREATIVE_STORAGE_DISK(new ChaosItem());
 
 		public final Item item;
-		
+
 		Items(Item i) {
 			String name = makeName(this.toString());
 			item = i;

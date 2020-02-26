@@ -28,12 +28,12 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 		CONSTRUCTOR(true, true),
 		DESTRUCTOR(true, true);
 
-    public final boolean hasDirectionState, hasConnectedState;
+		public final boolean hasDirectionState, hasConnectedState;
 
-    Type(boolean hasDirectionState2, boolean hasConnectedState2) {
-      hasDirectionState = hasDirectionState2;
-      hasConnectedState = hasConnectedState2;
-    }
+		Type(boolean hasDirectionState2, boolean hasConnectedState2) {
+			hasDirectionState = hasDirectionState2;
+			hasConnectedState = hasConnectedState2;
+		}
 	}
 
 	private final Type type;
@@ -87,7 +87,7 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 
 	public CableBlock(Type type) {
 		super(type.hasDirectionState, type.hasConnectedState);
-    this.type = type;
+		this.type = type;
 		this.setDefaultState(this.getStateManager().getDefaultState()
 				.with(NORTH, false)
 				.with(SOUTH, false)
@@ -99,7 +99,7 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-    super.appendProperties(builder);
+		super.appendProperties(builder);
 		NORTH = BooleanProperty.of("north");
 		SOUTH = BooleanProperty.of("south");
 		EAST = BooleanProperty.of("east");
@@ -107,27 +107,13 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 		UP = BooleanProperty.of("up");
 		DOWN = BooleanProperty.of("down");
 		builder
-				.add(NORTH)
-				.add(SOUTH)
-				.add(EAST)
-				.add(WEST)
-				.add(UP)
-				.add(DOWN);
+			.add(NORTH)
+			.add(SOUTH)
+			.add(EAST)
+			.add(WEST)
+			.add(UP)
+			.add(DOWN);
 	}
-
-	/*@Override
-	protected void onDirectionChanged(World world, BlockPos pos, Direction newDirection) {
-		// rotate() in BaseBlock "stupidly" changes the direction without checking if our cable connections are still valid.
-		// You'd expect that cable connections are not changing when simply changing the direction.
-		// But they need to. For example, when rotating a constructor to connect to a neighboring cable, the connection to that neighbor
-		// needs to be removed as otherwise the "holder" of the constructor will conflict with the cable connection.
-		// This is already checked in hasNode().
-		// But since rotate() doesn't invalidate that connection, we need to do it here.
-		// Ideally, this code would be in rotate(). But rotate() doesn't have any data about the position and world, so we need to do it here.
-		world.setBlockState(pos, getState(world.getBlockState(pos), world, pos));
-
-		super.onDirectionChanged(world, pos, newDirection);
-	}*/
 
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
@@ -144,7 +130,7 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 		// Prevent the "holder" of a cable block conflicting with a cable connection.
 		/*if (getDirection() != BlockDirection.NONE && state.get(getDirection().getProperty()).getOpposite() == direction) {
 			return false;
-		}*/
+			}*/
 
 		BlockEntity e = world.getBlockEntity(pos);
 		if (e == null) {
@@ -163,12 +149,12 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 		boolean down = hasNode(world, pos.offset(Direction.DOWN), currentState, Direction.UP);
 
 		return currentState
-				.with(NORTH, north)
-				.with(EAST, east)
-				.with(SOUTH, south)
-				.with(WEST, west)
-				.with(UP, up)
-				.with(DOWN, down);
+			.with(NORTH, north)
+			.with(EAST, east)
+			.with(SOUTH, south)
+			.with(WEST, west)
+			.with(UP, up)
+			.with(DOWN, down);
 	}
 
 	@Nullable
