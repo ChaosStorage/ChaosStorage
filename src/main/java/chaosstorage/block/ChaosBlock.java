@@ -25,6 +25,16 @@ public class ChaosBlock extends Block {
     this(false, false);
   }
 
+  /*
+   * This is a huge hack: We want to share this class between blocks that have a
+   * direction property in their BlockState, and those that don't.
+   * But because the Block() constructor calls appendProperties(), we will not
+   * have had any chance to apply the hasDirectionState parameter to the new
+   * object. This is why we have the static field hasDirectionState2, which is
+   * used to pass this information into appendProperties, assuming that the
+   * static variable will not be changed between the call of
+   * rememberStateSettings() and the call of appendProperties().
+   */
   private static Settings rememberStateSettings(Settings settings, boolean hasDirectionState, boolean hasConnectedState) {
     hasDirectionState2 = hasDirectionState;
     hasConnectedState2 = hasConnectedState;
