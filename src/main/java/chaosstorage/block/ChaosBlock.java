@@ -16,10 +16,10 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public class ChaosBlock extends Block {
-	public boolean hasDirectionState, hasConnectedState;
-	public static boolean hasDirectionState2, hasConnectedState2;
-	public static final DirectionProperty DIRECTION = DirectionProperty.of("direction", new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.UP, Direction.DOWN});
-	public static final BooleanProperty CONNECTED = BooleanProperty.of("connected");
+	public boolean hasDirectionState, hasConnectedState, allDirections;
+	public static boolean hasDirectionState2, hasConnectedState2, allDirections2;
+	public DirectionProperty DIRECTION;
+	public BooleanProperty CONNECTED;
 
 	public ChaosBlock() {
 		this(false, false);
@@ -35,17 +35,22 @@ public class ChaosBlock extends Block {
 	 * static variable will not be changed between the call of
 	 * rememberStateSettings() and the call of appendProperties().
 	 */
-	private static Settings rememberStateSettings(Settings settings, boolean hasDirectionState, boolean hasConnectedState) {
+	private static Settings rememberStateSettings(Settings settings, boolean hasDirectionState, boolean hasConnectedState, boolean allDirections) {
 		hasDirectionState2 = hasDirectionState;
 		hasConnectedState2 = hasConnectedState;
+		allDirections2 = allDirections;
 		return settings;
 	}
 
 	public ChaosBlock(boolean hasDirectionState, boolean hasConnectedState) {
-		super(rememberStateSettings(FabricBlockSettings.of(Material.STONE).strength(1.9f, 1.9f).sounds(BlockSoundGroup.STONE).build(), hasDirectionState, hasConnectedState));
+		this(hasDirectionState, hasConnectedState, false);
+	}
+	public ChaosBlock(boolean hasDirectionState, boolean hasConnectedState, boolean allDirections) {
+		super(rememberStateSettings(FabricBlockSettings.of(Material.STONE).strength(1.9f, 1.9f).sounds(BlockSoundGroup.STONE).build(), hasDirectionState, hasConnectedState, allDirections));
 
 		this.hasDirectionState = hasDirectionState;
 		this.hasConnectedState = hasConnectedState;
+		this.allDirections = allDirections;
 
 		if (hasDirectionState) {
 			this.setDefaultState(this.getStateManager().getDefaultState().with(DIRECTION, Direction.NORTH));
@@ -59,9 +64,15 @@ public class ChaosBlock extends Block {
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 		if (hasDirectionState2) {
+			if (allDirections2) {
+				DIRECTION = DirectionProperty.of("direction", new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.UP, Direction.DOWN});
+			} else {
+				DIRECTION = DirectionProperty.of("direction", new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST});
+			}
 			builder.add(DIRECTION);
 		}
 		if (hasConnectedState2) {
+			CONNECTED = BooleanProperty.of("connected");
 			builder.add(CONNECTED);
 		}
 	}
@@ -81,10 +92,12 @@ public class ChaosBlock extends Block {
 		super.onPlaced(worldIn, pos, state, placer, stack);
 		if (hasDirectionState) {
 			Direction direction = placer.getHorizontalFacing().getOpposite();
-			if (placer.pitch < -50) {
-				direction = Direction.DOWN;
-			} else if (placer.pitch > 50) {
-				direction = Direction.UP;
+			if (allDirections) {
+				if (placer.pitch < -50) {
+					direction = Direction.DOWN;
+				} else if (placer.pitch > 50) {
+					direction = Direction.UP;
+				}
 			}
 			setDirection(direction, worldIn, pos);
 		}

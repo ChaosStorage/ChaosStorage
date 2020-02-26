@@ -8,6 +8,7 @@ import net.minecraft.item.ItemConvertible;
 
 import chaosstorage.block.ChaosBlock;
 import chaosstorage.block.CableBlock;
+import chaosstorage.block.DetectorBlock;
 import chaosstorage.item.ChaosItem;
 import chaosstorage.item.UpgradeItem;
 import chaosstorage.item.WirelessGrid;
@@ -100,28 +101,30 @@ public class CSContent {
 		QUARTZ_ENRICHED_IRON_BLOCK(new ChaosBlock()),
 		MACHINE_CASING(new ChaosBlock()),
 
-		DETECTOR(new ChaosBlock()),
-		RELAY(new ChaosBlock()),
-		NETWORK_TRANSMITTER(new ChaosBlock()),
-		NETWORK_RECEIVER(new ChaosBlock()),
+		DETECTOR(new DetectorBlock()),
 
 		DISK_DRIVE(new ChaosBlock()),
-		GRID(new ChaosBlock(true, true)),
-		CRAFTING_GRID(new ChaosBlock(true, true)),
-		PATTERN_GRID(new ChaosBlock(true, true)),
-		FLUID_GRID(new ChaosBlock(true, true)),
-		SECURITY_MANAGER(new ChaosBlock(true, true)),
+		GRID(new ChaosBlock(true, true, false)),
+		CRAFTING_GRID(new ChaosBlock(true, true, false)),
+		PATTERN_GRID(new ChaosBlock(true, true, false)),
+		FLUID_GRID(new ChaosBlock(true, true, false)),
+		SECURITY_MANAGER(new ChaosBlock(true, true, false)),
+		CRAFTER_MANAGER(new ChaosBlock(true, true, false)),
+		CRAFTING_MONITOR(new ChaosBlock(true, true, false)),
+
+		STORAGE_MONITOR(new ChaosBlock(true, false, false)),
+		CRAFTER(new ChaosBlock(true, true, false)),
 
 		INTERFACE(new ChaosBlock(false, true)),
 		FLUID_INTERFACE(new ChaosBlock(false, true)),
 		WIRELESS_TRANSMITTER(new ChaosBlock(false, true)),
-		STORAGE_MONITOR(new ChaosBlock(true ,false)),
+		NETWORK_TRANSMITTER(new ChaosBlock(false, true)),
+		NETWORK_RECEIVER(new ChaosBlock(false, true)),
+		RELAY(new ChaosBlock(false, true)),
+
 		DISK_MANIPULATOR(new ChaosBlock()),
 		PORTABLE_GRID(new ChaosBlock()),
-		CREATIVE_PORTABLE_GRID(new ChaosBlock()),
-		CRAFTER(new ChaosBlock(true, true)),
-		CRAFTER_MANAGER(new ChaosBlock(true, true)),
-		CRAFTING_MONITOR(new ChaosBlock(true, true));
+		CREATIVE_PORTABLE_GRID(new ChaosBlock());
 
 		public final Block block;
 

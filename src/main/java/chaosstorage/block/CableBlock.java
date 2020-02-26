@@ -86,7 +86,7 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 	}
 
 	public CableBlock(Type type) {
-		super(type.hasDirectionState, type.hasConnectedState);
+		super(type.hasDirectionState, type.hasConnectedState, type.hasDirectionState);
 		this.type = type;
 		this.setDefaultState(this.getStateManager().getDefaultState()
 				.with(NORTH, false)
