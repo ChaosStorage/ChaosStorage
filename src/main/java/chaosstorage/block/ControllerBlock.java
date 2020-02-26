@@ -36,9 +36,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
@@ -49,7 +47,6 @@ import net.minecraft.world.World;
 import reborncore.api.ToolManager;
 import reborncore.api.blockentity.IMachineGuiHandler;
 import reborncore.common.BaseBlockEntityProvider;
-import reborncore.common.blocks.BlockWrenchEventHandler;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 import reborncore.common.util.ItemHandlerUtils;
 import reborncore.common.util.WrenchUtils;
@@ -58,14 +55,13 @@ import chaosstorage.client.EGui;
 import chaosstorage.blockentity.ControllerEntity;
 
 public class ControllerBlock extends BaseBlockEntityProvider {
-	public static DirectionProperty FACING = Properties.FACING; // FIXME: add for inventury foo
 	public String name;
 	public static BooleanProperty ACTIVE; // = BooleanProperty.of("active");
 	public IMachineGuiHandler gui;
 
 	public ControllerBlock(boolean _creative) {
 		super(FabricBlockSettings.of(Material.METAL).strength(2f, 2f).build());
-		this.setDefaultState(this.getStateManager().getDefaultState().with(ACTIVE, false).with(FACING, Direction.NORTH));
+		this.setDefaultState(this.getStateManager().getDefaultState().with(ACTIVE, false));
 		this.name = "controller";
 		this.gui = EGui.CONTROLLER;
 
@@ -77,8 +73,7 @@ public class ControllerBlock extends BaseBlockEntityProvider {
 	}
 
 	public static void setActive(Boolean active, World world, BlockPos pos) {
-		Direction facing = (Direction)world.getBlockState(pos).get(FACING);
-		BlockState state = world.getBlockState(pos).with(ACTIVE, active).with(FACING, facing);
+		BlockState state = world.getBlockState(pos).with(ACTIVE, active);
 		world.setBlockState(pos, state, 1);
 	}
 
@@ -86,20 +81,13 @@ public class ControllerBlock extends BaseBlockEntityProvider {
 	@Override
 	public void onPlaced(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		super.onPlaced(worldIn, pos, state, placer, stack);
-		Direction facing = placer.getHorizontalFacing().getOpposite();
-		if (placer.pitch < -50) {
-			facing = Direction.DOWN;
-		} else if (placer.pitch > 50) {
-			facing = Direction.UP;
-		}
-		//setFacing(facing, worldIn, pos);
 	}
 
 	// Block
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 		ACTIVE = BooleanProperty.of("active");
-		builder.add(ACTIVE).add(FACING);
+		builder.add(ACTIVE);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -127,6 +115,7 @@ public class ControllerBlock extends BaseBlockEntityProvider {
 		return super.onUse(state, worldIn, pos, playerIn, hand, hitResult);
 	}
 
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onBlockRemoved(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
@@ -146,12 +135,6 @@ public class ControllerBlock extends BaseBlockEntityProvider {
 	@Override
 	public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
 		return PowerAcceptorBlockEntity.calculateComparatorOutputFromEnergy(world.getBlockEntity(pos));
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public BlockState rotate(BlockState state, BlockRotation rotation) {
-		return state.with(FACING, rotation.rotate(state.get(FACING)));
 	}
 
 	@Override

@@ -13,13 +13,13 @@ import reborncore.client.containerBuilder.builder.ContainerBuilder;
 import chaosstorage.api.network.IStorage;
 import chaosstorage.init.CSBlockEntities;
 
-public class StorageEntity extends MachineBaseBlockEntity implements IStorage { // ITick??
+public class StorageBlockEntity extends MachineBaseBlockEntity implements IStorage { // ITick??
 
 	public final String name;
 	private final int maxStorage;
 	private int usedSpace;
 
-	public StorageEntity(int maxStorage, String name) {
+	public StorageBlockEntity(int maxStorage, String name) {
 		super(CSBlockEntities.STORAGE_BLOCK);
 		this.maxStorage = maxStorage;
 		this.name = name;

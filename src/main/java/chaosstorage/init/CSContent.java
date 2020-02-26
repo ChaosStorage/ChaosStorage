@@ -1,9 +1,10 @@
 package chaosstorage.init;
 
+import chaosstorage.blockentity.CableEntity;
 import net.minecraft.block.Block;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
 
 import chaosstorage.block.ChaosBlock;
 import chaosstorage.block.CableBlock;
@@ -11,15 +12,11 @@ import chaosstorage.item.ChaosItem;
 import chaosstorage.item.UpgradeItem;
 import chaosstorage.item.WirelessGrid;
 import chaosstorage.block.ControllerBlock;
-import chaosstorage.blockentity.ControllerEntity;
 import chaosstorage.block.StorageBlock;
 import chaosstorage.utils.InitUtils;
-import chaosstorage.events.ModRegistry;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
+import java.awt.*;
 import java.util.Locale;
-import java.util.function.Function;
 
 public class CSContent {
 
@@ -31,52 +28,100 @@ public class CSContent {
 		return ret;
 	}
 
-	/* Blocks */
+	public enum Cables implements ItemConvertible {
+		CABLE(new CableBlock(CableBlock.Type.NORMAL)),
+		EXTERNAL_STORAGE(new CableBlock(CableBlock.Type.EXTERNAL_STORAGE)),
+		CONSTRUCTOR(new CableBlock(CableBlock.Type.CONSTRUCTOR)),
+		DESTRUCTOR(new CableBlock(CableBlock.Type.DESTRUCTOR)),
+		IMPORTER(new CableBlock(CableBlock.Type.IMPORTER)),
+		EXPORTER(new CableBlock(CableBlock.Type.EXPORTER));
+
+		public final Block block;
+
+		Cables(Block b) {
+			String name = makeName(this.toString());
+			block = b;
+			InitUtils.setup(block, name);
+		}
+
+		@Override
+		public Item asItem() {
+			return block.asItem();
+		}
+	}
+
+	public enum Controllers implements ItemConvertible {
+		CONTROLLER(new ControllerBlock(false)),
+		CREATIVE_CONTROLLER(new ControllerBlock(true));
+
+		public final Block block;
+
+		Controllers(Block b) {
+			String name = makeName(this.toString());
+			block = b;
+			InitUtils.setup(block, name);
+		}
+
+		@Override
+		public Item asItem() {
+			return block.asItem();
+		}
+	}
+
+	public enum StorageBlocks implements ItemConvertible {
+		_1K_STORAGE_BLOCK(new StorageBlock(StorageBlock.Type.Item, 1024)),
+		_4K_STORAGE_BLOCK(new StorageBlock(StorageBlock.Type.Item, 1024 * 4)),
+		_16K_STORAGE_BLOCK(new StorageBlock(StorageBlock.Type.Item, 1024 * 16)),
+		_64K_STORAGE_BLOCK(new StorageBlock(StorageBlock.Type.Item, 1024 * 64)),
+		CREATIVE_STORAGE_BLOCK(new StorageBlock(StorageBlock.Type.Item, Integer.MAX_VALUE)),
+
+		_64K_FLUID_STORAGE_BLOCK(new StorageBlock(StorageBlock.Type.Fluid, 1024 * 64)),
+		_256K_FLUID_STORAGE_BLOCK(new StorageBlock(StorageBlock.Type.Fluid, 1024 * 256)),
+		_1024K_FLUID_STORAGE_BLOCK(new StorageBlock(StorageBlock.Type.Fluid, 1024 * 1024)),
+		_4096K_FLUID_STORAGE_BLOCK(new StorageBlock(StorageBlock.Type.Fluid, 1024 * 4096)),
+		CREATIVE_FLUID_STORAGE_BLOCK(new StorageBlock(StorageBlock.Type.Fluid, Integer.MAX_VALUE));
+
+		public final Block block;
+
+		StorageBlocks(Block b) {
+			String name = makeName(this.toString());
+			block = b;
+			InitUtils.setup(block, name);
+		}
+
+		@Override
+		public Item asItem() {
+			return block.asItem();
+		}
+	}
+
 	public enum Blocks implements ItemConvertible {
-		IMPORTER(new ChaosBlock()),
-		EXPORTER(new ChaosBlock()),
+		/* "Dumb" blocks */
+		QUARTZ_ENRICHED_IRON_BLOCK(new ChaosBlock()),
+		MACHINE_CASING(new ChaosBlock()),
+
 		DETECTOR(new ChaosBlock()),
 		RELAY(new ChaosBlock()),
 		NETWORK_TRANSMITTER(new ChaosBlock()),
 		NETWORK_RECEIVER(new ChaosBlock()),
 
-		QUARTZ_ENRICHED_IRON_BLOCK(new ChaosBlock()),
-		MACHINE_CASING(new ChaosBlock()),
-		CONTROLLER(new ControllerBlock(false)),
-		CREATIVE_CONTROLLER(new ControllerBlock(true)),
-		CABLE(new CableBlock()),
 		DISK_DRIVE(new ChaosBlock()),
-		EXTERNAL_STORAGE(new ChaosBlock()),
-		GRID(new ChaosBlock()),
-		CRAFTING_GRID(new ChaosBlock()),
-		PATTERN_GRID(new ChaosBlock()),
-		FLUID_GRID(new ChaosBlock()),
+		GRID(new ChaosBlock(true, true)),
+		CRAFTING_GRID(new ChaosBlock(true, true)),
+		PATTERN_GRID(new ChaosBlock(true, true)),
+		FLUID_GRID(new ChaosBlock(true, true)),
+		SECURITY_MANAGER(new ChaosBlock(true, true)),
 
-		SECURITY_MANAGER(new ChaosBlock()),
-		INTERFACE(new ChaosBlock()),
-		FLUID_INTERFACE(new ChaosBlock()),
-		WIRELESS_TRANSMITTER(new ChaosBlock()),
-		STORAGE_MONITOR(new ChaosBlock()),
-		CONSTRUCTOR(new ChaosBlock()),
-		DESTRUCTOR(new ChaosBlock()),
+		INTERFACE(new ChaosBlock(false, true)),
+		FLUID_INTERFACE(new ChaosBlock(false, true)),
+		WIRELESS_TRANSMITTER(new ChaosBlock(false, true)),
+		STORAGE_MONITOR(new ChaosBlock(true ,false)),
 		DISK_MANIPULATOR(new ChaosBlock()),
 		PORTABLE_GRID(new ChaosBlock()),
 		CREATIVE_PORTABLE_GRID(new ChaosBlock()),
-		CRAFTER(new ChaosBlock()),
-		CRAFTER_MANAGER(new ChaosBlock()),
-		CRAFTING_MONITOR(new ChaosBlock()),
-
-		_1K_STORAGE_BLOCK(new StorageBlock(StorageBlock.Item._1K_STORAGE_BLOCK)),
-		_4K_STORAGE_BLOCK(new StorageBlock(StorageBlock.Item._4K_STORAGE_BLOCK)),
-		_16K_STORAGE_BLOCK(new StorageBlock(StorageBlock.Item._16K_STORAGE_BLOCK)),
-		_64K_STORAGE_BLOCK(new StorageBlock(StorageBlock.Item._64K_STORAGE_BLOCK)),
-		CREATIVE_STORAGE_BLOCK(new StorageBlock(StorageBlock.Item.CREATIVE_STORAGE_BLOCK)),
-
-		_64K_FLUID_STORAGE_BLOCK(new ChaosBlock()),
-		_256K_FLUID_STORAGE_BLOCK(new ChaosBlock()),
-		_1024K_FLUID_STORAGE_BLOCK(new ChaosBlock()),
-		_4096K_FLUID_STORAGE_BLOCK(new ChaosBlock()),
-		CREATIVE_FLUID_STORAGE_BLOCK(new ChaosBlock());
+		CRAFTER(new ChaosBlock(true, true)),
+		CRAFTER_MANAGER(new ChaosBlock(true, true)),
+		CRAFTING_MONITOR(new ChaosBlock(true, true));
 
 		public final Block block;
 		
@@ -92,7 +137,6 @@ public class CSContent {
 		}
 	}
 
-	/* Items */
 	public enum Items implements ItemConvertible {
 		QUARTZ_ENRICHED_IRON(new ChaosItem()),
 		SILICON(new ChaosItem()),

@@ -1,6 +1,5 @@
 package chaosstorage.block;
 
-import chaosstorage.ChaosStorage;
 import chaosstorage.blockentity.CableEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -8,22 +7,36 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
 import net.minecraft.block.BlockEntityProvider;
 
 
 import javax.annotation.Nullable;
 
 public class CableBlock extends ChaosBlock implements BlockEntityProvider {
+	public enum Type {
+		NORMAL(false, false),
+		EXTERNAL_STORAGE(true, false),
+		IMPORTER(true, false),
+		EXPORTER(true, false),
+		CONSTRUCTOR(true, true),
+		DESTRUCTOR(true, true);
+
+    public final boolean hasDirectionState, hasConnectedState;
+
+    Type(boolean hasDirectionState2, boolean hasConnectedState2) {
+      hasDirectionState = hasDirectionState2;
+      hasConnectedState = hasConnectedState2;
+    }
+	}
+
+	private final Type type;
 
 	public static BooleanProperty NORTH;
 	public static BooleanProperty SOUTH;
@@ -72,8 +85,9 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 		return shape;
 	}
 
-	public CableBlock() {
-		super();
+	public CableBlock(Type type) {
+		super(type.hasDirectionState, type.hasConnectedState);
+    this.type = type;
 		this.setDefaultState(this.getStateManager().getDefaultState()
 				.with(NORTH, false)
 				.with(SOUTH, false)
@@ -85,6 +99,7 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    super.appendProperties(builder);
 		NORTH = BooleanProperty.of("north");
 		SOUTH = BooleanProperty.of("south");
 		EAST = BooleanProperty.of("east");
