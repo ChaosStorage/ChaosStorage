@@ -4,10 +4,9 @@ package chaosstorage.block;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.Material;
 import net.minecraft.world.BlockView;
-import reborncore.common.BaseBlockEntityProvider;
-
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,10 +20,8 @@ import reborncore.api.blockentity.IMachineGuiHandler;
 
 import chaosstorage.client.EGui;
 import chaosstorage.blockentity.StorageBlockEntity;
-// StorageEntity
 
-
-public class StorageBlock extends BaseBlockEntityProvider {
+public class StorageBlock extends ChaosBlock implements BlockEntityProvider {
 	public enum Type {
 		Item,
 		Fluid;
@@ -54,7 +51,7 @@ public class StorageBlock extends BaseBlockEntityProvider {
 	}
 
 	public StorageBlock(Type type, int size, String name) {
-		super(FabricBlockSettings.of(Material.METAL).strength(2f, 2f).build());
+		super();
 		this.name = name;
 		this.size = size;
 		this.type = type;
@@ -67,7 +64,7 @@ public class StorageBlock extends BaseBlockEntityProvider {
 		ItemStack stack = playerIn.getStackInHand(Hand.MAIN_HAND);
 		BlockEntity blockEntity = worldIn.getBlockEntity(pos);
 
-		// We extended BlockTileBase. Thus we should always have blockEntity entity. I hope.
+		// We implement BlockEntityProvider. Thus we should always have blockEntity entity. I hope.
 		if (blockEntity == null) {
 			return ActionResult.FAIL;
 		}
@@ -88,8 +85,7 @@ public class StorageBlock extends BaseBlockEntityProvider {
 
 	// TODO: Comperator output
 
-
-	//BaseBlockEntityProvider
+	// BlockEntityProvider
 	@Override
 	public BlockEntity createBlockEntity(BlockView worldIn) {
 		System.out.println("add entity for " + this.name);

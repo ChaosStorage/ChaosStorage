@@ -27,6 +27,7 @@ package chaosstorage.block;
 
 
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.world.BlockView;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -46,7 +47,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import reborncore.api.ToolManager;
 import reborncore.api.blockentity.IMachineGuiHandler;
-import reborncore.common.BaseBlockEntityProvider;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 import reborncore.common.util.ItemHandlerUtils;
 import reborncore.common.util.WrenchUtils;
@@ -54,13 +54,13 @@ import reborncore.common.util.WrenchUtils;
 import chaosstorage.client.EGui;
 import chaosstorage.blockentity.ControllerEntity;
 
-public class ControllerBlock extends BaseBlockEntityProvider {
+public class ControllerBlock extends ChaosBlock implements BlockEntityProvider {
 	public String name;
 	public static BooleanProperty ACTIVE; // = BooleanProperty.of("active");
 	public IMachineGuiHandler gui;
 
 	public ControllerBlock(boolean _creative) {
-		super(FabricBlockSettings.of(Material.METAL).strength(2f, 2f).build());
+		super();
 		this.setDefaultState(this.getStateManager().getDefaultState().with(ACTIVE, false));
 		this.name = "controller";
 		this.gui = EGui.CONTROLLER;
@@ -77,7 +77,7 @@ public class ControllerBlock extends BaseBlockEntityProvider {
 		world.setBlockState(pos, state, 1);
 	}
 
-	// BaseBlockEntityProvider
+	// Block
 	@Override
 	public void onPlaced(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		super.onPlaced(worldIn, pos, state, placer, stack);
@@ -137,6 +137,7 @@ public class ControllerBlock extends BaseBlockEntityProvider {
 		return PowerAcceptorBlockEntity.calculateComparatorOutputFromEnergy(world.getBlockEntity(pos));
 	}
 
+	// BlockEntityProvider
 	@Override
 	public BlockEntity createBlockEntity(BlockView worldIn) {
 		return new ControllerEntity();

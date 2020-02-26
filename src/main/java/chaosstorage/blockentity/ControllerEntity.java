@@ -134,26 +134,11 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 
 /*	// MachineBaseBlockEntity
 	@Override
-	public void setFacing(Direction enumFacing) {
-		if (world == null) { return; }
-		world.setBlockState(pos, world.getBlockState(pos).with(ControllerBlock.FACING, enumFacing));
-	}
-
-	@Override
-	public Direction getFacingEnum() {
-		if (world == null ) { return null; }
-		Block block = world.getBlockState(pos).getBlock();
-		if (block instanceof ControllerBlock) {
-			return ((ControllerBlock) block).getFacing(world.getBlockState(pos));
-		}
-		return null;
-	}
-
-	@Override
 	public boolean canBeUpgraded() {
 		return false;
 	}
 */
+
 	// InventoryProvider
 	@Override
 	public RebornInventory<ControllerEntity> getInventory() {
