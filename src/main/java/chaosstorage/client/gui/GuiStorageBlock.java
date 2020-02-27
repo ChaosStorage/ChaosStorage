@@ -57,7 +57,7 @@ public class GuiStorageBlock extends GuiBase<BuiltContainer> {
 		super.drawBackground(partialTicks, mouseX, mouseY);
 		final Layer layer = Layer.BACKGROUND;
 
-		//drawSlot(8, 72, layer);
+		drawSlot(9, 15, layer);
 
 	}
 
@@ -67,7 +67,7 @@ public class GuiStorageBlock extends GuiBase<BuiltContainer> {
 		super.drawForeground(mouseX, mouseY);
 		final Layer layer = Layer.FOREGROUND;
 
-		builder.drawStorageBar(this, 9, 19, (int) blockEntity.getSpace(), (int) blockEntity.getMaxSpace(), mouseX, mouseY, 0, layer);
+		builder.drawStorageBar(this, 9, 39, (int) blockEntity.getSpace(), (int) blockEntity.getMaxSpace(), mouseX, mouseY, 0, layer);
 	}
 }
 
