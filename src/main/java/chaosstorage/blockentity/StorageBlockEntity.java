@@ -39,9 +39,9 @@ public class StorageBlockEntity extends MachineBaseBlockEntity implements IStora
 
 	// MachineBaseBlockEntity
 	@Override
-        public boolean canBeUpgraded() {
-                return false;
-        }
+	public boolean canBeUpgraded() {
+		return false;
+	}
 
 	public BuiltContainer createContainer(int syncID, final PlayerEntity player) {
 		//return new ContainerBuilder(this.name).player(player.inventory).inventory().hotbar().addInventory()

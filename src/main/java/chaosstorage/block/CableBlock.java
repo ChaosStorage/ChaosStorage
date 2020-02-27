@@ -1,29 +1,48 @@
 package chaosstorage.block;
 
-import chaosstorage.ChaosStorage;
 import chaosstorage.blockentity.CableEntity;
+import chaosstorage.network.IController;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityContext;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
 import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.world.World;
 
 
 import javax.annotation.Nullable;
 
 public class CableBlock extends ChaosBlock implements BlockEntityProvider {
+	public enum Type {
+		NORMAL(false, false),
+		EXTERNAL_STORAGE(true, false),
+		IMPORTER(true, false),
+		EXPORTER(true, false),
+		CONSTRUCTOR(true, true),
+		DESTRUCTOR(true, true);
+
+		public final boolean hasDirectionState, hasConnectedState;
+
+		Type(boolean hasDirectionState2, boolean hasConnectedState2) {
+			hasDirectionState = hasDirectionState2;
+			hasConnectedState = hasConnectedState2;
+		}
+	}
+
+	private final Type type;
 
 	public static BooleanProperty NORTH;
 	public static BooleanProperty SOUTH;
@@ -72,8 +91,9 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 		return shape;
 	}
 
-	public CableBlock() {
-		super();
+	public CableBlock(Type type) {
+		super(type.hasDirectionState, type.hasConnectedState, type.hasDirectionState);
+		this.type = type;
 		this.setDefaultState(this.getStateManager().getDefaultState()
 				.with(NORTH, false)
 				.with(SOUTH, false)
@@ -85,6 +105,7 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+		super.appendProperties(builder);
 		NORTH = BooleanProperty.of("north");
 		SOUTH = BooleanProperty.of("south");
 		EAST = BooleanProperty.of("east");
@@ -92,27 +113,13 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 		UP = BooleanProperty.of("up");
 		DOWN = BooleanProperty.of("down");
 		builder
-				.add(NORTH)
-				.add(SOUTH)
-				.add(EAST)
-				.add(WEST)
-				.add(UP)
-				.add(DOWN);
+			.add(NORTH)
+			.add(SOUTH)
+			.add(EAST)
+			.add(WEST)
+			.add(UP)
+			.add(DOWN);
 	}
-
-	/*@Override
-	protected void onDirectionChanged(World world, BlockPos pos, Direction newDirection) {
-		// rotate() in BaseBlock "stupidly" changes the direction without checking if our cable connections are still valid.
-		// You'd expect that cable connections are not changing when simply changing the direction.
-		// But they need to. For example, when rotating a constructor to connect to a neighboring cable, the connection to that neighbor
-		// needs to be removed as otherwise the "holder" of the constructor will conflict with the cable connection.
-		// This is already checked in hasNode().
-		// But since rotate() doesn't invalidate that connection, we need to do it here.
-		// Ideally, this code would be in rotate(). But rotate() doesn't have any data about the position and world, so we need to do it here.
-		world.setBlockState(pos, getState(world.getBlockState(pos), world, pos));
-
-		super.onDirectionChanged(world, pos, newDirection);
-	}*/
 
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
@@ -129,7 +136,7 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 		// Prevent the "holder" of a cable block conflicting with a cable connection.
 		/*if (getDirection() != BlockDirection.NONE && state.get(getDirection().getProperty()).getOpposite() == direction) {
 			return false;
-		}*/
+			}*/
 
 		BlockEntity e = world.getBlockEntity(pos);
 		if (e == null) {
@@ -148,17 +155,29 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 		boolean down = hasNode(world, pos.offset(Direction.DOWN), currentState, Direction.UP);
 
 		return currentState
-				.with(NORTH, north)
-				.with(EAST, east)
-				.with(SOUTH, south)
-				.with(WEST, west)
-				.with(UP, up)
-				.with(DOWN, down);
+			.with(NORTH, north)
+			.with(EAST, east)
+			.with(SOUTH, south)
+			.with(WEST, west)
+			.with(UP, up)
+			.with(DOWN, down);
 	}
 
 	@Nullable
 	@Override
 	public BlockEntity createBlockEntity(BlockView view) {
 		return new CableEntity();
+	}
+
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult blockHitResult) {
+		CableEntity e = (CableEntity) world.getBlockEntity(pos);
+		IController ctrl = e.getNetworkNode().getController();
+		if (ctrl != null) {
+			System.out.println("Controller Position: " + ctrl.getControllerEntity().getPos());
+		} else {
+			System.out.println("No controller");
+		}
+		return ActionResult.SUCCESS;
 	}
 }

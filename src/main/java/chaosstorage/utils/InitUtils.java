@@ -26,6 +26,7 @@
 package chaosstorage.utils;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Settings;
 import net.minecraft.block.Material;
@@ -37,6 +38,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.client.render.RenderLayer;
 import reborncore.RebornRegistry;
 import team.reborn.energy.Energy;
 import chaosstorage.ChaosStorage;
@@ -49,6 +51,7 @@ public class InitUtils {
 
 	public static <B extends Block> B setup(B block, String name) {
 		RebornRegistry.registerIdent(block, new Identifier(ChaosStorage.MOD_ID, name));
+    BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
 		return block;
 	}
 

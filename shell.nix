@@ -1,10 +1,4 @@
-{ pkgs ? import <nixpkgs> {
-  overlays = [
-    (super: self: {
-      jdk = super.jdk12;
-    })
-  ];
-}, ... }:
+{ pkgs ? import <nixpkgs> {}, ... }:
 
 with pkgs;
 

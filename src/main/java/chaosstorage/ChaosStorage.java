@@ -21,7 +21,7 @@ public class ChaosStorage implements ModInitializer {
 
 	public static final ItemGroup ITEMGROUP = FabricItemGroupBuilder.build(
 			new Identifier("chaosstorage", "item_group"),
-			() -> new ItemStack(CSContent.Blocks.CREATIVE_CONTROLLER));
+			() -> new ItemStack(CSContent.Controllers.CREATIVE_CONTROLLER));
 
 	@Override
 	public void onInitialize() {
@@ -31,9 +31,6 @@ public class ChaosStorage implements ModInitializer {
 
 		ModRegistry.setupShit();
 		GuiHandler.register();
-		
-		// Force loads the block entities at the right time
-		//CSBlockEntities.CONTROLLER.toString();
 
 		System.out.println("ChaosStorage setup done!");
 	}
