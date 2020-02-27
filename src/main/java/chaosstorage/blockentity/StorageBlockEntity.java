@@ -9,12 +9,15 @@ import net.minecraft.util.math.Direction;
 import reborncore.common.blockentity.MachineBaseBlockEntity;
 import reborncore.client.containerBuilder.builder.BuiltContainer;
 import reborncore.client.containerBuilder.builder.ContainerBuilder;
+import reborncore.common.util.RebornInventory;
+import reborncore.api.blockentity.InventoryProvider;
 
 import chaosstorage.api.network.IStorage;
 import chaosstorage.init.CSBlockEntities;
 
-public class StorageBlockEntity extends MachineBaseBlockEntity implements IStorage { // ITick??
+public class StorageBlockEntity extends MachineBaseBlockEntity implements IStorage, InventoryProvider { // ITick??
 
+  public RebornInventory<StorageBlockEntity> inventory;
 	public final String name;
 	private final int maxStorage;
 	private int usedSpace;
@@ -37,16 +40,23 @@ public class StorageBlockEntity extends MachineBaseBlockEntity implements IStora
 		return this.usedSpace;
 	}
 
+  // InventoryProvider
+  @Override
+  public RebornInventory<StorageBlockEntity> getInventory() {
+    return inventory;
+  }
+
 	// MachineBaseBlockEntity
 	@Override
 	public boolean canBeUpgraded() {
 		return false;
 	}
 
+  // IContainerProvider
 	public BuiltContainer createContainer(int syncID, final PlayerEntity player) {
 		//return new ContainerBuilder(this.name).player(player.inventory).inventory().hotbar().addInventory()
 		//	.blockEntity(this);
-		return new ContainerBuilder("controller").player(player.inventory).inventory().hotbar().addInventory()
-			.blockEntity(this).energySlot(0, 8, 72).syncEnergyValue().addInventory().create(this, syncID);
+		return new ContainerBuilder("storage").player(player.inventory).inventory().hotbar().addInventory()
+			.blockEntity(this).energySlot(0, 9, 15).syncEnergyValue().addInventory().create(this, syncID);
 	}
 }	

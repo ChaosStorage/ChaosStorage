@@ -66,15 +66,15 @@ public enum EGui implements IMachineGuiHandler {
 		return new Identifier("chaosstorage", name().toLowerCase(Locale.ROOT));
 	}
 
+	public boolean useContainerBuilder() {
+		return this.containerBuilder;
+	}
+
+	// IMachineGuiHandler
 	@Override
 	public void open(PlayerEntity player, BlockPos pos, World world) {
 		if (!world.isClient) {
 			 ContainerProviderRegistry.INSTANCE.openContainer(getID(), player, packetByteBuf -> packetByteBuf.writeBlockPos(pos));
 		}
 	}
-
-	public boolean useContainerBuilder() {
-		return this.containerBuilder;
-	}
-
 }

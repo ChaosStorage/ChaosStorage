@@ -57,7 +57,7 @@ public class GuiHandler {
 
 		/*if (blockEntity instanceof DataDrivenBEProvider.DataDrivenBlockEntity) {
 			return new DataDrivenGui(syncID, player, (DataDrivenBEProvider.DataDrivenBlockEntity) blockEntity);
-			}*/
+		}*/
 
 		switch (gui) {
 			case CONTROLLER:

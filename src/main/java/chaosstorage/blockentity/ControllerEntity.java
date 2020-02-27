@@ -107,8 +107,6 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 		}
 
 		node.tick();
-
-		// Enegry movment??
 	}
 
 	@Override
