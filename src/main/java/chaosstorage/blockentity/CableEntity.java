@@ -25,26 +25,24 @@
 
 package chaosstorage.blockentity;
 
-import net.minecraft.block.Block;
+import chaosstorage.network.CableNode;
+import chaosstorage.network.INetworkNode;
+import chaosstorage.network.INetworkNodeProvider;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.Direction;
-import reborncore.api.blockentity.InventoryProvider;
-import reborncore.client.containerBuilder.IContainerProvider;
-import reborncore.client.containerBuilder.builder.BuiltContainer;
-import reborncore.client.containerBuilder.builder.ContainerBuilder;
-import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
-import reborncore.common.util.RebornInventory;
-import team.reborn.energy.EnergyTier;
 
 import chaosstorage.init.CSBlockEntities;
-import chaosstorage.init.CSContent;
-import chaosstorage.block.CableBlock;
-import chaosstorage.config.ChaosStorageConfig;
 
-public class CableEntity extends BlockEntity {
+public class CableEntity extends BlockEntity implements INetworkNodeProvider {
+
+	private CableNode node;
 
 	public CableEntity() {
 		super(CSBlockEntities.CONTROLLER);
+		this.node = new CableNode(this);
+	}
+
+	@Override
+	public INetworkNode getNetworkNode() {
+		return node;
 	}
 }

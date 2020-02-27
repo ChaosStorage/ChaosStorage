@@ -17,7 +17,6 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import reborncore.api.blockentity.IMachineGuiHandler;
-
 import chaosstorage.client.EGui;
 import chaosstorage.blockentity.StorageBlockEntity;
 

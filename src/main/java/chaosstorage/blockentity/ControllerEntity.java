@@ -25,7 +25,12 @@
 
 package chaosstorage.blockentity;
 
+import chaosstorage.network.ControllerNode;
+import chaosstorage.network.INetworkNode;
+import chaosstorage.network.INetworkNodeProvider;
+import chaosstorage.network.NetworkNode;
 import net.minecraft.block.Block;
+import net.minecraft.client.RunArgs;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Direction;
 import reborncore.api.blockentity.InventoryProvider;
@@ -41,17 +46,20 @@ import chaosstorage.init.CSContent;
 import chaosstorage.block.ControllerBlock;
 import chaosstorage.config.ChaosStorageConfig;
 
-public class ControllerEntity extends PowerAcceptorBlockEntity implements IContainerProvider, InventoryProvider {
+public class ControllerEntity extends PowerAcceptorBlockEntity implements IContainerProvider, InventoryProvider, INetworkNodeProvider {
 
 	public RebornInventory<ControllerEntity> inventory;
-	int ticksSinceLastChange;
-	int EnergyPerTick;	
+	private int ticksSinceLastChange;
+	private int EnergyPerTick;
+	private ControllerNode node;
 
 	public ControllerEntity() {
 		super(CSBlockEntities.CONTROLLER);
 		inventory = new RebornInventory<>(1, "ControllerEntity", 64, this);
 		EnergyPerTick = ChaosStorageConfig.ControllerEngergyPerTick;
 		checkTier(); //?
+
+		node = new ControllerNode(this);
 
 		//super(CSBlockEntities.Controller, "controller", 2, CSContent.Machine.CONTROLLER.block, EnergyTier.INFINITY, 40_000);
 	}
@@ -98,6 +106,7 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 			useEnergy(getEuPerTick(EnergyPerTick));
 		}
 
+		node.tick();
 
 		// Enegry movment??
 	}
@@ -150,5 +159,10 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 	public BuiltContainer createContainer(int syncID, final PlayerEntity player) {
 		return new ContainerBuilder("controller").player(player.inventory).inventory().hotbar().addInventory()
 			.blockEntity(this).energySlot(0, 8, 72).syncEnergyValue().addInventory().create(this, syncID);
+	}
+
+	@Override
+	public INetworkNode getNetworkNode() {
+		return node;
 	}
 }

@@ -1,13 +1,18 @@
 package chaosstorage.block;
 
 import chaosstorage.blockentity.CableEntity;
+import chaosstorage.network.IController;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityContext;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -15,6 +20,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.IWorld;
 import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.world.World;
 
 
 import javax.annotation.Nullable;
@@ -161,5 +167,17 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 	@Override
 	public BlockEntity createBlockEntity(BlockView view) {
 		return new CableEntity();
+	}
+
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult blockHitResult) {
+		CableEntity e = (CableEntity) world.getBlockEntity(pos);
+		IController ctrl = e.getNetworkNode().getController();
+		if (ctrl != null) {
+			System.out.println("Controller Position: " + ctrl.getControllerEntity().getPos());
+		} else {
+			System.out.println("No controller");
+		}
+		return ActionResult.SUCCESS;
 	}
 }
