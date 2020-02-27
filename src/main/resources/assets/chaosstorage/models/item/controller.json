@@ -1,28 +1,3 @@
 {
-  "overrides": [
-    {
-      "predicate": {
-        "energy_type": 0
-      },
-      "model": "chaosstorage:block/controller/controller_off"
-    },
-    {
-      "predicate": {
-        "energy_type": 1
-      },
-      "model": "chaosstorage:block/controller/controller_nearly_off"
-    },
-    {
-      "predicate": {
-        "energy_type": 2
-      },
-      "model": "chaosstorage:block/controller/controller_nearly_on"
-    },
-    {
-      "predicate": {
-        "energy_type": 3
-      },
-      "model": "chaosstorage:block/controller/controller_on"
-    }
-  ]
+  "parent": "chaosstorage:block/controller/controller_off"
 }

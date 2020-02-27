@@ -39,6 +39,7 @@ import reborncore.client.containerBuilder.builder.BuiltContainer;
 import reborncore.client.containerBuilder.builder.ContainerBuilder;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 import reborncore.common.util.RebornInventory;
+import team.reborn.energy.EnergySide;
 import team.reborn.energy.EnergyTier;
 
 import chaosstorage.init.CSBlockEntities;
@@ -53,16 +54,22 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 	private int EnergyPerTick;
 	private ControllerNode node;
 
-	public ControllerEntity() {
+  private double energy = 0;
+	private boolean creative;
+
+	public ControllerEntity(boolean creative) {
 		super(CSBlockEntities.CONTROLLER);
+		this.creative = creative;
 		inventory = new RebornInventory<>(1, "ControllerEntity", 64, this);
 		EnergyPerTick = ChaosStorageConfig.ControllerEngergyPerTick;
 		checkTier(); //?
 
 		node = new ControllerNode(this);
-
-		//super(CSBlockEntities.Controller, "controller", 2, CSContent.Machine.CONTROLLER.block, EnergyTier.INFINITY, 40_000);
 	}
+
+  public ControllerEntity() {
+    this(false);
+  }
 
 	public void setInvDirty(boolean isDirty) {
 		 inventory.setChanged(isDirty);
@@ -102,7 +109,7 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 			updateState();
 		}
 
-		if (canUseEnergy(getEuPerTick(EnergyPerTick))) {
+		if (canUseEnergy(getEuPerTick(EnergyPerTick)) && !this.creative) {
 			useEnergy(getEuPerTick(EnergyPerTick));
 		}
 
@@ -139,19 +146,24 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 		return false;
 	}
 
-/*	// MachineBaseBlockEntity
 	@Override
-	public boolean canBeUpgraded() {
-		return false;
+	public boolean hasSlotConfig() {
+    return false;
+  }
+
+  	@Override
+	public double getStored(EnergySide face) {
+		if (this.creative) {
+			return this.getBaseMaxPower();
+		}
+		return super.getStored(face);
 	}
-*/
 
 	// InventoryProvider
 	@Override
 	public RebornInventory<ControllerEntity> getInventory() {
 		return inventory;
 	}
-
 
 	@Override
 	public BuiltContainer createContainer(int syncID, final PlayerEntity player) {

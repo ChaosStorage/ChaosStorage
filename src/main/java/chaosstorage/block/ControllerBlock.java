@@ -25,7 +25,6 @@
 
 package chaosstorage.block;
 
-
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.world.BlockView;
@@ -58,14 +57,14 @@ public class ControllerBlock extends ChaosBlock implements BlockEntityProvider {
 	public String name;
 	public static BooleanProperty ACTIVE; // = BooleanProperty.of("active");
 	public IMachineGuiHandler gui;
+	public boolean creative;
 
-	public ControllerBlock(boolean _creative) {
+	public ControllerBlock(boolean creative) {
 		super();
-		this.setDefaultState(this.getStateManager().getDefaultState().with(ACTIVE, false));
+		this.setDefaultState(this.getStateManager().getDefaultState().with(ACTIVE, creative));
 		this.name = "controller";
 		this.gui = EGui.CONTROLLER;
-
-		//super ("low_volt...", EGui.LOW_VOLT...);
+		this.creative = creative;
 	}
 
 	public static boolean isActive(BlockState state) {
@@ -116,14 +115,14 @@ public class ControllerBlock extends ChaosBlock implements BlockEntityProvider {
 	}
 
 
-	@SuppressWarnings("deprecation")
+	/*@SuppressWarnings("deprecation")
 	@Override
 	public void onBlockRemoved(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			ItemHandlerUtils.dropContainedItems(worldIn, pos);
 			super.onBlockRemoved(state, worldIn, pos, newState, isMoving);
 		}
-	}
+	}*/
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -140,6 +139,6 @@ public class ControllerBlock extends ChaosBlock implements BlockEntityProvider {
 	// BlockEntityProvider
 	@Override
 	public BlockEntity createBlockEntity(BlockView worldIn) {
-		return new ControllerEntity();
+		return new ControllerEntity(this.creative);
 	}
 }
