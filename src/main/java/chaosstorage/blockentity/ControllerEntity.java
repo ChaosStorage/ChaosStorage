@@ -28,9 +28,7 @@ package chaosstorage.blockentity;
 import chaosstorage.network.ControllerNode;
 import chaosstorage.network.INetworkNode;
 import chaosstorage.network.INetworkNodeProvider;
-import chaosstorage.network.NetworkNode;
 import net.minecraft.block.Block;
-import net.minecraft.client.RunArgs;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Direction;
 import reborncore.api.blockentity.InventoryProvider;
@@ -40,10 +38,8 @@ import reborncore.client.containerBuilder.builder.ContainerBuilder;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 import reborncore.common.util.RebornInventory;
 import team.reborn.energy.EnergySide;
-import team.reborn.energy.EnergyTier;
 
 import chaosstorage.init.CSBlockEntities;
-import chaosstorage.init.CSContent;
 import chaosstorage.block.ControllerBlock;
 import chaosstorage.config.ChaosStorageConfig;
 
@@ -51,25 +47,25 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 
 	public RebornInventory<ControllerEntity> inventory;
 	private int ticksSinceLastChange;
-	private int EnergyPerTick;
+	//private int EnergyPerTick;
 	private ControllerNode node;
 
-  private double energy = 0;
+	private double energy = 0;
 	private boolean creative;
 
 	public ControllerEntity(boolean creative) {
-		super(CSBlockEntities.CONTROLLER);
+		super(creative ? CSBlockEntities.CREATIVE_CONTROLLER : CSBlockEntities.CONTROLLER);
 		this.creative = creative;
 		inventory = new RebornInventory<>(1, "ControllerEntity", 64, this);
-		EnergyPerTick = ChaosStorageConfig.ControllerEngergyPerTick;
+		//EnergyPerTick = ChaosStorageConfig.ControllerEngergyPerTick;
 		checkTier(); //?
 
 		node = new ControllerNode(this);
 	}
 
-  public ControllerEntity() {
-    this(false);
-  }
+	public ControllerEntity() {
+		this(false);
+	}
 
 	public void setInvDirty(boolean isDirty) {
 		 inventory.setChanged(isDirty);
@@ -84,7 +80,7 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 
 		if (block instanceof ControllerBlock) {
 			ControllerBlock controllerBlock = (ControllerBlock) block;
-			boolean isActive = (getEnergy() > 0);
+			boolean isActive = canUseEnergy(getEuPerTick(node.getTotalEnergyUsage()));
 			controllerBlock.setActive(isActive, world, pos);
 		}
 	}
@@ -105,10 +101,11 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 			ticksSinceLastChange = 0;
 		}
 
-		if (isInvDirty()) {
+		//if (isInvDirty()) {
 			updateState();
-		}
+		//}
 
+		int EnergyPerTick = node.getTotalEnergyUsage();
 		if (canUseEnergy(getEuPerTick(EnergyPerTick)) && !this.creative) {
 			useEnergy(getEuPerTick(EnergyPerTick));
 		}
@@ -148,10 +145,10 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 
 	@Override
 	public boolean hasSlotConfig() {
-    return false;
-  }
+		return false;
+	}
 
-  	@Override
+		@Override
 	public double getStored(EnergySide face) {
 		if (this.creative) {
 			return this.getBaseMaxPower();

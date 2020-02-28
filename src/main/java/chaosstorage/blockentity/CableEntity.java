@@ -37,7 +37,7 @@ public class CableEntity extends BlockEntity implements INetworkNodeProvider {
 	private CableNode node;
 
 	public CableEntity() {
-		super(CSBlockEntities.CONTROLLER);
+		super(CSBlockEntities.CABLE);
 		this.node = new CableNode(this);
 	}
 

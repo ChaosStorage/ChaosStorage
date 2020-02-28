@@ -4,12 +4,14 @@ import chaosstorage.blockentity.CableEntity;
 import chaosstorage.network.IController;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -25,7 +27,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class CableBlock extends ChaosBlock implements BlockEntityProvider {
+public class CableBlock extends ChaosBlock implements BlockEntityProvider, Waterloggable {
 	public enum Type {
 		NORMAL(false, false),
 		EXTERNAL_STORAGE(true, false),
@@ -58,6 +60,8 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 	private static final VoxelShape SHAPE_WEST = createCuboidShape(0, 6, 6, 6, 10, 10);
 	private static final VoxelShape SHAPE_UP = createCuboidShape(6, 10, 6, 10, 16, 10);
 	private static final VoxelShape SHAPE_DOWN = createCuboidShape(6, 0, 6, 10, 6, 10);
+
+	public static BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
 	@Override
 	@SuppressWarnings("deprecation")
@@ -100,7 +104,8 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 				.with(EAST, false)
 				.with(WEST, false)
 				.with(UP, false)
-				.with(DOWN, false));
+				.with(DOWN, false)
+				.with(WATERLOGGED, false));
 	}
 
 	@Override
@@ -118,7 +123,8 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 			.add(EAST)
 			.add(WEST)
 			.add(UP)
-			.add(DOWN);
+			.add(DOWN)
+			.add(WATERLOGGED);
 	}
 
 	@Override
@@ -178,6 +184,6 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider {
 		} else {
 			System.out.println("No controller");
 		}
-		return ActionResult.SUCCESS;
+		return super.onUse(state, world, pos, player, hand, blockHitResult);
 	}
 }

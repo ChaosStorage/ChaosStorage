@@ -2,6 +2,8 @@
 
 package chaosstorage.block;
 
+import chaosstorage.blockentity.CableEntity;
+import chaosstorage.network.IController;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.BlockEntityProvider;
@@ -66,6 +68,14 @@ public class StorageBlock extends ChaosBlock implements BlockEntityProvider {
 		// We implement BlockEntityProvider. Thus we should always have blockEntity entity. I hope.
 		if (blockEntity == null) {
 			return ActionResult.FAIL;
+		}
+
+		StorageBlockEntity e = (StorageBlockEntity) worldIn.getBlockEntity(pos);
+		IController ctrl = e.getNetworkNode().getController();
+		if (ctrl != null) {
+			System.out.println("Controller Position: " + ctrl.getControllerEntity().getPos());
+		} else {
+			System.out.println("No controller");
 		}
 
 		/*if (!stack.isEmpty() && ToolManager.INSTANCE.canHandleTool(stack)) {

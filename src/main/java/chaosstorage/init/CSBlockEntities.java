@@ -37,6 +37,7 @@ public class CSBlockEntities {
 	public static List<BlockEntityType<?>> TYPES = new ArrayList<>();
 
 	public static BlockEntityType<ControllerEntity> CONTROLLER;
+	public static BlockEntityType<ControllerEntity> CREATIVE_CONTROLLER;
 	public static BlockEntityType<StorageBlockEntity> STORAGE_BLOCK;
 	public static BlockEntityType<CableEntity> CABLE;
 }
