@@ -2,11 +2,13 @@
 package chaosstorage.network;
 
 import chaosstorage.blockentity.StorageBlockEntity;
-import chaosstorage.block.StorageBlock;
+import chaosstorage.storage.StorageDisk;
+
 //import chaosstorage.ChaosStorageConfig;
 
 public class StorageNode extends NetworkNode implements IStorageNode {
 	private StorageBlockEntity blockEntity;
+	private StorageDisk disk;
 
 	private int maxStorage;
 
@@ -14,6 +16,7 @@ public class StorageNode extends NetworkNode implements IStorageNode {
 		super(blockentity);
 		this.blockEntity = blockentity;
 		this.maxStorage = maxStorage;
+		this.disk = new StorageDisk(maxStorage);
 	}
 
 	// INetworkNode

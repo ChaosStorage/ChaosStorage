@@ -33,7 +33,6 @@ import reborncore.client.gui.builder.GuiBase;
 import chaosstorage.blockentity.StorageBlockEntity;
 import chaosstorage.client.gui.guibuilder.GuiBuilder;
 
-//import techreborn.blockentity.storage.energy.LowVoltageSUBlockEntity;
 
 public class GuiStorageBlock extends GuiBase<BuiltContainer> {
 	

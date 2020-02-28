@@ -73,6 +73,7 @@ public class ControllerNode extends NetworkNode implements IController {
 								scanQueue.add(neighbour);
 						}
 				}
+
 				scanQueued = false;
 
 			for( IStorageNode storage: this.storageMembers ) {
