@@ -2,11 +2,16 @@
 package chaosstorage.network;
 
 import chaosstorage.blockentity.StorageBlockEntity;
-import chaosstorage.block.StorageBlock;
+import chaosstorage.storage.StorageDisk;
+import chaosstorage.storage.IStorageDisk;
+
+import java.util.ArrayList;
+
 //import chaosstorage.ChaosStorageConfig;
 
 public class StorageNode extends NetworkNode implements IStorageNode {
 	private StorageBlockEntity blockEntity;
+	private StorageDisk disk;
 
 	private int maxStorage;
 
@@ -14,6 +19,7 @@ public class StorageNode extends NetworkNode implements IStorageNode {
 		super(blockentity);
 		this.blockEntity = blockentity;
 		this.maxStorage = maxStorage;
+		this.disk = new StorageDisk(maxStorage);
 	}
 
 	// INetworkNode
@@ -25,6 +31,26 @@ public class StorageNode extends NetworkNode implements IStorageNode {
 
 	@Override
 	public int getMaxStorage() {
-		return maxStorage;
+		int storage = 0;
+		for (IStorageDisk disk: this.getDisks()) {
+			storage += disk.getMaxSpace();
+		}
+		return storage;
+	}
+
+	@Override
+	public int getStorage() {
+		int storage = 0;
+		for (IStorageDisk disk: this.getDisks()) {
+			storage += disk.getSpace();
+		}
+		return storage;
+	}
+
+	@Override
+	public ArrayList<IStorageDisk> getDisks() {
+		ArrayList<IStorageDisk> disks = new ArrayList<IStorageDisk>();
+		disks.add(this.disk);
+		return disks;
 	}
 }

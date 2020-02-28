@@ -4,6 +4,8 @@ package chaosstorage.block;
 
 import chaosstorage.blockentity.CableEntity;
 import chaosstorage.network.IController;
+import chaosstorage.network.IStorageNode;
+import chaosstorage.storage.IStorageDisk;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.BlockEntityProvider;
@@ -21,6 +23,8 @@ import net.minecraft.world.World;
 import reborncore.api.blockentity.IMachineGuiHandler;
 import chaosstorage.client.EGui;
 import chaosstorage.blockentity.StorageBlockEntity;
+
+import java.util.ArrayList;
 
 public class StorageBlock extends ChaosBlock implements BlockEntityProvider {
 	public enum Type {
@@ -77,6 +81,8 @@ public class StorageBlock extends ChaosBlock implements BlockEntityProvider {
 		} else {
 			System.out.println("No controller");
 		}
+
+		((IStorageNode) e.getNetworkNode()).insert(stack, stack.getCount());
 
 		/*if (!stack.isEmpty() && ToolManager.INSTANCE.canHandleTool(stack)) {
 			if (WrenchUtils.handleWrench(stack, worldIn, pos, playerIn, hitResult.getSide())) {

@@ -18,6 +18,8 @@ public class ControllerNode extends NetworkNode implements IController {
 	private boolean scanQueued = false;
 	private int totalEnergyUsage;
 
+	private int totalStorage;
+
 	public ControllerNode(ControllerEntity blockEntity) {
 		super(blockEntity);
 		this.blockEntity = blockEntity;
@@ -71,7 +73,7 @@ public class ControllerNode extends NetworkNode implements IController {
 			this.totalEnergyUsage += current.getEnergyUsage();
 			if (current instanceof IStorageNode) {
 				storageMembers.add((IStorageNode) current);
-				this.totalStorage += storage.getMaxStorage();
+				this.totalStorage += ((IStorageNode) current).getMaxStorage();
 			}
 		}
 	}

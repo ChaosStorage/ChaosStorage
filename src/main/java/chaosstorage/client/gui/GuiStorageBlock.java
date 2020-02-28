@@ -25,6 +25,7 @@
 
 package chaosstorage.client.gui;
 
+import chaosstorage.network.IStorageNode;
 import net.minecraft.entity.player.PlayerEntity;
 import reborncore.client.containerBuilder.builder.BuiltContainer;
 import reborncore.client.gui.builder.GuiBase;
@@ -33,7 +34,6 @@ import reborncore.client.gui.builder.GuiBase;
 import chaosstorage.blockentity.StorageBlockEntity;
 import chaosstorage.client.gui.guibuilder.GuiBuilder;
 
-//import techreborn.blockentity.storage.energy.LowVoltageSUBlockEntity;
 
 public class GuiStorageBlock extends GuiBase<BuiltContainer> {
 	
@@ -66,7 +66,7 @@ public class GuiStorageBlock extends GuiBase<BuiltContainer> {
 		super.drawForeground(mouseX, mouseY);
 		final Layer layer = Layer.FOREGROUND;
 
-		builder.drawStorageBar(this, 9, 39, (int) blockEntity.getSpace(), (int) blockEntity.getMaxSpace(), mouseX, mouseY, 0, layer);
+		builder.drawStorageBar(this, 9, 39, (int) (((IStorageNode) blockEntity.getNetworkNode()).getStorage()), (int) (((IStorageNode) blockEntity.getNetworkNode()).getMaxStorage()), mouseX, mouseY, 0, layer);
 	}
 }
 
