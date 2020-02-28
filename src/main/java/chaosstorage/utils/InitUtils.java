@@ -51,7 +51,7 @@ public class InitUtils {
 
 	public static <B extends Block> B setup(B block, String name) {
 		RebornRegistry.registerIdent(block, new Identifier(ChaosStorage.MOD_ID, name));
-    BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
 		return block;
 	}
 

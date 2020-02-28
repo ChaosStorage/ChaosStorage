@@ -9,12 +9,12 @@ public class DetectorBlock extends ChaosBlock {
 	public static final BooleanProperty POWERED = BooleanProperty.of("powered");
 
 	public DetectorBlock() {
-    super();
+		super();
 		this.setDefaultState(this.getStateManager().getDefaultState().with(POWERED, false));
-  }
+	}
 
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-    builder.add(POWERED);
-  }
+		builder.add(POWERED);
+	}
 }

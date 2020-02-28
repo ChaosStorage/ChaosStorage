@@ -4,97 +4,75 @@ import chaosstorage.api.network.IStorage;
 import chaosstorage.blockentity.ControllerEntity;
 import chaosstorage.config.ChaosStorageConfig;
 
+import java.lang.reflect.Array;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class ControllerNode extends NetworkNode implements IController {
-		private ArrayList<INetworkNode> networkMembers = new ArrayList<INetworkNode>();
-		private ArrayList<IStorageNode> storageMembers = new ArrayList<IStorageNode>();
+	private ArrayList<INetworkNode> networkMembers = new ArrayList<INetworkNode>();
+	private ArrayList<IStorageNode> storageMembers = new ArrayList<IStorageNode>();
 
-		private int totalStorage;
+	private ControllerEntity blockEntity;
+	private boolean scanQueued = false;
+	private int totalEnergyUsage;
 
-		private ControllerEntity blockEntity;
-		private boolean scanQueued = false;
-		private int energyUsage;
+	public ControllerNode(ControllerEntity blockEntity) {
+		super(blockEntity);
+		this.blockEntity = blockEntity;
+		this.totalEnergyUsage = ChaosStorageConfig.ControllerEngergyPerTick;
+		scan();
+	}
 
-		public ControllerNode(ControllerEntity blockEntity) {
-				super(blockEntity);
-				this.blockEntity = blockEntity;
-				this.energyUsage = ChaosStorageConfig.ControllerEngergyPerTick;
-				scan();
-				System.out.println("queued scan");
-		}
+	public void scan() {
+		System.out.println("queued scan");
+		scanQueued = true;
+	}
 
-		public void scan() {
-				scanQueued = true;
-		}
+	@Override
+	public void tick() {
+		super.tick();
+		if (scanQueued) doScan();
+	}
 
-		public void tick() {
-				if (scanQueued) doScan();
-		}
+	public int getTotalEnergyUsage() {
+		return this.totalEnergyUsage;
+	}
 
-		public int addEnergy(int usage) {
-			System.out.print("usage add: " + this.getTotalEnergyUsage() + " + " + usage + " = " );
-			this.energyUsage = this.getTotalEnergyUsage() + usage;
-			System.out.println(this.energyUsage);
-			return this.getTotalEnergyUsage();
-		}
+	@Override
+	public void removeNode(INetworkNode node) {
+		scan();
+	}
 
-		public int getTotalEnergyUsage() {
-			return this.energyUsage;
-		}
+	@Override
+	public ControllerEntity getControllerEntity() {
+		return blockEntity;
+	}
 
-		public void resetEnergyUsage() {
-			this.energyUsage = 0;
-		}
+	@Override
+	public int getEnergyUsage() {
+		return ChaosStorageConfig.ControllerEngergyPerTick;
+	}
 
-		private void doScan() {
-				System.out.println("running scan");
-				this.resetEnergyUsage();
-				this.totalStorage = 0;
-				networkMembers.clear();
-				Queue<INetworkNode> scanQueue = new PriorityQueue<INetworkNode>();
-				scanQueue.add(this);
-				while (!scanQueue.isEmpty()) {
-						INetworkNode current = scanQueue.remove();
-						System.out.println("adding node");
-						networkMembers.add(current);
-						current.adopt(this);
-						if (current instanceof IStorageNode) {
-							storageMembers.add((IStorageNode) current);
-							System.out.println("adding storage");
-						}
-						this.addEnergy(current.getEnergyUsage());
-						for (INetworkNode neighbour : current.getNeighbours()) {
-								if (networkMembers.contains(neighbour) || scanQueue.contains(neighbour))
-										continue;
+	public void doScan() {
+		scanQueued = false;
+		System.out.println("running scan");
 
-								scanQueue.add(neighbour);
-						}
-				}
-				scanQueued = false;
+		networkMembers.clear();
+		totalEnergyUsage = 0;
+		totalStorage = 0;
 
-			for( IStorageNode storage: this.storageMembers ) {
-				this.totalStorage = this.totalStorage + storage.getMaxStorage();
+		adopt(this, networkMembers);
+		boolean invalid = networkMembers.stream().anyMatch(n -> n != this && n instanceof IController);
+		for (INetworkNode current : networkMembers) {
+			// TODO: do something with invalid
+
+			this.totalEnergyUsage += current.getEnergyUsage();
+			if (current instanceof IStorageNode) {
+				storageMembers.add((IStorageNode) current);
+				this.totalStorage += storage.getMaxStorage();
 			}
-
-			System.out.println("Total Storage: " + this.totalStorage);
 		}
-
-		@Override
-		public void removeNode(INetworkNode node) {
-				networkMembers.remove(node);
-				scan(); // TODO: make sure the block is not addded again
-		}
-
-		@Override
-		public ControllerEntity getControllerEntity() {
-				return blockEntity;
-		}
-
-		@Override
-		public	int getEnergyUsage() {
-				return ChaosStorageConfig.ControllerEngergyPerTick;
-		}
+	}
 }

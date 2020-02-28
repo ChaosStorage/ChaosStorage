@@ -70,4 +70,10 @@ public class StorageBlockEntity extends MachineBaseBlockEntity implements IStora
 	public INetworkNode getNetworkNode() {
 		return node;
 	}
-}	
+
+	@Override
+	public void tick() {
+		super.tick();
+		node.tick();
+	}
+}

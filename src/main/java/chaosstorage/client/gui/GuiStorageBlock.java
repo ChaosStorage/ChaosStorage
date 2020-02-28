@@ -46,7 +46,7 @@ public class GuiStorageBlock extends GuiBase<BuiltContainer> {
 		this.blockEntity = storageBlock;
 	}
 
-  @Override
+	@Override
 	public void init() {
 		super.init();
 	}
