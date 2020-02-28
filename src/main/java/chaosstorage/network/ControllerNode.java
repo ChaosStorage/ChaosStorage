@@ -1,5 +1,6 @@
 package chaosstorage.network;
 
+import chaosstorage.api.network.IStorage;
 import chaosstorage.blockentity.ControllerEntity;
 import chaosstorage.config.ChaosStorageConfig;
 
@@ -9,10 +10,12 @@ import java.util.ArrayList;
 
 public class ControllerNode extends NetworkNode implements IController {
 		private ArrayList<INetworkNode> networkMembers = new ArrayList<INetworkNode>();
+		private ArrayList<IStorageNode> storageMembers = new ArrayList<IStorageNode>();
+
+		private int totalStorage;
 
 		private ControllerEntity blockEntity;
 		private boolean scanQueued = false;
-		//private static final int baseEnergyUsage = ChaosStorageConfig.ControllerEngergyPerTick;
 		private int energyUsage;
 
 		public ControllerNode(ControllerEntity blockEntity) {
@@ -49,6 +52,7 @@ public class ControllerNode extends NetworkNode implements IController {
 		private void doScan() {
 				System.out.println("running scan");
 				this.resetEnergyUsage();
+				this.totalStorage = 0;
 				networkMembers.clear();
 				Queue<INetworkNode> scanQueue = new PriorityQueue<INetworkNode>();
 				scanQueue.add(this);
@@ -57,6 +61,10 @@ public class ControllerNode extends NetworkNode implements IController {
 						System.out.println("adding node");
 						networkMembers.add(current);
 						current.adopt(this);
+						if (current instanceof IStorageNode) {
+							storageMembers.add((IStorageNode) current);
+							System.out.println("adding storage");
+						}
 						this.addEnergy(current.getEnergyUsage());
 						for (INetworkNode neighbour : current.getNeighbours()) {
 								if (networkMembers.contains(neighbour) || scanQueue.contains(neighbour))
@@ -66,6 +74,12 @@ public class ControllerNode extends NetworkNode implements IController {
 						}
 				}
 				scanQueued = false;
+
+			for( IStorageNode storage: this.storageMembers ) {
+				this.totalStorage = this.totalStorage + storage.getMaxStorage();
+			}
+
+			System.out.println("Total Storage: " + this.totalStorage);
 		}
 
 		@Override

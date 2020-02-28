@@ -32,7 +32,7 @@ public class StorageBlockEntity extends MachineBaseBlockEntity implements IStora
 		this.maxStorage = maxStorage;
 		this.name = name;
 		this.usedSpace = 0;
-		this.node = new StorageNode(this);
+		this.node = new StorageNode(this, maxStorage);
 	}
 
 	// IStorage

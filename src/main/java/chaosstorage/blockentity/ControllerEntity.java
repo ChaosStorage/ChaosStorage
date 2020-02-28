@@ -83,6 +83,8 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 			boolean isActive = canUseEnergy(getEuPerTick(node.getTotalEnergyUsage()));
 			controllerBlock.setActive(isActive, world, pos);
 		}
+
+		world.updateListeners(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
 	}
 
 	// PowerAcceptorBlockEntity
@@ -101,9 +103,9 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 			ticksSinceLastChange = 0;
 		}
 
-		//if (isInvDirty()) {
+		if (isInvDirty()) {
 			updateState();
-		//}
+		}
 
 		int EnergyPerTick = node.getTotalEnergyUsage();
 		if (canUseEnergy(getEuPerTick(EnergyPerTick)) && !this.creative) {
