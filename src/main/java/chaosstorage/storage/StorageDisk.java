@@ -8,7 +8,9 @@ import net.minecraft.item.ItemStack;
 import com.google.common.collect.ArrayListMultimap;
 import net.minecraft.util.math.MathHelper;
 
-public class StorageDisk {
+import java.util.Collection;
+
+public class StorageDisk implements IStorageDisk {
     private Multimap<Item, ItemStack> stacks = ArrayListMultimap.create();
 
     private final int maxStorage;
@@ -18,17 +20,16 @@ public class StorageDisk {
         this.maxStorage = maxStorage;
     }
 
+    @Override
     public int getMaxSpace() {
         return this.maxStorage;
     }
 
+    @Override
     public int getSpace() {
         return this.usedSpace;
     }
 
-    public int getFreeSpace() {
-        return getMaxSpace() - getSpace();
-    }
 
     public int calculateComparatorOutputFromStorage(BlockEntity blockentity) {
         return MathHelper.ceil(getSpace() * 15.0 / getMaxSpace());
@@ -53,7 +54,7 @@ public class StorageDisk {
                     return ItemHelper.copyStackWithSize(otherStack, size - remainingSpace);
                 }
             } else {
-                otherStack.setCount(otherStack.getCount() + size);
+                otherStack.setCount(otherStack.getCount() + size); // TODO??
                 this.usedSpace += size;
                 return ItemStack.EMPTY;
             }
@@ -72,5 +73,10 @@ public class StorageDisk {
             this.usedSpace += size;
             return ItemStack.EMPTY;
         }
+    }
+
+    @Override
+    public Collection<ItemStack> getStacks() {
+        return stacks.values();
     }
 }
