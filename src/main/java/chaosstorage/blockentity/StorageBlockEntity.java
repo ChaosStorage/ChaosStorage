@@ -8,39 +8,21 @@ import reborncore.client.containerBuilder.builder.ContainerBuilder;
 import reborncore.common.util.RebornInventory;
 import reborncore.api.blockentity.InventoryProvider;
 
-import chaosstorage.api.network.IStorage;
 import chaosstorage.init.CSBlockEntities;
 import chaosstorage.network.StorageNode;
 import chaosstorage.network.INetworkNode;
 import chaosstorage.network.INetworkNodeProvider;
 
-public class StorageBlockEntity extends MachineBaseBlockEntity implements IStorage, InventoryProvider, INetworkNodeProvider { // ITick??
+public class StorageBlockEntity extends MachineBaseBlockEntity implements InventoryProvider, INetworkNodeProvider { // ITick??
 
 	public RebornInventory<StorageBlockEntity> inventory;
 	public final String name;
-	private final int maxStorage;
-	private int usedSpace;
-
 	private StorageNode node;
 
 	public StorageBlockEntity(int maxStorage, String name) {
 		super(CSBlockEntities.STORAGE_BLOCK);
-		this.maxStorage = maxStorage;
 		this.name = name;
-		this.usedSpace = 0;
 		this.node = new StorageNode(this, maxStorage);
-	}
-
-	// IStorage
-	@Override
-	public int getMaxSpace() {
-		return this.maxStorage;
-	}
-
-	@Override
-	public int getSpace() {
-		return 512;
-		//return this.usedSpace;
 	}
 
 	// InventoryProvider
