@@ -100,6 +100,8 @@ public class ControllerBlock extends ChaosBlock implements BlockEntityProvider {
 			return ActionResult.FAIL;
 		}
 
+		//System.out.println(((ControllerEntity) blockEntity).getNetworkNode().getNetworkNodes());
+
 		if (!stack.isEmpty() && ToolManager.INSTANCE.canHandleTool(stack)) {
 			if (WrenchUtils.handleWrench(stack, worldIn, pos, playerIn, hitResult.getSide())) {
 				return ActionResult.SUCCESS;

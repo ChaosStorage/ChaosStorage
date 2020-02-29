@@ -30,6 +30,18 @@ public class NetworkNode implements INetworkNode {
 		}
 	}
 
+	@Override
+	public void markRemoved() {
+		if (controller != null) {
+			controller.scan();
+		}
+	}
+
+	@Override
+	public void unadopt() {
+		controller = null;
+	}
+
 	public Direction[] getConnectionDirections() {
 		return Direction.values();
 	}
@@ -54,7 +66,6 @@ public class NetworkNode implements INetworkNode {
 
 	@Override
 	public void adopt(IController controller, ArrayList<INetworkNode> networkMembers) {
-		System.out.println("adding node");
 		networkMembers.add(this);
 		this.controller = controller;
 		for (INetworkNode neighbour : getNeighbours()) {
@@ -65,4 +76,5 @@ public class NetworkNode implements INetworkNode {
 			neighbour.adopt(controller, networkMembers);
 		}
 	}
+
 }

@@ -2,6 +2,7 @@ package chaosstorage.block;
 
 import chaosstorage.blockentity.CableEntity;
 import chaosstorage.network.IController;
+import chaosstorage.utils.DebugUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Waterloggable;
@@ -177,13 +178,7 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider, Water
 
 	@Override
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult blockHitResult) {
-		CableEntity e = (CableEntity) world.getBlockEntity(pos);
-		IController ctrl = e.getNetworkNode().getController();
-		if (ctrl != null) {
-			System.out.println("Controller Position: " + ctrl.getControllerEntity().getPos());
-		} else {
-			System.out.println("No controller");
-		}
+		DebugUtils.printController(world, pos, hand);
 		return super.onUse(state, world, pos, player, hand, blockHitResult);
 	}
 }

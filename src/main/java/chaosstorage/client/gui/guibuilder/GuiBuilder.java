@@ -42,13 +42,13 @@ public class GuiBuilder extends reborncore.client.gui.guibuilder.GuiBuilder {
 		if (stored > maxStored) {
 			draw = 48;
 		}
-		gui.blit(x + 1, y + 49 - draw, xBar, 48 + yBar, 12, draw);
+		gui.blit(x + 1, y + 49 - draw, xBar, 48 + yBar - draw, 12, draw);
 		int percentage = percentage(maxStored, stored);
 		if (gui.isPointInRect(x + 1, y + 1, 11, 48, mouseX, mouseY)) { // Mouse tooltip
 			List<Text> list = Lists.newArrayList();
 			list.add(new LiteralText(stored /* TODO: format */ + "/" + maxStored /* TODO: format */ +
 						" Bytes").formatted(Formatting.GOLD));
-			list.add(new LiteralText(StringUtils.getPercentageColour(percentage) + "" + percentage + 
+			list.add(new LiteralText(StringUtils.getPercentageColour(percentage) + "" + percentage +
 						"%" + Formatting.GRAY + " " + "Used" /*StringUtils.t()*/));
 			if (layer == GuiBase.Layer.FOREGROUND) {
 				mouseX -= gui.getGuiLeft();

@@ -51,4 +51,10 @@ public class CableEntity extends BlockEntity implements INetworkNodeProvider, Ti
 	public void tick() {
 		node.tick();
 	}
+
+	@Override
+	public void markRemoved() {
+		super.markRemoved();
+		node.markRemoved();
+	}
 }

@@ -66,7 +66,8 @@ public class GuiStorageBlock extends GuiBase<BuiltContainer> {
 		super.drawForeground(mouseX, mouseY);
 		final Layer layer = Layer.FOREGROUND;
 
-		builder.drawStorageBar(this, 9, 39, (int) (((IStorageNode) blockEntity.getNetworkNode()).getStorage()), (int) (((IStorageNode) blockEntity.getNetworkNode()).getMaxStorage()), mouseX, mouseY, 0, layer);
+    IStorageNode node = (IStorageNode) blockEntity.getNetworkNode();
+		builder.drawStorageBar(this, 9, 39, node.getStorage(), node.getMaxStorage(), mouseX, mouseY, 0, layer);
 	}
 }
 

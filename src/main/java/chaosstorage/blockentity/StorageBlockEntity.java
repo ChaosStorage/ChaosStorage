@@ -1,11 +1,7 @@
 
 package chaosstorage.blockentity;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Direction;
 import reborncore.common.blockentity.MachineBaseBlockEntity;
 import reborncore.client.containerBuilder.builder.BuiltContainer;
 import reborncore.client.containerBuilder.builder.ContainerBuilder;
@@ -43,7 +39,8 @@ public class StorageBlockEntity extends MachineBaseBlockEntity implements IStora
 
 	@Override
 	public int getSpace() {
-		return this.usedSpace;
+		return 512;
+		//return this.usedSpace;
 	}
 
 	// InventoryProvider
@@ -75,5 +72,11 @@ public class StorageBlockEntity extends MachineBaseBlockEntity implements IStora
 	public void tick() {
 		super.tick();
 		node.tick();
+	}
+
+	@Override
+	public void markRemoved() {
+		super.markRemoved();
+		node.markRemoved();
 	}
 }

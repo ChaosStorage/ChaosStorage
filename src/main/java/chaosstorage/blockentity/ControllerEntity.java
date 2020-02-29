@@ -150,7 +150,7 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 		return false;
 	}
 
-		@Override
+	@Override
 	public double getStored(EnergySide face) {
 		if (this.creative) {
 			return this.getBaseMaxPower();
@@ -173,5 +173,11 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 	@Override
 	public INetworkNode getNetworkNode() {
 		return node;
+	}
+
+	@Override
+	public void markRemoved() {
+		super.markRemoved();
+		node.markRemoved();
 	}
 }
