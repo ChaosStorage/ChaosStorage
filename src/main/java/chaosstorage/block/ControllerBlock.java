@@ -25,6 +25,10 @@
 
 package chaosstorage.block;
 
+import chaosstorage.network.ControllerNode;
+import chaosstorage.network.IController;
+import chaosstorage.network.INetworkNode;
+import chaosstorage.network.IStorageNode;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.world.BlockView;
@@ -100,13 +104,18 @@ public class ControllerBlock extends ChaosBlock implements BlockEntityProvider {
 			return ActionResult.FAIL;
 		}
 
-		//System.out.println(((ControllerEntity) blockEntity).getNetworkNode().getNetworkNodes());
+		if (!worldIn.isClient()) {
+			System.out.println("inserting " + stack.getCount() + " " + stack.getName().asString());
+			INetworkNode nn = ((ControllerEntity) blockEntity).getNetworkNode();
+			IController ctrl = nn.getController();
+			ctrl.insert(stack);
+		}
 
-		if (!stack.isEmpty() && ToolManager.INSTANCE.canHandleTool(stack)) {
+		/*if (!stack.isEmpty() && ToolManager.INSTANCE.canHandleTool(stack)) {
 			if (WrenchUtils.handleWrench(stack, worldIn, pos, playerIn, hitResult.getSide())) {
 				return ActionResult.SUCCESS;
 			}
-		}
+		}*/
 
 		if (!playerIn.isSneaking() && gui != null) {
 			gui.open(playerIn, pos, worldIn);

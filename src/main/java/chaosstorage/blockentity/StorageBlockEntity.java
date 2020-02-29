@@ -9,7 +9,7 @@ import reborncore.common.util.RebornInventory;
 import reborncore.api.blockentity.InventoryProvider;
 
 import chaosstorage.init.CSBlockEntities;
-import chaosstorage.network.StorageNode;
+import chaosstorage.network.StorageBlockNode;
 import chaosstorage.network.INetworkNode;
 import chaosstorage.network.INetworkNodeProvider;
 
@@ -17,12 +17,12 @@ public class StorageBlockEntity extends MachineBaseBlockEntity implements Invent
 
 	public RebornInventory<StorageBlockEntity> inventory;
 	public final String name;
-	private StorageNode node;
+	private StorageBlockNode node;
 
 	public StorageBlockEntity(int maxStorage, String name) {
 		super(CSBlockEntities.STORAGE_BLOCK);
 		this.name = name;
-		this.node = new StorageNode(this, maxStorage);
+		this.node = new StorageBlockNode(this, maxStorage);
 	}
 
 	// InventoryProvider

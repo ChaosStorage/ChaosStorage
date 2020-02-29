@@ -6,6 +6,7 @@ import chaosstorage.blockentity.CableEntity;
 import chaosstorage.network.IController;
 import chaosstorage.network.IStorageNode;
 import chaosstorage.storage.IStorageDisk;
+import chaosstorage.utils.DebugUtils;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.BlockEntityProvider;
@@ -74,15 +75,7 @@ public class StorageBlock extends ChaosBlock implements BlockEntityProvider {
 			return ActionResult.FAIL;
 		}
 
-		StorageBlockEntity e = (StorageBlockEntity) worldIn.getBlockEntity(pos);
-		IController ctrl = e.getNetworkNode().getController();
-		if (ctrl != null) {
-			System.out.println("Controller Position: " + ctrl.getControllerEntity().getPos());
-		} else {
-			System.out.println("No controller");
-		}
-
-		((IStorageNode) e.getNetworkNode()).insert(stack, stack.getCount());
+		DebugUtils.printController(worldIn, pos, hand);
 
 		/*if (!stack.isEmpty() && ToolManager.INSTANCE.canHandleTool(stack)) {
 			if (WrenchUtils.handleWrench(stack, worldIn, pos, playerIn, hitResult.getSide())) {
@@ -103,7 +96,6 @@ public class StorageBlock extends ChaosBlock implements BlockEntityProvider {
 	// BlockEntityProvider
 	@Override
 	public BlockEntity createBlockEntity(BlockView worldIn) {
-		System.out.println("add entity for " + this.name);
 		return new StorageBlockEntity(this.size, this.name);
 	}
 }

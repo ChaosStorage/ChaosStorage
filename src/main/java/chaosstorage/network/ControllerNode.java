@@ -2,17 +2,20 @@ package chaosstorage.network;
 
 import chaosstorage.blockentity.ControllerEntity;
 import chaosstorage.config.ChaosStorageConfig;
+import chaosstorage.storage.IStorage;
+import net.minecraft.item.ItemStack;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class ControllerNode extends NetworkNode implements IController {
 	private ArrayList<INetworkNode> networkMembers = new ArrayList<INetworkNode>();
-	private ArrayList<IStorageNode> storageMembers = new ArrayList<IStorageNode>();
 
 	private ControllerEntity blockEntity;
 	private boolean scanQueued = false;
 	private int totalEnergyUsage;
-	private int totalStorage;
 
 	public ControllerNode(ControllerEntity blockEntity) {
 		super(blockEntity);
@@ -65,7 +68,6 @@ public class ControllerNode extends NetworkNode implements IController {
 
 		networkMembers.clear();
 		totalEnergyUsage = 0;
-		totalStorage = 0;
 
 		adopt(this, networkMembers);
 		boolean invalid = networkMembers.stream().anyMatch(n -> n != this && n instanceof IController);
@@ -75,9 +77,33 @@ public class ControllerNode extends NetworkNode implements IController {
 			this.totalEnergyUsage += current.getEnergyUsage();
 			if (current instanceof IStorageNode) {
 				IStorageNode storage = (IStorageNode) current;
-				storageMembers.add(storage);
-				this.totalStorage += storage.getMaxStorage();
 			}
 		}
+	}
+
+	public ArrayList<IStorageNode> getStorageNodes() {
+		return getNetworkNodes().stream()
+				.filter(n -> n instanceof IStorageNode)
+				.map(n -> (IStorageNode) n)
+				.collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	public ArrayList<IStorage> getStorages() {
+		return getStorageNodes().stream()
+				.flatMap(n -> n.getStorages().stream())
+				.collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	public ItemStack insert(ItemStack stack) {
+		ArrayList<IStorage> storages = getStorages();
+		ItemStack retStack = stack;
+		for (IStorage storage : storages) {
+			if (retStack.isEmpty()) {
+				return retStack;
+			}
+			System.out.println(storage);
+			retStack = storage.insert(retStack);
+		}
+		return retStack;
 	}
 }
