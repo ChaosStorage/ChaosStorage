@@ -13,26 +13,26 @@ import java.util.Collection;
 public class StorageDisk implements IStorageDisk {
 	private Multimap<Item, ItemStack> stacks = ArrayListMultimap.create();
 
-	private final int maxStorage;
-	private int usedSpace;
+	private final int capacity;
+	private int stored;
 
 	public StorageDisk(int maxStorage) {
-		this.maxStorage = maxStorage;
+		this.capacity = maxStorage;
 	}
 
 	@Override
-	public int getMaxSpace() {
-		return this.maxStorage;
+	public int getCapacity() {
+		return this.capacity;
 	}
 
 	@Override
-	public int getSpace() {
-		return this.usedSpace;
+	public int getStored() {
+		return this.stored;
 	}
 
 
 	public int calculateComparatorOutputFromStorage(BlockEntity blockentity) {
-		return MathHelper.ceil(getSpace() * 15.0 / getMaxSpace());
+		return MathHelper.ceil(getStored() * 15.0 / getCapacity());
 	}
 
 	@Override
@@ -52,13 +52,13 @@ public class StorageDisk implements IStorageDisk {
 					}
 
 					otherStack.setCount(otherStack.getCount() + remainingSpace);
-					this.usedSpace += remainingSpace;
+					this.stored += remainingSpace;
 
 					return ItemHelper.copyStackWithSize(otherStack, size - remainingSpace);
 				}
 			} else {
 				otherStack.setCount(otherStack.getCount() + size); // TODO??
-				this.usedSpace += size;
+				this.stored += size;
 				return ItemStack.EMPTY;
 			}
 		}
@@ -69,11 +69,11 @@ public class StorageDisk implements IStorageDisk {
 			}
 
 			stacks.put(stack.getItem(), ItemHelper.copyStackWithSize(stack, this.getFreeSpace()));
-			this.usedSpace += size;
+			this.stored += size;
 			return ItemHelper.copyStackWithSize(stack, this.getFreeSpace() - size);
 		} else {
 			stacks.put(stack.getItem(), ItemHelper.copyStackWithSize(stack, size));
-			this.usedSpace += size;
+			this.stored += size;
 			return ItemStack.EMPTY;
 		}
 	}

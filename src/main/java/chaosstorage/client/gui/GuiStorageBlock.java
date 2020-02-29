@@ -25,10 +25,8 @@
 
 package chaosstorage.client.gui;
 
-import chaosstorage.network.IStorageNode;
 import chaosstorage.network.StorageBlockNode;
 import chaosstorage.storage.IStorageDisk;
-import chaosstorage.storage.StorageDisk;
 import net.minecraft.entity.player.PlayerEntity;
 import reborncore.client.containerBuilder.builder.BuiltContainer;
 import reborncore.client.gui.builder.GuiBase;
@@ -72,7 +70,7 @@ public class GuiStorageBlock extends GuiBase<BuiltContainer> {
 		IStorageDisk disk = (IStorageDisk) node.getDisk();
 		System.out.println(disk);
 
-		builder.drawStorageBar(this, 9, 39, disk.getSpace(), disk.getMaxSpace(), mouseX, mouseY, 0, layer);
+		builder.drawStorageBar(this, 9, 39, disk.getStored(), disk.getCapacity(), mouseX, mouseY, 0, layer);
 	}
 }
 
