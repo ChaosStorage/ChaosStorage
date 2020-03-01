@@ -65,14 +65,12 @@ public class StorageBlockEntity extends NetworkMachineEntity<StorageBlockNode> i
 
 	@Override
 	public void fromTag(CompoundTag nbttagcompound) {
-		System.out.println("from " + getUUID());
 		super.fromTag(nbttagcompound);
 		setUUID(UUID.fromString(nbttagcompound.getString(NBT_UUID)));
 	}
 
 	@Override
 	public CompoundTag toTag(CompoundTag nbttagcompound) {
-		System.out.println("to " + getUUID());
 		super.toTag(nbttagcompound);
 		nbttagcompound.putString(NBT_UUID, getUUID().toString());
 		return nbttagcompound;
@@ -96,14 +94,12 @@ public class StorageBlockEntity extends NetworkMachineEntity<StorageBlockNode> i
 		if (world.isClient) {
 			return clientStored;
 		} else {
-			System.out.println("server: " + getNetworkNode().getDisk().getStored());
 			return getNetworkNode().getDisk().getStored();
 		}
 	}
 
 	public void setStored(int amount) {
 		if (!world.isClient) return;
-		System.out.println("client: " + amount);
 		clientStored = amount;
 	}
 

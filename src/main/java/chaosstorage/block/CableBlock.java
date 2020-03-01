@@ -50,6 +50,7 @@ public class CableBlock extends NetworkBlock<CableNode> implements Waterloggable
 
 	private final Type type;
 
+	// FIXME: This takes really long to load, because every possible combination of properties is registered
 	public static BooleanProperty NORTH;
 	public static BooleanProperty SOUTH;
 	public static BooleanProperty EAST;

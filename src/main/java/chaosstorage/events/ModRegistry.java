@@ -4,6 +4,7 @@ import chaosstorage.blockentity.CableEntity;
 import chaosstorage.blockentity.ControllerEntity;
 import chaosstorage.blockentity.StorageBlockEntity;
 import chaosstorage.init.CSBlockEntities;
+import chaosstorage.utils.DebugUtils;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemConvertible;
@@ -24,20 +25,17 @@ public class ModRegistry {
 	private static final Item.Settings itemGroup = new Item.Settings().group(ChaosStorage.ITEMGROUP);
 
 	public static void setupShit() {
-		System.out.println("Registering blocks");
+		DebugUtils.dbg("Registering blocks");
 		registerBlocks();
-		System.out.println("Registering items");
+		DebugUtils.dbg("Registering items");
 		registerItems();
-		System.out.println("Registering block entities");
+		DebugUtils.dbg("Registering block entities");
 		registerBlockEntities();
 	}
 
 	private static void registerBlocks() {
 		Arrays.stream(CSContent.Controllers.values()).forEach(value -> RebornRegistry.registerBlock(value.block, itemGroup));
 		Arrays.stream(CSContent.StorageBlocks.values()).forEach(value -> RebornRegistry.registerBlock(value.block, itemGroup));
-		System.out.println("Cables1");
-		CSContent.Cables.values();
-		System.out.println("Cables2");
 		Arrays.stream(CSContent.Cables.values()).forEach(value -> RebornRegistry.registerBlock(value.block, itemGroup));
 		Arrays.stream(CSContent.Blocks.values()).forEach(value -> RebornRegistry.registerBlock(value.block, itemGroup));
 	}

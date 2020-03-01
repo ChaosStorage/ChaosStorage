@@ -26,12 +26,20 @@ public class DebugUtils {
 			INetworkNodeProvider e = (INetworkNodeProvider) _e;
 			IController ctrl = e.getNetworkNode().getController();
 			if (ctrl != null) {
-				System.out.println("Controller Position: " + ctrl.getControllerEntity().getPos());
+				DebugUtils.dbg("Controller Position: " + ctrl.getControllerEntity().getPos());
 			} else {
-				System.out.println("No controller");
+				DebugUtils.dbg("No controller");
 			}
 		} else {
-			System.out.println("Not an INetworkNodeProvider");
+			DebugUtils.dbg("Not an INetworkNodeProvider");
 		}
+	}
+
+	public static void print(String text) {
+		System.out.println("[ChaosStorage][INFO] " + text);
+	}
+
+	public static void dbg(String text) {
+		System.out.println("[ChaosStorage][DEBUG] " + text);
 	}
 }

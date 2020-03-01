@@ -29,6 +29,7 @@ import chaosstorage.network.ControllerNode;
 import chaosstorage.network.IController;
 import chaosstorage.network.INetworkNode;
 import chaosstorage.network.IStorageNode;
+import chaosstorage.utils.DebugUtils;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.world.BlockView;
@@ -108,7 +109,7 @@ public class ControllerBlock extends NetworkBlock<ControllerNode> implements Blo
 		}
 
 		if (!worldIn.isClient()) {
-			System.out.println("inserting " + stack.getCount() + " " + stack.getName().asString());
+			DebugUtils.dbg("inserting " + stack.getCount() + " " + stack.getName().asString());
 			INetworkNode nn = ((ControllerEntity) blockEntity).getNetworkNode();
 			IController ctrl = nn.getController();
 			ctrl.insert(stack);

@@ -3,6 +3,7 @@ package chaosstorage.network;
 import chaosstorage.blockentity.ControllerEntity;
 import chaosstorage.config.ChaosStorageConfig;
 import chaosstorage.storage.IStorage;
+import chaosstorage.utils.DebugUtils;
 import net.minecraft.item.ItemStack;
 
 import java.lang.reflect.Array;
@@ -59,7 +60,7 @@ public class ControllerNode extends NetworkNode implements IController {
 	}
 
 	public void doScan() {
-		System.out.println("scanning");
+		DebugUtils.dbg("scanning");
 		scanQueued = false;
 
 		disconnectAll();

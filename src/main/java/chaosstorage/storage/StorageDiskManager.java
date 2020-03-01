@@ -1,6 +1,7 @@
 package chaosstorage.storage;
 
 import chaosstorage.network.IStorageNode;
+import chaosstorage.utils.DebugUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.World;
 import reborncore.common.world.DataAttachment;
@@ -26,7 +27,7 @@ public class StorageDiskManager implements DataAttachment {
 		if (disks.containsKey(uuid)) {
 			return disks.get(uuid);
 		} else {
-			System.out.println("creating disk " + uuid);
+			DebugUtils.dbg("creating disk " + uuid);
 			StorageDisk newDisk = new StorageDisk(capacity);
 			disks.put(uuid, newDisk);
 			return newDisk;

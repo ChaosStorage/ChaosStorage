@@ -130,14 +130,12 @@ public class ControllerEntity extends NetworkMachineEntity<ControllerNode> imple
 		}
 
 		if (Energy.valid(batteryStack)) {
-			System.out.println(energy);
 			Energy.of(batteryStack)
 					.into(
 							Energy
 									.of(this)
 					)
 					.move();
-			System.out.println(energy);
 		}
 
 	}

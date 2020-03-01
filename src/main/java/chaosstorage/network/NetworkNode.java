@@ -1,5 +1,6 @@
 package chaosstorage.network;
 
+import chaosstorage.utils.DebugUtils;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -20,7 +21,7 @@ public abstract class NetworkNode implements INetworkNode {
 	@Override
 	public void initiateScan() {
 		if (!blockEntity.hasWorld()) {
-			System.out.println("blockEntity has no world, refusing to initiate scan!");
+			DebugUtils.dbg("blockEntity has no world, refusing to initiate scan!");
 			return;
 		}
 		Optional<INetworkNode> neighbourWithController = getNeighbours().stream().filter(n -> n.getController() != null).findAny();

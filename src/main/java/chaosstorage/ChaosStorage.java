@@ -3,6 +3,7 @@ package chaosstorage;
 import chaosstorage.packets.ClientBoundPackets;
 import chaosstorage.packets.ServerBoundPackets;
 import chaosstorage.storage.StorageDiskManager;
+import chaosstorage.utils.DebugUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemStack;
@@ -28,19 +29,19 @@ public class ChaosStorage implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		System.out.println("Hello Fabric world!");
+		DebugUtils.dbg("ChaosStorage initializing");
 		CS = this;
-		System.out.println("Reading configuration");
+		DebugUtils.dbg("Reading configuration");
 		new Configuration(ChaosStorageConfig.class, "chaosstorage");
 
 		ModRegistry.setupShit();
 		GuiHandler.register();
-		System.out.println("Registering packets");
+		DebugUtils.dbg("Registering packets");
 		ServerBoundPackets.init();
 		ClientBoundPackets.init();
-		System.out.println("Registering data attachments");
+		DebugUtils.dbg("Registering data attachments");
 		DataAttachment.REGISTRY.register(StorageDiskManager.class, StorageDiskManager::new);
 
-		System.out.println("ChaosStorage setup done!");
+		DebugUtils.dbg("ChaosStorage setup done!");
 	}
 }
