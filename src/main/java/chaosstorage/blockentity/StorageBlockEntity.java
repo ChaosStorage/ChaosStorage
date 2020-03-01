@@ -110,6 +110,6 @@ public class StorageBlockEntity extends NetworkMachineEntity<StorageBlockNode> i
 
 	public void setUUID(UUID uuid) {
 		this.uuid = uuid;
-		syncWithAll();
+		if (hasWorld() && world.isClient) syncWithAll();
 	}
 }
