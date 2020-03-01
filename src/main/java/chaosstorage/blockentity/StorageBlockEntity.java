@@ -4,6 +4,7 @@ package chaosstorage.blockentity;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
+import reborncore.client.containerBuilder.IContainerProvider;
 import reborncore.client.containerBuilder.builder.BuiltContainer;
 import reborncore.client.containerBuilder.builder.ContainerBuilder;
 import reborncore.common.util.RebornInventory;
@@ -15,7 +16,7 @@ import chaosstorage.network.INetworkNodeProvider;
 
 import java.util.UUID;
 
-public class StorageBlockEntity extends NetworkMachineEntity<StorageBlockNode> implements InventoryProvider, INetworkNodeProvider, BlockEntityClientSerializable { // ITick??
+public class StorageBlockEntity extends NetworkMachineEntity<StorageBlockNode> implements InventoryProvider, INetworkNodeProvider, BlockEntityClientSerializable, IContainerProvider {
 		//MachineBaseBlockEntity
 	public static String NBT_UUID = "Uuid";
 
@@ -23,6 +24,7 @@ public class StorageBlockEntity extends NetworkMachineEntity<StorageBlockNode> i
 	public final String name;
 	public final int capacity;
 	private UUID uuid;
+	private int clientStored;
 
 	public StorageBlockEntity(int capacity, String name) {
 		super(CSBlockEntities.STORAGE_BLOCK);
@@ -46,8 +48,10 @@ public class StorageBlockEntity extends NetworkMachineEntity<StorageBlockNode> i
 	public BuiltContainer createContainer(int syncID, final PlayerEntity player) {
 		//return new ContainerBuilder(this.name).player(player.inventory).inventory().hotbar().addInventory()
 		//	.blockEntity(this);
-		return new ContainerBuilder("storage").player(player.inventory).inventory().hotbar().addInventory()
-			.blockEntity(this).energySlot(0, 9, 15).syncEnergyValue().addInventory().create(this, syncID);
+		return new ContainerBuilder("storage")
+				.player(player.inventory).inventory().hotbar().addInventory()
+				.blockEntity(this) .sync(this::getStored, this::setStored) .addInventory()
+				.create(this, syncID);
 	}
 
 	@Override
@@ -82,6 +86,21 @@ public class StorageBlockEntity extends NetworkMachineEntity<StorageBlockNode> i
 
 	public int getCapacity() {
 		return capacity;
+	}
+
+	public int getStored() {
+		if (world.isClient) {
+			return clientStored;
+		} else {
+			System.out.println("server: " + getNetworkNode().getDisk().getStored());
+			return getNetworkNode().getDisk().getStored();
+		}
+	}
+
+	public void setStored(int amount) {
+		if (!world.isClient) return;
+		System.out.println("client: " + amount);
+		clientStored = amount;
 	}
 
 	public UUID getUUID() {

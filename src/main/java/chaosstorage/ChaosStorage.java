@@ -3,14 +3,12 @@ package chaosstorage;
 import chaosstorage.packets.ClientBoundPackets;
 import chaosstorage.packets.ServerBoundPackets;
 import chaosstorage.storage.StorageDiskManager;
-import chaosstorage.storage.StorageDiskSync;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 
-import net.minecraft.world.World;
 import reborncore.common.config.Configuration;
 
 import chaosstorage.config.ChaosStorageConfig;
@@ -23,7 +21,6 @@ import reborncore.common.world.DataAttachment;
 public class ChaosStorage implements ModInitializer {
 	public static final String MOD_ID = "chaosstorage";
 	public static ChaosStorage CS;
-	private StorageDiskSync storageDiskSync = new StorageDiskSync();
 
 	public static final ItemGroup ITEMGROUP = FabricItemGroupBuilder.build(
 			new Identifier("chaosstorage", "item_group"),

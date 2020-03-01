@@ -35,6 +35,9 @@ public class ModRegistry {
 	private static void registerBlocks() {
 		Arrays.stream(CSContent.Controllers.values()).forEach(value -> RebornRegistry.registerBlock(value.block, itemGroup));
 		Arrays.stream(CSContent.StorageBlocks.values()).forEach(value -> RebornRegistry.registerBlock(value.block, itemGroup));
+		System.out.println("Cables1");
+		CSContent.Cables.values();
+		System.out.println("Cables2");
 		Arrays.stream(CSContent.Cables.values()).forEach(value -> RebornRegistry.registerBlock(value.block, itemGroup));
 		Arrays.stream(CSContent.Blocks.values()).forEach(value -> RebornRegistry.registerBlock(value.block, itemGroup));
 	}

@@ -25,8 +25,6 @@
 
 package chaosstorage.client.gui;
 
-import chaosstorage.storage.StorageDiskSync;
-import chaosstorage.storage.StorageDiskSyncData;
 import net.minecraft.entity.player.PlayerEntity;
 import reborncore.client.containerBuilder.builder.BuiltContainer;
 import reborncore.client.gui.builder.GuiBase;
@@ -34,8 +32,6 @@ import reborncore.client.gui.builder.GuiBase;
 //import chaosstorage.blockentity.StorageBlockEntity;
 import chaosstorage.blockentity.StorageBlockEntity;
 import chaosstorage.client.gui.guibuilder.GuiBuilder;
-
-import static chaosstorage.ChaosStorage.CS;
 
 
 public class GuiStorageBlock extends GuiBase<BuiltContainer> {
@@ -68,12 +64,7 @@ public class GuiStorageBlock extends GuiBase<BuiltContainer> {
 		super.drawForeground(mouseX, mouseY);
 		final Layer layer = Layer.FOREGROUND;
 
-		StorageDiskSync.getInstance().sendRequest(blockEntity.getUUID());
-		StorageDiskSyncData d = StorageDiskSync.getInstance().getData(blockEntity.getUUID());
-
-		if (d != null) {
-			builder.drawStorageBar(this, 9, 39, d.getStored(), d.getCapacity(), mouseX, mouseY, 0, layer);
-		}
+		builder.drawStorageBar(this, 9, 39, blockEntity.getStored(), blockEntity.getCapacity(), mouseX, mouseY, 0, layer);
 	}
 }
 

@@ -34,6 +34,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import reborncore.api.IListInfoProvider;
 import reborncore.api.blockentity.InventoryProvider;
 import reborncore.client.containerBuilder.IContainerProvider;
 import reborncore.client.containerBuilder.builder.BuiltContainer;
@@ -49,7 +50,7 @@ import chaosstorage.config.ChaosStorageConfig;
 import team.reborn.energy.EnergyStorage;
 import team.reborn.energy.EnergyTier;
 
-public class ControllerEntity extends NetworkMachineEntity<ControllerNode> implements IContainerProvider, InventoryProvider, INetworkNodeProvider, EnergyStorage {
+public class ControllerEntity extends NetworkMachineEntity<ControllerNode> implements IContainerProvider, InventoryProvider, INetworkNodeProvider, EnergyStorage, IListInfoProvider {
 
 	public RebornInventory<ControllerEntity> inventory;
 	private int ticksSinceLastChange;
