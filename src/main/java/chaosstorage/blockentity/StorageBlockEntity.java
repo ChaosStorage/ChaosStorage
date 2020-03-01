@@ -32,6 +32,10 @@ public class StorageBlockEntity extends NetworkMachineEntity<StorageBlockNode> i
 		this.capacity = capacity;
 	}
 
+	public StorageBlockEntity() {
+		this(0, "");
+	}
+
 	// InventoryProvider
 	@Override
 	public RebornInventory<StorageBlockEntity> getInventory() {
