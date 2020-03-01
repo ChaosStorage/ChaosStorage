@@ -1,33 +1,34 @@
 package chaosstorage.network;
 
-import chaosstorage.blockentity.ControllerEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Stack;
-import java.util.stream.Stream;
 
-public class NetworkNode implements INetworkNode {
+public abstract class NetworkNode implements INetworkNode {
 
 	private IController controller;
 	/* this implementation of INetworkNode assumes that the provider is a BlockEntity */
 	private BlockEntity blockEntity;
-	private boolean haveToNotifyController = true;
 
 	public NetworkNode(BlockEntity blockEntity) {
 		this.blockEntity = blockEntity;
 	}
 
 	@Override
-	public void tick() {
-		if (haveToNotifyController) {
-			Optional<INetworkNode> neighbourWithController = getNeighbours().stream().filter(n -> n.getController() != null).findAny();
-			if (neighbourWithController.isPresent()) neighbourWithController.get().getController().scan();
-			haveToNotifyController = false;
+	public void initiateScan() {
+		if (!blockEntity.hasWorld()) {
+			System.out.println("blockEntity has no world, refusing to initiate scan!");
+			return;
 		}
+		Optional<INetworkNode> neighbourWithController = getNeighbours().stream().filter(n -> n.getController() != null).findAny();
+		if (neighbourWithController.isPresent()) neighbourWithController.get().getController().scan();
+	}
+
+	@Override
+	public void tick() {
 	}
 
 	@Override
@@ -52,8 +53,9 @@ public class NetworkNode implements INetworkNode {
 		for (Direction d : getConnectionDirections()) {
 			BlockPos pos = blockEntity.getPos().offset(d);
 			BlockEntity e = blockEntity.getWorld().getBlockEntity(pos);
-			if (e != null && e instanceof INetworkNodeProvider) {
-				neighbours.add(((INetworkNodeProvider) e).getNetworkNode());
+			if (e instanceof INetworkNodeProvider) {
+				INetworkNode n = ((INetworkNodeProvider) e).getNetworkNode();
+				if (n != null) neighbours.add(n);
 			}
 		}
 		return neighbours;

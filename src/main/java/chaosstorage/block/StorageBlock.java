@@ -2,15 +2,10 @@
 
 package chaosstorage.block;
 
-import chaosstorage.blockentity.CableEntity;
-import chaosstorage.network.IController;
-import chaosstorage.network.IStorageNode;
-import chaosstorage.storage.IStorageDisk;
+import chaosstorage.blockentity.NetworkEntity;
+import chaosstorage.network.StorageBlockNode;
 import chaosstorage.utils.DebugUtils;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.Material;
 import net.minecraft.world.BlockView;
 
 import net.minecraft.block.BlockState;
@@ -25,9 +20,7 @@ import reborncore.api.blockentity.IMachineGuiHandler;
 import chaosstorage.client.EGui;
 import chaosstorage.blockentity.StorageBlockEntity;
 
-import java.util.ArrayList;
-
-public class StorageBlock extends ChaosBlock implements BlockEntityProvider {
+public class StorageBlock extends NetworkBlock<StorageBlockNode> {
 	public enum Type {
 		Item,
 		Fluid;

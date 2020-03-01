@@ -1,8 +1,9 @@
 
 package chaosstorage.blockentity;
 
+import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.entity.player.PlayerEntity;
-import reborncore.common.blockentity.MachineBaseBlockEntity;
+import net.minecraft.nbt.CompoundTag;
 import reborncore.client.containerBuilder.builder.BuiltContainer;
 import reborncore.client.containerBuilder.builder.ContainerBuilder;
 import reborncore.common.util.RebornInventory;
@@ -10,19 +11,23 @@ import reborncore.api.blockentity.InventoryProvider;
 
 import chaosstorage.init.CSBlockEntities;
 import chaosstorage.network.StorageBlockNode;
-import chaosstorage.network.INetworkNode;
 import chaosstorage.network.INetworkNodeProvider;
 
-public class StorageBlockEntity extends MachineBaseBlockEntity implements InventoryProvider, INetworkNodeProvider { // ITick??
+import java.util.UUID;
+
+public class StorageBlockEntity extends NetworkMachineEntity<StorageBlockNode> implements InventoryProvider, INetworkNodeProvider, BlockEntityClientSerializable { // ITick??
+		//MachineBaseBlockEntity
+	public static String NBT_UUID = "Uuid";
 
 	public RebornInventory<StorageBlockEntity> inventory;
 	public final String name;
-	private StorageBlockNode node;
+	public final int capacity;
+	private UUID uuid;
 
-	public StorageBlockEntity(int maxStorage, String name) {
+	public StorageBlockEntity(int capacity, String name) {
 		super(CSBlockEntities.STORAGE_BLOCK);
 		this.name = name;
-		this.node = new StorageBlockNode(this, maxStorage);
+		this.capacity = capacity;
 	}
 
 	// InventoryProvider
@@ -45,20 +50,47 @@ public class StorageBlockEntity extends MachineBaseBlockEntity implements Invent
 			.blockEntity(this).energySlot(0, 9, 15).syncEnergyValue().addInventory().create(this, syncID);
 	}
 
-	// INetworkNodeProvider
-	public INetworkNode getNetworkNode() {
-		return node;
+	@Override
+	public StorageBlockNode createNetworkNode() {
+		return new StorageBlockNode(this);
 	}
 
 	@Override
-	public void tick() {
-		super.tick();
-		node.tick();
+	public void fromTag(CompoundTag nbttagcompound) {
+		System.out.println("from " + getUUID());
+		super.fromTag(nbttagcompound);
+		setUUID(UUID.fromString(nbttagcompound.getString(NBT_UUID)));
 	}
 
 	@Override
-	public void markRemoved() {
-		super.markRemoved();
-		node.markRemoved();
+	public CompoundTag toTag(CompoundTag nbttagcompound) {
+		System.out.println("to " + getUUID());
+		super.toTag(nbttagcompound);
+		nbttagcompound.putString(NBT_UUID, getUUID().toString());
+		return nbttagcompound;
+	}
+
+	@Override
+	public void fromClientTag(CompoundTag tag) {
+		fromTag(tag);
+	}
+
+	@Override
+	public CompoundTag toClientTag(CompoundTag tag) {
+		return toTag(tag);
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public UUID getUUID() {
+		if (!world.isClient && uuid == null) setUUID(UUID.randomUUID());
+		return uuid;
+	}
+
+	public void setUUID(UUID uuid) {
+		this.uuid = uuid;
+		syncWithAll();
 	}
 }

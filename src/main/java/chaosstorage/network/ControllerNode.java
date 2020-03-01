@@ -62,9 +62,7 @@ public class ControllerNode extends NetworkNode implements IController {
 		System.out.println("scanning");
 		scanQueued = false;
 
-		for (INetworkNode current : networkMembers) {
-			current.unadopt();
-		}
+		disconnectAll();
 
 		networkMembers.clear();
 		totalEnergyUsage = 0;
@@ -101,9 +99,14 @@ public class ControllerNode extends NetworkNode implements IController {
 			if (retStack.isEmpty()) {
 				return retStack;
 			}
-			System.out.println(storage);
 			retStack = storage.insert(retStack);
 		}
 		return retStack;
+	}
+
+	public void disconnectAll() {
+		for (INetworkNode current : networkMembers) {
+			current.unadopt();
+		}
 	}
 }

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 public interface INetworkNode {
 	public IController getController();
 
+	void initiateScan();
+
 	public void tick();
 	public void markRemoved();
 	public void unadopt();

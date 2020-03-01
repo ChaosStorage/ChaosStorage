@@ -25,42 +25,45 @@
 
 package chaosstorage.blockentity;
 
+import chaosstorage.network.CableNode;
 import chaosstorage.network.ControllerNode;
 import chaosstorage.network.INetworkNode;
 import chaosstorage.network.INetworkNodeProvider;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import reborncore.api.blockentity.InventoryProvider;
 import reborncore.client.containerBuilder.IContainerProvider;
 import reborncore.client.containerBuilder.builder.BuiltContainer;
 import reborncore.client.containerBuilder.builder.ContainerBuilder;
 import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 import reborncore.common.util.RebornInventory;
+import team.reborn.energy.Energy;
 import team.reborn.energy.EnergySide;
 
 import chaosstorage.init.CSBlockEntities;
 import chaosstorage.block.ControllerBlock;
 import chaosstorage.config.ChaosStorageConfig;
+import team.reborn.energy.EnergyStorage;
+import team.reborn.energy.EnergyTier;
 
-public class ControllerEntity extends PowerAcceptorBlockEntity implements IContainerProvider, InventoryProvider, INetworkNodeProvider {
+public class ControllerEntity extends NetworkMachineEntity<ControllerNode> implements IContainerProvider, InventoryProvider, INetworkNodeProvider, EnergyStorage {
 
 	public RebornInventory<ControllerEntity> inventory;
 	private int ticksSinceLastChange;
 	//private int EnergyPerTick;
-	private ControllerNode node;
 
 	private double energy = 0;
 	private boolean creative;
+	private EnergyTier energyTier = EnergyTier.INSANE;
 
 	public ControllerEntity(boolean creative) {
 		super(creative ? CSBlockEntities.CREATIVE_CONTROLLER : CSBlockEntities.CONTROLLER);
 		this.creative = creative;
 		inventory = new RebornInventory<>(1, "ControllerEntity", 64, this);
 		//EnergyPerTick = ChaosStorageConfig.ControllerEngergyPerTick;
-		checkTier(); //?
-
-		node = new ControllerNode(this);
 	}
 
 	public ControllerEntity() {
@@ -80,11 +83,62 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 
 		if (block instanceof ControllerBlock) {
 			ControllerBlock controllerBlock = (ControllerBlock) block;
-			boolean isActive = canUseEnergy(getEuPerTick(node.getTotalEnergyUsage()));
+			boolean isActive = canUseEnergy(getEuPerTick(getNetworkNode().getTotalEnergyUsage()));
 			controllerBlock.setActive(isActive, world, pos);
 		}
 
 		world.updateListeners(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
+	}
+
+	public boolean canUseEnergy(double input) {
+		return input <= getEnergy();
+	}
+	public double useEnergy(double energy) {
+		return useEnergy(energy, false);
+	}
+
+	public double useEnergy(double extract, boolean simulate) {
+		if (extract > energy) {
+			extract = energy;
+		}
+		if (!simulate) {
+			setStored(energy - extract);
+		}
+		return extract;
+	}
+
+	public double getFreeSpace() {
+		return getMaxPower() - getEnergy();
+	}
+
+	public void charge(int slot) {
+		if (world.isClient) {
+			return;
+		}
+
+		double chargeEnergy = Math.min(getFreeSpace(), getMaxInput(EnergySide.UNKNOWN));
+		if (chargeEnergy <= 0.0) {
+			return;
+		}
+		if (!getOptionalInventory().isPresent()) {
+			return;
+		}
+		ItemStack batteryStack = getOptionalInventory().get().getInvStack(slot);
+		if (batteryStack.isEmpty()) {
+			return;
+		}
+
+		if (Energy.valid(batteryStack)) {
+			System.out.println(energy);
+			Energy.of(batteryStack)
+					.into(
+							Energy
+									.of(this)
+					)
+					.move();
+			System.out.println(energy);
+		}
+
 	}
 
 	// PowerAcceptorBlockEntity
@@ -107,36 +161,29 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 			updateState();
 		}
 
-		int EnergyPerTick = node.getTotalEnergyUsage();
+		int EnergyPerTick = getNetworkNode().getTotalEnergyUsage();
 		if (canUseEnergy(getEuPerTick(EnergyPerTick)) && !this.creative) {
 			useEnergy(getEuPerTick(EnergyPerTick));
 		}
-
-		node.tick();
 	}
 
-	@Override
-	public double getBaseMaxPower() {
+	public double getMaxPower() {
 		return ChaosStorageConfig.ControllerMaxPower;
 	}
 
-	@Override
 	public boolean canAcceptEnergy(Direction direction) {
 		return direction == null || getFacing() != direction;
 	}
 
-	@Override
 	public boolean canProvideEnergy(Direction direction) {
 		return false; // not providing energy
 	}
 
-	@Override
-	public double getBaseMaxOutput() {
+	public double getMaxOutput() {
 		return 0;
 	}
 
-	@Override
-	public double getBaseMaxInput() {
+	public double getMaxInput() {
 		return ChaosStorageConfig.ControllerMaxInput;
 	}
 
@@ -152,10 +199,19 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 
 	@Override
 	public double getStored(EnergySide face) {
+		return getEnergy();
+	}
+
+	public double getEnergy() {
 		if (this.creative) {
-			return this.getBaseMaxPower();
+			return this.getMaxPower();
 		}
-		return super.getStored(face);
+		return energy;
+	}
+
+	@Override
+	public void setStored(double amount) {
+		energy = amount;
 	}
 
 	// InventoryProvider
@@ -167,17 +223,30 @@ public class ControllerEntity extends PowerAcceptorBlockEntity implements IConta
 	@Override
 	public BuiltContainer createContainer(int syncID, final PlayerEntity player) {
 		return new ContainerBuilder("controller").player(player.inventory).inventory().hotbar().addInventory()
-			.blockEntity(this).energySlot(0, 8, 72).syncEnergyValue().addInventory().create(this, syncID);
+				.blockEntity(this)
+				.energySlot(0, 8, 72)
+				.sync(this::getEnergy, this::setStored)
+				.addInventory()
+				.create(this, syncID);
 	}
 
 	@Override
-	public INetworkNode getNetworkNode() {
-		return node;
+	public ControllerNode createNetworkNode() {
+		return new ControllerNode(this);
+	}
+
+	@Override
+	public double getMaxStoredPower() {
+		return getMaxPower();
 	}
 
 	@Override
 	public void markRemoved() {
-		super.markRemoved();
-		node.markRemoved();
+		getNetworkNode().disconnectAll();
+	}
+
+	@Override
+	public EnergyTier getTier() {
+		return energyTier;
 	}
 }

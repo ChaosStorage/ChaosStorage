@@ -6,19 +6,23 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import com.google.common.collect.ArrayListMultimap;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.nbt.Tag;
 
 import java.util.Collection;
 
 public class StorageDisk implements IStorageDisk {
 	private Multimap<Item, ItemStack> stacks = ArrayListMultimap.create();
 
-	private final int capacity;
+	private int capacity;
 	private int stored;
 
-	public StorageDisk(int maxStorage) {
-		this.capacity = maxStorage;
+	public StorageDisk(int capacity) {
+		this.capacity = capacity;
 	}
+	public StorageDisk() {}
 
 	@Override
 	public int getCapacity() {
@@ -26,10 +30,20 @@ public class StorageDisk implements IStorageDisk {
 	}
 
 	@Override
+	public void read(CompoundTag tag) {
+		capacity = tag.getInt(NBT_CAPACITY);
+		stored = tag.getInt(NBT_STORED);
+		ListTag stacksTag = tag.getList(NBT_STACKS, 9);
+		for (Tag stackTag : stacksTag) {
+			ItemStack stack = ItemStack.fromTag((CompoundTag) stackTag);
+			stacks.put(stack.getItem(), stack);
+		}
+	}
+
+	@Override
 	public int getStored() {
 		return this.stored;
 	}
-
 
 	public int calculateComparatorOutputFromStorage(BlockEntity blockentity) {
 		return MathHelper.ceil(getStored() * 15.0 / getCapacity());

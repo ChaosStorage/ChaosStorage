@@ -57,9 +57,9 @@ import reborncore.common.util.WrenchUtils;
 import chaosstorage.client.EGui;
 import chaosstorage.blockentity.ControllerEntity;
 
-public class ControllerBlock extends ChaosBlock implements BlockEntityProvider {
+public class ControllerBlock extends NetworkBlock<ControllerNode> implements BlockEntityProvider {
 	public String name;
-	public static BooleanProperty ACTIVE; // = BooleanProperty.of("active");
+	public static BooleanProperty ACTIVE;
 	public IMachineGuiHandler gui;
 	public boolean creative;
 
@@ -83,6 +83,9 @@ public class ControllerBlock extends ChaosBlock implements BlockEntityProvider {
 	// Block
 	@Override
 	public void onPlaced(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+		if (!worldIn.isClient) {
+
+		}
 		super.onPlaced(worldIn, pos, state, placer, stack);
 	}
 

@@ -33,6 +33,8 @@ import reborncore.common.powerSystem.PowerSystem;
 
 import chaosstorage.blockentity.ControllerEntity;
 
+import static chaosstorage.ChaosStorage.CS;
+
 //import techreborn.blockentity.storage.energy.LowVoltageSUBlockEntity;
 
 public class GuiController extends GuiBase<BuiltContainer> {
@@ -57,7 +59,6 @@ public class GuiController extends GuiBase<BuiltContainer> {
 		drawSlot(8, 72, layer);
 
 	}
-
 
 	@Override
 	protected void drawForeground(final int mouseX, final int mouseY) {

@@ -5,19 +5,19 @@ import chaosstorage.blockentity.StorageBlockEntity;
 import chaosstorage.storage.IStorage;
 import chaosstorage.storage.StorageDisk;
 import chaosstorage.storage.IStorageDisk;
+import chaosstorage.storage.StorageDiskManager;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 //import chaosstorage.ChaosStorageConfig;
 
 public class StorageBlockNode extends NetworkNode implements IStorageNode {
-	private StorageBlockEntity blockEntity;
-	private StorageDisk disk;
+	private IStorageDisk disk;
 
-	public StorageBlockNode(StorageBlockEntity blockentity, int maxStorage) {
+	public StorageBlockNode(StorageBlockEntity blockentity) {
 		super(blockentity);
-		this.blockEntity = blockentity;
-		this.disk = new StorageDisk(maxStorage);
+		this.disk = StorageDiskManager.getInstance(blockentity.getWorld()).getDiskOrNew(blockentity.getUUID(), blockentity.getCapacity());
 	}
 
 	// INetworkNode
@@ -34,7 +34,7 @@ public class StorageBlockNode extends NetworkNode implements IStorageNode {
 		return storages;
 	}
 
-	public StorageDisk getDisk() {
+	public IStorageDisk getDisk() {
 		return disk;
 	}
 }

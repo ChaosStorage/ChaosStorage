@@ -1,7 +1,10 @@
 package chaosstorage.block;
 
 import chaosstorage.blockentity.CableEntity;
+import chaosstorage.network.CableNode;
 import chaosstorage.network.IController;
+import chaosstorage.network.INetworkNode;
+import chaosstorage.network.INetworkNodeProvider;
 import chaosstorage.utils.DebugUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -28,7 +31,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class CableBlock extends ChaosBlock implements BlockEntityProvider, Waterloggable {
+public class CableBlock extends NetworkBlock<CableNode> implements Waterloggable {
 	public enum Type {
 		NORMAL(false, false),
 		EXTERNAL_STORAGE(true, false),
@@ -69,29 +72,12 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider, Water
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos) {
 		VoxelShape shape = SHAPE_CORE;
 
-		if (state.get(NORTH)) {
-			shape = VoxelShapes.union(shape, SHAPE_NORTH);
-		}
-
-		if (state.get(EAST)) {
-			shape = VoxelShapes.union(shape, SHAPE_EAST);
-		}
-
-		if (state.get(SOUTH)) {
-			shape = VoxelShapes.union(shape, SHAPE_SOUTH);
-		}
-
-		if (state.get(WEST)) {
-			shape = VoxelShapes.union(shape, SHAPE_WEST);
-		}
-
-		if (state.get(UP)) {
-			shape = VoxelShapes.union(shape, SHAPE_UP);
-		}
-
-		if (state.get(DOWN)) {
-			shape = VoxelShapes.union(shape, SHAPE_DOWN);
-		}
+		if (state.get(NORTH)) shape = VoxelShapes.union(shape, SHAPE_NORTH);
+		if (state.get(EAST)) shape = VoxelShapes.union(shape, SHAPE_EAST);
+		if (state.get(SOUTH)) shape = VoxelShapes.union(shape, SHAPE_SOUTH);
+		if (state.get(WEST)) shape = VoxelShapes.union(shape, SHAPE_WEST);
+		if (state.get(UP)) shape = VoxelShapes.union(shape, SHAPE_UP);
+		if (state.get(DOWN)) shape = VoxelShapes.union(shape, SHAPE_DOWN);
 
 		return shape;
 	}
@@ -146,11 +132,7 @@ public class CableBlock extends ChaosBlock implements BlockEntityProvider, Water
 			}*/
 
 		BlockEntity e = world.getBlockEntity(pos);
-		if (e == null) {
-			return false;
-		}
-
-		return true; //e.getCapability(NetworkNodeProxyCapability.NETWORK_NODE_PROXY_CAPABILITY, direction).isPresent();
+		return e instanceof INetworkNodeProvider;
 	}
 
 	private BlockState getState(BlockState currentState, IWorld world, BlockPos pos) {

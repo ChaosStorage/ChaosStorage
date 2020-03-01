@@ -24,8 +24,11 @@ public class ModRegistry {
 	private static final Item.Settings itemGroup = new Item.Settings().group(ChaosStorage.ITEMGROUP);
 
 	public static void setupShit() {
+		System.out.println("Registering blocks");
 		registerBlocks();
+		System.out.println("Registering items");
 		registerItems();
+		System.out.println("Registering block entities");
 		registerBlockEntities();
 	}
 

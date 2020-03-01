@@ -33,28 +33,14 @@ import net.minecraft.block.entity.BlockEntity;
 import chaosstorage.init.CSBlockEntities;
 import net.minecraft.util.Tickable;
 
-public class CableEntity extends BlockEntity implements INetworkNodeProvider, Tickable {
-
-	private CableNode node;
+public class CableEntity extends NetworkEntity<CableNode> {
 
 	public CableEntity() {
 		super(CSBlockEntities.CABLE);
-		this.node = new CableNode(this);
 	}
 
 	@Override
-	public INetworkNode getNetworkNode() {
-		return node;
-	}
-
-	@Override
-	public void tick() {
-		node.tick();
-	}
-
-	@Override
-	public void markRemoved() {
-		super.markRemoved();
-		node.markRemoved();
+	public CableNode createNetworkNode() {
+		return new CableNode(this);
 	}
 }
