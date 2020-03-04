@@ -25,21 +25,18 @@
 
 package chaosstorage.blockentity;
 
-import chaosstorage.network.CableNode;
 import chaosstorage.network.ControllerNode;
-import chaosstorage.network.INetworkNode;
 import chaosstorage.network.INetworkNodeProvider;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
 import reborncore.api.IListInfoProvider;
 import reborncore.api.blockentity.InventoryProvider;
 import reborncore.client.containerBuilder.IContainerProvider;
 import reborncore.client.containerBuilder.builder.BuiltContainer;
 import reborncore.client.containerBuilder.builder.ContainerBuilder;
-import reborncore.common.powerSystem.PowerAcceptorBlockEntity;
 import reborncore.common.util.RebornInventory;
 import team.reborn.energy.Energy;
 import team.reborn.energy.EnergySide;
@@ -51,7 +48,7 @@ import team.reborn.energy.EnergyStorage;
 import team.reborn.energy.EnergyTier;
 
 public class ControllerEntity extends NetworkMachineEntity<ControllerNode> implements IContainerProvider, InventoryProvider, INetworkNodeProvider, EnergyStorage, IListInfoProvider {
-
+	private static final String NBT_CREATIVE = "Creative";
 	public RebornInventory<ControllerEntity> inventory;
 	private int ticksSinceLastChange;
 	//private int EnergyPerTick;
@@ -61,7 +58,7 @@ public class ControllerEntity extends NetworkMachineEntity<ControllerNode> imple
 	private EnergyTier energyTier = EnergyTier.INSANE;
 
 	public ControllerEntity(boolean creative) {
-		super(creative ? CSBlockEntities.CREATIVE_CONTROLLER : CSBlockEntities.CONTROLLER);
+		super(CSBlockEntities.CONTROLLER);
 		this.creative = creative;
 		inventory = new RebornInventory<>(1, "ControllerEntity", 64, this);
 		//EnergyPerTick = ChaosStorageConfig.ControllerEngergyPerTick;
@@ -247,5 +244,18 @@ public class ControllerEntity extends NetworkMachineEntity<ControllerNode> imple
 	@Override
 	public EnergyTier getTier() {
 		return energyTier;
+	}
+
+	@Override
+	public void fromTag(CompoundTag tag) {
+		super.fromTag(tag);
+		this.creative = tag.getBoolean(NBT_CREATIVE);
+	}
+
+	@Override
+	public CompoundTag toTag(CompoundTag tag) {
+		super.toTag(tag);
+		tag.putBoolean(NBT_CREATIVE, this.creative);
+		return tag;
 	}
 }

@@ -45,8 +45,7 @@ public class ModRegistry {
 	}
 
 	public static void registerBlockEntities() {
-		CSBlockEntities.CONTROLLER = registerBlockEntity(ControllerEntity.class, "controller", CSContent.Controllers.CONTROLLER);
-		CSBlockEntities.CREATIVE_CONTROLLER = registerBlockEntity(ControllerEntity.class, "creative_controller", CSContent.Controllers.CREATIVE_CONTROLLER);
+		CSBlockEntities.CONTROLLER = registerBlockEntity(ControllerEntity.class, "controller", CSContent.Controllers.values());
 		CSBlockEntities.STORAGE_BLOCK = registerBlockEntity(StorageBlockEntity.class, "storage_block", CSContent.StorageBlocks.values());
 		CSBlockEntities.CABLE = registerBlockEntity(CableEntity.class, "cable", CSContent.Cables.values());
 	}

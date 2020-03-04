@@ -15,14 +15,13 @@ public class ControllerNode extends NetworkNode implements IController {
 	private ArrayList<INetworkNode> networkMembers = new ArrayList<INetworkNode>();
 
 	private ControllerEntity blockEntity;
-	private boolean scanQueued = false;
+	private boolean scanQueued = true;
 	private int totalEnergyUsage;
 
 	public ControllerNode(ControllerEntity blockEntity) {
 		super(blockEntity);
 		this.blockEntity = blockEntity;
 		this.totalEnergyUsage = ChaosStorageConfig.ControllerEngergyPerTick;
-		scan();
 	}
 
 	public void scan() {
@@ -37,6 +36,12 @@ public class ControllerNode extends NetworkNode implements IController {
 
 	public int getTotalEnergyUsage() {
 		return this.totalEnergyUsage;
+	}
+
+	@Override
+	public IController getController() {
+		if (super.getController() == null) doScan();
+		return super.getController();
 	}
 
 	@Override
